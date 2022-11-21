@@ -1,0 +1,27 @@
+{
+    "name": "1wire_io",
+    "version": "0.0.1",
+    "description": "Some basic onewire IO for DS2413 etc. Also Find chips and print to term.",
+    "keywords": "DS2413 DS2408 onewire 1-wire",
+    "repository":
+    {
+      "type": "git",
+      "url": "git@github.com:home-controller/1wire_io.git"
+    },
+    "authors":
+    [
+      {
+        "name": "jmnc2",
+        "email": "49760581+jmnc2@users.noreply.github.com",
+        "url": "https://github.com/jmnc2",
+        "maintainer": true
+
+      }
+    ],
+    "dependencies": {
+    },
+    "license": "MIT",
+    "homepage": "https://github.com/home-controller/1wire_io",
+    "frameworks": "*",
+    "platforms": "*"
+  }
