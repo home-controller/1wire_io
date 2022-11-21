@@ -1,0 +1,710 @@
+\hypertarget{1wire_8cpp_source}{}\doxysection{1wire.\+cpp}
+\label{1wire_8cpp_source}\index{src/1wire.cpp@{src/1wire.cpp}}
+\mbox{\hyperlink{1wire_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00016}00016 \textcolor{preprocessor}{\#ifndef \_1wire\_cpp}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00017}\mbox{\hyperlink{1wire_8cpp_aa85c674d090bb0ef50f0a0e735edffba}{00017}} \textcolor{preprocessor}{\#define \_1wire\_cpp}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00018}00018  \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00019}00019 \textcolor{comment}{  * Family Code  Device Name(s)  Description}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00020}00020 \textcolor{comment}{  * 5   DS2405  Addressable switch}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00021}00021 \textcolor{comment}{  * 10  DS18S20   temperature sensor}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00022}00022 \textcolor{comment}{  * 12  DS2406, DS2407  Dual Addressable Switch with 1k bit Memory}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00023}00023 \textcolor{comment}{  * 28  DS18B20   temperature sensor}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00024}00024 \textcolor{comment}{  * 29  DS2408  8-\/channel switch}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00025}00025 \textcolor{comment}{  * 3A  DS2413  two-\/channel switch}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00026}00026 \textcolor{comment}{  * 85  3A 2100H(DS2413 clone)  two-\/channel switch}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00027}00027 \textcolor{comment}{ */}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00028}00028  \textcolor{comment}{//\#include "{}E.h"{}}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00029}00029 \textcolor{preprocessor}{\#ifndef ARDUINO}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00030}\mbox{\hyperlink{1wire_8cpp_a5deccebbf24e21ddc073c8774179f1b3}{00030}} \textcolor{preprocessor}{\#define ARDUINO 10808 }}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00031}00031 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00032}00032 \textcolor{preprocessor}{\#include <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00033}00033 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{1wire_8h}{1wire.h}}>}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00034}00034 \textcolor{preprocessor}{\#include <ui\_io.h>}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00035}00035 \textcolor{preprocessor}{\#include <OneWire.h>}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00036}00036 \textcolor{preprocessor}{\#include <avr/pgmspace.h>}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00037}00037 \textcolor{preprocessor}{\#include <defs.h>}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00038}00038 \textcolor{preprocessor}{\#include <EEPROM.h>}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00039}00039 \textcolor{preprocessor}{\#include <store.h>}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00041}00041 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00042}\mbox{\hyperlink{1wire_8cpp_a98ea559b3f61a540608997b5ee55eb60}{00042}} \textcolor{preprocessor}{\#define DS2405\_FAMILY\_ID 0x5           }\textcolor{comment}{// 1 channel IO :1}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00043}\mbox{\hyperlink{1wire_8cpp_a99ed45dde220f1f590bc945b4646bb0a}{00043}} \textcolor{preprocessor}{\#define DS18S20\_FAMILY\_ID 0x10         }\textcolor{comment}{//:2}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00044}\mbox{\hyperlink{1wire_8cpp_ab20414815640ae9cd42c01c9d1a4c17a}{00044}} \textcolor{preprocessor}{\#define DS2406\_FAMILY\_ID 0x12          }\textcolor{comment}{// DS2406 or DS2407. Both have same id. // 2 channel IO :3}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00045}\mbox{\hyperlink{1wire_8cpp_a39cd35a43de2fefdaed70c09898aaed3}{00045}} \textcolor{preprocessor}{\#define DS2407\_FAMILY\_ID 0x12          }\textcolor{comment}{//:4}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00046}\mbox{\hyperlink{1wire_8cpp_aa888f4f026782b3d0919c5b6f42407c1}{00046}} \textcolor{preprocessor}{\#define DS18B20\_FAMILY\_ID 0x28         }\textcolor{comment}{//:5}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00047}\mbox{\hyperlink{1wire_8cpp_a3e36d3f05676e13a5bc6fcfe0e7a54ee}{00047}} \textcolor{preprocessor}{\#define DS2408\_FAMILY\_ID 0x29          }\textcolor{comment}{// 8 channel IO :6}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00048}\mbox{\hyperlink{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}{00048}} \textcolor{preprocessor}{\#define DS2413\_FAMILY\_ID 0x3A          }\textcolor{comment}{// 2 channel IO :7}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00049}\mbox{\hyperlink{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}{00049}} \textcolor{preprocessor}{\#define DS2413clone\_FAMILY\_ID 0x85     }\textcolor{comment}{// 2 channel IO  :8}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00050}\mbox{\hyperlink{1wire_8cpp_a563b75793a1703adfba83ce275c4a2ee}{00050}} \textcolor{preprocessor}{\#define \_3A\_2100H\_FAMILY\_ID 0x85       }\textcolor{comment}{// 3A 2100H markings on chip. = DS2413 clone with dif id :9}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00051}00051                                              \textcolor{comment}{//\{   0,    1,    2,    3,    4,    5,    6 \};}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00052}00052 \textcolor{keyword}{const} \textcolor{keyword}{static} PROGMEM \textcolor{keywordtype}{byte} type1wireChip[ ] = \{ 0x5, 0x10, 0x12, 0x28, 0x29, 0x3A, 0x85 \}; \textcolor{comment}{//if adding more, array values must be in ascending order.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00053}00053 \textcolor{keyword}{const} \textcolor{keyword}{static} PROGMEM \textcolor{keywordtype}{byte} onewireSwitchIO[ ] = \{ 1,    0,    2,    0,    8,    2,    2 \};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00054}\mbox{\hyperlink{1wire_8cpp_a47518a29c73d292a8e99cad8e5bc3d6a}{00054}} \textcolor{preprocessor}{\#define num1wireIDs sizeof(type1wireChip) }\textcolor{comment}{// some have the same ID so 7 different ids not 9}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00055}00055 \textcolor{comment}{//n = pgm\_read\_byte\_near(type1wireChip + i);}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00059}00059 \textcolor{comment}{//+++++++++++++++++++++++++++++++++++++++++++ globals vars}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00060}00060 \textcolor{comment}{//byte no\_storedChips = 0;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00061}00061 \textcolor{comment}{//5: Max No. 1wire switch chips stored}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00062}00062 \textcolor{comment}{//byte maxNo\_1wireChips = defMaxNo\_1wireChips;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00063}00063 \textcolor{comment}{//6: mem for 1wire start}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00064}00064 \textcolor{comment}{//byte memFor\_1wireStart;// = memForRooms + memForRoomsStart;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00065}00065 \textcolor{comment}{//7: mem reserved for 1wire switch chips}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00066}00066 \textcolor{comment}{//byte resFor\_1wire\_switch;// = maxNo\_1wireChips * onewireEepromRecSize; // 15 1-\/wire chips * 9 bytes fro each  = 180 bytes.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00067}00067 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/End of globals}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00069}00069 \textcolor{comment}{//+++++++++++++++++++++++++++++++++++++++++++ Working vars}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00070}00070 \textcolor{comment}{// switch1wire\_TE owChipR; //this is a temp array used for EEPROM storing}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00071}00071 \textcolor{comment}{// byte addr[ 8 ];           //this is a working array used by the library}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00074}00074 \textcolor{comment}{// chip1wire\_T tempSaved1wireChip; //loadFromStorage? todo: }}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00076}00076 \textcolor{comment}{// An array to save the status of saved chips}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00077}\mbox{\hyperlink{1wire_8cpp_a565a4ca1ef05911887e8e0e3c2b56291}{00077}} \textcolor{keywordtype}{byte} \mbox{\hyperlink{1wire_8cpp_a565a4ca1ef05911887e8e0e3c2b56291}{oneWireState}}[ \mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{defMaxNo\_1wireChips}} ];}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00078}00078 \textcolor{comment}{//0: Chip connected     \{B00000001: Set to 1 if this chip was found while scanning the 1wire bus}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00079}00079 \textcolor{comment}{//0: bus Max 8          \{B00001110: Set to the 1-\/wire bus the chip is found on. This is a Max of 4 other places.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00080}00080 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00081}00081 \textcolor{comment}{// An array to save the switch state of the 1-\/wire relay controllers}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00082}00082 \textcolor{comment}{//byte ioSavedState[defMaxNo\_1wireChips + 1]; //Needs to be at lest 1 bigger than EEPROM array}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00083}00083 \textcolor{comment}{// this is kind of redundant after setup and testing as on, off, etc. is stored in the lights array although this should speed things up.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00084}00084 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/End of working vars defs}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00085}00085 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00089}00089  \textcolor{comment}{// bool writeDS2413( byte state );}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00090}00090  \textcolor{comment}{// bool writeDS2413( byte i , byte state );}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00091}00091  \textcolor{comment}{//int BinarySearching(byte arr[], int max, int element)}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00102}\mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{00102}} int16\_t \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}( \textcolor{keywordtype}{byte} element ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00103}00103   uint8\_t low, high;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00104}00104   uint8\_t middle, id;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00105}00105   low = 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00106}00106   high = \mbox{\hyperlink{1wire_8cpp_a47518a29c73d292a8e99cad8e5bc3d6a}{num1wireIDs}} -\/ 1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00107}00107   \textcolor{comment}{//Serial.print(F("{} high = "{}) ); Serial.print( high);}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00108}00108 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00109}00109   \textcolor{keywordflow}{while} ( low <= high ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00110}00110 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00111}00111     middle = ( low + high ) / 2;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00112}00112     \textcolor{keywordtype}{id} = byte( pgm\_read\_byte\_near( type1wireChip + middle ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00113}00113     \textcolor{comment}{//Serial.println(); Serial.print(F("{}low= "{}) ); Serial.print( low); Serial.print(F("{}, middle = "{}) ); Serial.print( middle); Serial.print(F("{}, high= "{}) ); Serial.print( high); Serial.print(F("{}, id = "{}) ); Serial.print( id, HEX); }}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00114}00114     \textcolor{keywordflow}{if} ( element > \textcolor{keywordtype}{byte}( \textcolor{keywordtype}{id} ) )}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00115}00115       low = middle + 1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00116}00116     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( element < \textcolor{keywordtype}{id} ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00117}00117       \textcolor{keywordflow}{if} ( middle < 1 ) \{ \textcolor{keywordflow}{break}; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00118}00118       high = middle -\/ 1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00119}00119     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00120}00120       \textcolor{keywordflow}{return} middle;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00121}00121     \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00122}00122   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00123}00123   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00124}00124 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00134}\mbox{\hyperlink{1wire_8cpp_a9947dc757c59a6d2546157669ed3790a}{00134}} \textcolor{keywordtype}{byte} \mbox{\hyperlink{1wire_8cpp_a9947dc757c59a6d2546157669ed3790a}{get1wireIDfromIndex}}( \textcolor{keywordtype}{byte} \textcolor{keywordtype}{id} ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00135}00135   \textcolor{keywordflow}{if} ( \textcolor{keywordtype}{id} > 0x28 ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00136}00136     \textcolor{keywordflow}{if} ( \textcolor{keywordtype}{id} == 0x3A ) \{ \textcolor{keywordflow}{return} 5; \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \textcolor{keywordtype}{id} == 0x85 ) \{ \textcolor{keywordflow}{return} 6; \} \textcolor{keywordflow}{else} \{ \textcolor{keywordflow}{return} 4; \} \textcolor{comment}{// only 0x29 left}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00137}00137   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00138}00138     \textcolor{keywordflow}{if} ( \textcolor{keywordtype}{id} > 0x10 ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00139}00139       \textcolor{keywordflow}{if} ( \textcolor{keywordtype}{id} == 0x12 ) \{ \textcolor{keywordflow}{return} 2; \} \textcolor{keywordflow}{else} \{ \textcolor{keywordflow}{return} 3; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00140}00140     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00141}00141       \textcolor{keywordflow}{if} ( \textcolor{keywordtype}{id} == 0x5 ) \{ \textcolor{keywordflow}{return} 0; \} \textcolor{keywordflow}{else} \{ \textcolor{keywordflow}{return} 1; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00142}00142     \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00143}00143   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00144}00144   \textcolor{keywordflow}{return} 0xFF; \textcolor{comment}{// Unknown chip}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00145}00145 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00146}00146 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00154}\mbox{\hyperlink{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}{00154}} \textcolor{keywordtype}{byte} \mbox{\hyperlink{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}{get1wireIOno}}( \textcolor{keywordtype}{byte} i ) \{ \textcolor{comment}{//from index. This is the number of IO pins the chip has i.e. 8 for the DS2408}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00155}00155   \textcolor{keywordflow}{if} ( ( i >= 0 ) and ( i < \mbox{\hyperlink{1wire_8cpp_a47518a29c73d292a8e99cad8e5bc3d6a}{num1wireIDs}} ) ) \{ \textcolor{keywordflow}{return} pgm\_read\_byte\_near( onewireSwitchIO + i ); \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00156}00156   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00157}00157 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00158}00158 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00159}\mbox{\hyperlink{1wire_8cpp_adc0e43b0bfe532c9150833a40d6ff2d7}{00159}} \textcolor{keywordtype}{byte} \mbox{\hyperlink{1wire_8cpp_adc0e43b0bfe532c9150833a40d6ff2d7}{get1wireIdFIA}}( \textcolor{keywordtype}{byte} i ) \{ \textcolor{comment}{//from index. This is the number of IO pins the chip has i.e. 8 for the DS2408}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00160}00160   \textcolor{keywordflow}{if} ( ( i >= 0 ) and ( i < \mbox{\hyperlink{1wire_8cpp_a47518a29c73d292a8e99cad8e5bc3d6a}{num1wireIDs}} ) ) \{ \textcolor{keywordflow}{return} pgm\_read\_byte\_near( type1wireChip + i ); \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00161}00161   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00162}00162 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00163}00163 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00170}\mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{00170}} \textcolor{keywordtype}{byte} \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wireChipTypeIOPins}}( \textcolor{keywordtype}{byte} chipType ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00171}00171   int16\_t x;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00172}00172   x = \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}( chipType );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00173}00173   \textcolor{comment}{// io\_print("{}get1wireIDsIndex(chipType) = "{});}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00174}00174   \textcolor{comment}{// io\_println\_n(x);}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00175}00175   \textcolor{keywordflow}{if} ( x >= 0 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}{get1wireIOno}}( x );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00176}00176   \textcolor{keywordflow}{else} \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00177}00177 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00178}00178 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00179}\mbox{\hyperlink{1wire_8cpp_a7b66dbae451bc9c7a1b68897cc4836ac}{00179}} \textcolor{preprocessor}{\#define DS2413\_ACCESS\_READ 0xF5}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00180}\mbox{\hyperlink{1wire_8cpp_a7f43ecbc0966fed19eaa57167f3fc748}{00180}} \textcolor{preprocessor}{\#define DS2413\_ACCESS\_WRITE 0x5A}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00181}\mbox{\hyperlink{1wire_8cpp_ac0aa910faa0e7ff97464aed9869d38d6}{00181}} \textcolor{preprocessor}{\#define DS2413\_ACK\_SUCCESS 0xAA}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00182}\mbox{\hyperlink{1wire_8cpp_a45b24525786ca075daff83e27ece1566}{00182}} \textcolor{preprocessor}{\#define DS2413\_ACK\_ERROR 0xFF}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00183}00183 \textcolor{comment}{/*DS2413\_ACCESS\_READ returns [b7    |b6   ||b5    |b4   |b3          |b2       |b1         |b0       ]}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00184}00184 \textcolor{comment}{                             [Complement of b3 to b0    |PIOB Output |PIOB Pin |PIOA Output|PIOA Pin ]}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00185}00185 \textcolor{comment}{                             [                          |Latch State |State    |Latch State|State    ]}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00186}00186 \textcolor{comment}{ so to get relays set to on in 2 least significant bit do x = ((r bitand b1) bitor ( (r >> 1) bitand b10)) xor B11}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00187}00187 \textcolor{comment}{ */}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00188}00188 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00189}\mbox{\hyperlink{1wire_8cpp_a857c0079efbda4141b54eb3ab2782618}{00189}} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{1wire_8cpp_a857c0079efbda4141b54eb3ab2782618}{IOA}} = B00000001;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00190}\mbox{\hyperlink{1wire_8cpp_a1ba15df8bc259dcb4374803da9e30379}{00190}} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{1wire_8cpp_a1ba15df8bc259dcb4374803da9e30379}{IOB}} = 0x2;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00191}00191 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00198}\mbox{\hyperlink{class_one_wire__mem_a5c7095bf9d144b6f93bbb718f53abe37}{00198}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_one_wire__mem_a5c7095bf9d144b6f93bbb718f53abe37}{OneWire\_mem::initStuff}}( storageBlock\_C\& o, \textcolor{keywordtype}{byte} \textcolor{keywordtype}{id} ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00199}00199   \textcolor{keywordtype}{byte} i;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00200}00200   \textcolor{keywordflow}{for} ( i = 0; i < \mbox{\hyperlink{1wire_8h_ad98991aeddbf80974301458b78b55bc1}{owPins}}; i++ ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00201}00201     ow[ i ] = OneWire( \mbox{\hyperlink{class_one_wire__mem_a5b9e5adb64f5ca7823f65444494d8954}{pinsA}}[ i ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00202}00202   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00203}00203   blockObj.setMemManager( o );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00204}00204   blockObj.setId( \textcolor{keywordtype}{id} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00205}00205   \mbox{\hyperlink{class_one_wire__mem_a9b69e3e0959e689809be7a3e0ef9359a}{eepromStartIndex}} = o.blockStart( \textcolor{keywordtype}{id} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00206}00206   \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}} = EEPROM.read( 4 );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00207}00207   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}} > \mbox{\hyperlink{class_one_wire__mem_aade252862587d10878ae704957748225}{maxNo\_1wireChips}} ) \{ \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}} = \mbox{\hyperlink{class_one_wire__mem_aade252862587d10878ae704957748225}{maxNo\_1wireChips}}; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00208}00208 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00209}00209 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00210}\mbox{\hyperlink{class_one_wire__mem_a16981e2405fb8b76ba593d18dc0388d5}{00210}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_one_wire__mem_a16981e2405fb8b76ba593d18dc0388d5}{OneWire\_mem::print1wirePins}}() \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00211}00211   \textcolor{keywordtype}{byte} i;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00212}00212   io\_print( \textcolor{stringliteral}{"{}No. 1-\/wire chips stored in EEprom "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00213}00213   io\_print( \textcolor{stringliteral}{"{}(OneWire\_mem::no\_storedChips): "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00214}00214   io\_println\_n( \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00215}00215   io\_println( \textcolor{stringliteral}{"{}1-\/wire chips table: "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00216}00216   io\_println( \textcolor{stringliteral}{"{}Pin index\(\backslash\)tIO pin\(\backslash\)t\(\backslash\)tChips found\(\backslash\)tNot saved\(\backslash\)tSaved but not found"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00217}00217   \textcolor{keywordflow}{for} ( i = 0; i < oneWireNumPins; i++ ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00218}00218     io\_print\_n( i );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00219}00219     io\_print( \textcolor{stringliteral}{"{},\(\backslash\)t\(\backslash\)t"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00220}00220     io\_print\_n( \mbox{\hyperlink{class_one_wire__mem_a5b9e5adb64f5ca7823f65444494d8954}{pinsA}}[ i ] ); \textcolor{comment}{// An array maping the 1wire bus No. to the IO pin No. Starts at 0 for the first bus}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00221}00221     io\_print( \textcolor{stringliteral}{"{},\(\backslash\)t\(\backslash\)t"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00222}00222     io\_print\_n( oneWireChipsOnPin[ i ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00223}00223     io\_print( \textcolor{stringliteral}{"{},\(\backslash\)t\(\backslash\)t"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00224}00224     io\_print\_n( oneWireChipsOnPinNotEE[ i ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00225}00225     io\_print( \textcolor{stringliteral}{"{},\(\backslash\)t\(\backslash\)t"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00226}00226     io\_println\_n( EEChipsNotFound[ i ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00227}00227   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00228}00228   io\_ln;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00229}00229 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00230}00230 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00231}\mbox{\hyperlink{class_one_wire__mem_afbd641c23146fcafaaf12685d88b84ee}{00231}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_one_wire__mem_afbd641c23146fcafaaf12685d88b84ee}{OneWire\_mem::print1wireSetup}}() \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00232}00232   io\_printHeading( \textcolor{stringliteral}{"{}Printing 1-\/wire mem / storage setup"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00233}00233   io\_print( \textcolor{stringliteral}{"{}1 wire number lines/pins: "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00234}00234   io\_println\_n( oneWireNumPins );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00235}00235 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00236}00236   Serial.print( F( \textcolor{stringliteral}{"{}1-\/wire EEPROM start address (self.eepromStartIndex)= "{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00237}00237   Serial.println( \mbox{\hyperlink{class_one_wire__mem_a9b69e3e0959e689809be7a3e0ef9359a}{eepromStartIndex}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00238}00238 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00239}00239   Serial.print( F( \textcolor{stringliteral}{"{}EEPROM 1-\/wire record size.(switch1wire\_T) : "{}} ) ); \textcolor{comment}{// 1-\/wire light relay controller}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00240}00240   Serial.println( \mbox{\hyperlink{1wire_8h_ad1a8e5237651e1d29b5f6a8c21314ae1}{onewireEepromRecSize}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00241}00241 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00242}00242   Serial.print( F( \textcolor{stringliteral}{"{}eeprom mem reserved for: maxNo\_1wireChips("{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00243}00243   Serial.print( \mbox{\hyperlink{class_one_wire__mem_aade252862587d10878ae704957748225}{maxNo\_1wireChips}} ); Serial.print( \textcolor{stringliteral}{"{}) * onewireEepromRecSize("{}} ); Serial.print( \mbox{\hyperlink{1wire_8h_ad1a8e5237651e1d29b5f6a8c21314ae1}{onewireEepromRecSize}} ); Serial.print( F( \textcolor{stringliteral}{"{}) = "{}} ) ); Serial.print( \mbox{\hyperlink{1wire_8h_ad1a8e5237651e1d29b5f6a8c21314ae1}{onewireEepromRecSize}} * \mbox{\hyperlink{class_one_wire__mem_aade252862587d10878ae704957748225}{maxNo\_1wireChips}} ); Serial.println( \textcolor{stringliteral}{"{} bytes"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00244}00244 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00245}00245   io\_print( \textcolor{stringliteral}{"{}No. 1-\/wire chips stored in EEprom "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00246}00246   io\_print( \textcolor{stringliteral}{"{}(EEPROM.read(4): "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00247}00247 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00248}00248   Serial.println( EEPROM.read( \mbox{\hyperlink{1wire_8h_aadba483a3bd8dc77a950cf36cd204874}{no\_1wireChips\_EA}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00249}00249 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00250}00250   \mbox{\hyperlink{class_one_wire__mem_a16981e2405fb8b76ba593d18dc0388d5}{print1wirePins}}();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00251}00251 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00252}00252 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00258}\mbox{\hyperlink{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}{00258}} int8\_t \mbox{\hyperlink{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}{OneWire\_mem::checkStoredIndex}}() \{ \textcolor{comment}{// If the 1wire chip in the globals is in eeprom return index else return -\/1}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00259}00259   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}{checkStoredIndex}}( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5ca474f4749f83f1261ee3dd569991ef}{addr}} -\/ 1 );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00260}00260 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00261}00261 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00269}\mbox{\hyperlink{class_one_wire__mem_a2ef28102ddb6c05a30e870162f76fb5c}{00269}} int8\_t \mbox{\hyperlink{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}{OneWire\_mem::checkStoredIndex}}( \textcolor{keywordtype}{byte} addr[ ] ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00270}00270   \textcolor{keywordtype}{byte} i;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00271}00271   \textcolor{keywordtype}{byte} x;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00272}00272   \textcolor{keywordflow}{for} ( i = 0; i < \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}}; i++ ) \{ \textcolor{comment}{//no\_storedChips = No. stored in eeprom}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00273}00273     blockObj.readSlot( i, \&\mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00274}00274     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}} != addr[ 0 ] ) \{ \textcolor{keywordflow}{return} -\/1; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00275}00275 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00276}00276     \textcolor{keywordflow}{for} ( x = 1; x < 7; x++ ) \{ \textcolor{comment}{//check if chip type plus address is in eeprom. Address should be unique}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00277}00277       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5ca474f4749f83f1261ee3dd569991ef}{addr}}[ x -\/ 1 ] != addr[ x ] ) \{ \textcolor{keywordflow}{break}; \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( x == 6 ) \{ \textcolor{keywordflow}{return} i; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00278}00278     \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00279}00279   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00280}00280   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00281}00281 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00282}00282 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00289}\mbox{\hyperlink{class_one_wire__mem_a825507ec70be0783b2c9b84a2ed86b39}{00289}} int8\_t \mbox{\hyperlink{class_one_wire__mem_a825507ec70be0783b2c9b84a2ed86b39}{OneWire\_mem::loadFromStorage}}( \textcolor{keywordtype}{byte} index ) \{ \textcolor{comment}{// get from eeprom and store in globals}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00290}00290   \textcolor{comment}{//\#define v1wire 1}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00291}00291 \textcolor{preprocessor}{\#ifdef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00292}00292   io\_printStartFunc( \textcolor{stringliteral}{"{}get1wireFromEepromIndex"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00293}00293 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00294}00294   \textcolor{keywordflow}{if} ( index >= \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}} )}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00295}00295     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00296}00296 \textcolor{preprocessor}{\#ifdef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00297}00297   io\_print( \textcolor{stringliteral}{"{}Loading 1wire chip record from EEPROM at index: "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00298}00298   io\_println\_n( index );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00299}00299 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00300}00300   blockObj.readSlot( index, \&\mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00301}00301   \textcolor{comment}{//owChipR.wa1wirePos = index;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00302}00302   \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ac4cb745b0c5ceb9a3800a4b3bfed7b6a}{pinChan}} = \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ad4f020f5d04c7ec07fa4c940e57e2ad0}{crc}};\textcolor{comment}{// In storage  pinChan is stored in the crc position as no point in storing the crc.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00303}00303   \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ad4f020f5d04c7ec07fa4c940e57e2ad0}{crc}} = OneWire::crc8( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}, 7 );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00304}00304   \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a997ee99bbaf450bd0035cafec4a9803c}{slotI}} = index;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00305}00305   \textcolor{comment}{//working1wire.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00306}00306 \textcolor{preprocessor}{\#ifdef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00307}00307   io\_print( \textcolor{stringliteral}{"{}Chip type:"{}} ); io\_print\_nh( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}} ); io\_print( \textcolor{stringliteral}{"{} = "{}} ); io\_println\_nh( addr[ 0 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00308}00308   io\_print( \textcolor{stringliteral}{"{}working1wire.addr[0]"{}} ); io\_print\_nh( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5ca474f4749f83f1261ee3dd569991ef}{addr}}[ 0 ] ); io\_print( \textcolor{stringliteral}{"{} = "{}} ); io\_println\_nh( addr[ 1 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00309}00309   io\_print( \textcolor{stringliteral}{"{}\(\backslash\)"{} [1]:"{}} ); io\_print\_nh( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5ca474f4749f83f1261ee3dd569991ef}{addr}}[ 1 ] ); io\_print( \textcolor{stringliteral}{"{} = "{}} ); io\_println\_nh( addr[ 2 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00310}00310   io\_print( \textcolor{stringliteral}{"{}\(\backslash\)"{} [2]:"{}} ); io\_print\_nh( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5ca474f4749f83f1261ee3dd569991ef}{addr}}[ 2 ] ); io\_print( \textcolor{stringliteral}{"{} = "{}} ); io\_println\_nh( addr[ 3 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00311}00311   io\_print( \textcolor{stringliteral}{"{}\(\backslash\)"{} [3]:"{}} ); io\_print\_nh( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5ca474f4749f83f1261ee3dd569991ef}{addr}}[ 3 ] ); io\_print( \textcolor{stringliteral}{"{} = "{}} ); io\_println\_nh( addr[ 4 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00312}00312   io\_print( \textcolor{stringliteral}{"{}\(\backslash\)"{} [4]:"{}} ); io\_print\_nh( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5ca474f4749f83f1261ee3dd569991ef}{addr}}[ 4 ] ); io\_print( \textcolor{stringliteral}{"{} = "{}} ); io\_println\_nh( addr[ 5 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00313}00313   io\_print( \textcolor{stringliteral}{"{}\(\backslash\)"{} [5]:"{}} ); io\_print\_nh( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5ca474f4749f83f1261ee3dd569991ef}{addr}}[ 5 ] ); io\_print( \textcolor{stringliteral}{"{} = "{}} ); io\_println\_nh( addr[ 6 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00314}00314   io\_print( \textcolor{stringliteral}{"{}crc:"{}} ); io\_print\_nh( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ad4f020f5d04c7ec07fa4c940e57e2ad0}{crc}} ); io\_print( \textcolor{stringliteral}{"{} = "{}} ); io\_println\_nh( addr[ 7 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00315}00315   io\_printEndFunc( \textcolor{stringliteral}{"{}get1wireFromEepromIndex"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00316}00316 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00317}00317   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00318}00318   \textcolor{comment}{//\#undef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00319}00319 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00320}00320 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00321}\mbox{\hyperlink{class_one_wire__mem_af56ea8aea5c4ef1c2c1463cf7f8a7d88}{00321}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_one_wire__mem_af56ea8aea5c4ef1c2c1463cf7f8a7d88}{OneWire\_mem::test1wireIO}}( \textcolor{keywordtype}{byte} addr[ ], \textcolor{keywordtype}{byte} bus ) \{ \mbox{\hyperlink{1wire_8cpp_a93a8808362069ecaef566c7fda84a1b3}{return ::test1wireIO}}( ow[ bus ], addr ); \};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00322}00322 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00333}\mbox{\hyperlink{class_one_wire__mem_a1d9aed76616fc837319331ea69558234}{00333}} int8\_t \mbox{\hyperlink{class_one_wire__mem_a1d9aed76616fc837319331ea69558234}{OneWire\_mem::saveChipTo}}( \textcolor{keywordtype}{byte} addr[ ], \textcolor{keywordtype}{byte} owPinI, \textcolor{keywordtype}{byte} slot ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00334}00334   \textcolor{comment}{// /Todo update the arrays keeping track of stored chips. for now reset the board :P could also be problems if a chip is stored twice.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00335}00335   \textcolor{keywordtype}{byte} i;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00336}00336   \textcolor{keywordtype}{byte} x;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00337}00337   \textcolor{keywordflow}{if} ( slot < \mbox{\hyperlink{class_one_wire__mem_aade252862587d10878ae704957748225}{maxNo\_1wireChips}} ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00338}00338     i = \mbox{\hyperlink{class_one_wire__mem_a9b69e3e0959e689809be7a3e0ef9359a}{eepromStartIndex}} + ( slot * \mbox{\hyperlink{1wire_8h_ad1a8e5237651e1d29b5f6a8c21314ae1}{onewireEepromRecSize}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00339}00339     Serial.print( F( \textcolor{stringliteral}{"{}Starting 1wire eeprom address is: "{}} ) );    Serial.print( \mbox{\hyperlink{class_one_wire__mem_a9b69e3e0959e689809be7a3e0ef9359a}{eepromStartIndex}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00340}00340     Serial.print( F( \textcolor{stringliteral}{"{}, chip saved at: "{}} ) );    Serial.print( i );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00341}00341     Serial.print( F( \textcolor{stringliteral}{"{}, stored index(+1)= "{}} ) ); Serial.print( slot + 1 ); Serial.print( \textcolor{stringliteral}{"{}, "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00342}00342 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00343}00343     \textcolor{keywordflow}{for} ( x = 0; x < 7; x++ ) \{ \textcolor{comment}{//copy chip type but not crc to eeprom"{}.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00344}00344       EEPROM.update( i + x, addr[ x ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00345}00345     \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00346}00346     x = owPinI << 5;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00347}00347     x |= ( \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wireChipTypeIOPins}}( addr[ 0 ] ) << 1 );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00348}00348     EEPROM.update( i + 7, x ); \textcolor{comment}{// save pin and channels. Channels is set to Max for chip type. If not used change it manually.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00349}00349     EEPROM.update( i + 8, 0 ); \textcolor{comment}{// 0 = no room set.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00350}00350   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00351}00351     Serial.print( F( \textcolor{stringliteral}{"{}No room left in eeprom. maxNo\_1wireChips : "{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00352}00352     Serial.println( \mbox{\hyperlink{class_one_wire__mem_aade252862587d10878ae704957748225}{maxNo\_1wireChips}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00353}00353     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00354}00354   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00355}00355   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00356}00356 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00357}00357 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00365}\mbox{\hyperlink{class_one_wire__mem_a27f7ce3561aa62be2b5f2bb356c0e96f}{00365}} int8\_t \mbox{\hyperlink{class_one_wire__mem_a27f7ce3561aa62be2b5f2bb356c0e96f}{OneWire\_mem::saveAllOnBus}}( \textcolor{keywordtype}{byte} owPinI, \textcolor{keywordtype}{byte} slot ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00366}00366   \textcolor{keywordtype}{byte} addr[ 8 ], c;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00367}00367   int8\_t r = 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00368}00368   ow[ owPinI ].reset\_search();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00369}00369   c = 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00370}00370   \textcolor{keywordflow}{while} ( search1wireBus( addr, owPinI, \textcolor{keyword}{false} ) == 1 ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00371}00371     r = \mbox{\hyperlink{class_one_wire__mem_a1d9aed76616fc837319331ea69558234}{saveChipTo}}( addr, owPinI, slot + c );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00372}00372     io\_ln;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00373}00373     \textcolor{keywordflow}{if} ( r < 0 ) \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00374}00374     c++;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00375}00375   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00376}00376   \textcolor{keywordflow}{return} c;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00377}00377 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00378}00378 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00389}\mbox{\hyperlink{class_one_wire__mem_a5b48b1dbefc529284d2df8151e526d4c}{00389}} int8\_t \mbox{\hyperlink{class_one_wire__mem_a08c1bb6f9c0756a5aa59f452d4956de1}{OneWire\_mem::add1wireChip}}( \textcolor{keywordtype}{byte} addr[ ], \textcolor{keywordtype}{byte} owPinI ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00390}00390   int8\_t x;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00391}00391   x = \mbox{\hyperlink{class_one_wire__mem_a1d9aed76616fc837319331ea69558234}{saveChipTo}}( addr, owPinI, \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}} );\textcolor{comment}{// as the first slot is 0 this is the next slot after the already stored chips.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00392}00392   \textcolor{keywordflow}{if} ( x == 0 ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00393}00393     \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}}++;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00394}00394   \}    \textcolor{comment}{// EEPROM.write(4, no\_storedChips); // save from calling func instead of each time through likely loop}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00395}00395   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00396}00396     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00397}00397   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00398}00398   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00399}00399 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00400}00400 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00408}\mbox{\hyperlink{class_one_wire__mem_a08c1bb6f9c0756a5aa59f452d4956de1}{00408}} int8\_t \mbox{\hyperlink{class_one_wire__mem_a08c1bb6f9c0756a5aa59f452d4956de1}{OneWire\_mem::add1wireChip}}( \textcolor{keywordtype}{byte} owPinI ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00409}00409   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_one_wire__mem_a08c1bb6f9c0756a5aa59f452d4956de1}{add1wireChip}}( \&\mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}}, owPinI );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00410}00410 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00411}00411 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00412}\mbox{\hyperlink{class_one_wire__mem_ac20f8f219ab221cbdda38cb97cb6f647}{00412}} int8\_t \mbox{\hyperlink{class_one_wire__mem_ae174414a725b9d7db38d68f52c0e93ae}{OneWire\_mem::makeSureInEeprom}}( \textcolor{keywordtype}{byte} addrs[ ], \textcolor{keywordtype}{byte} owPinI ) \{ \textcolor{comment}{// for hardware pin number use lights\_1wire\_pins[owPinI];}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00413}00413   Serial.println();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00414}00414   Serial.print( F( \textcolor{stringliteral}{"{}Checking if in EEPROM"{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00415}00415   \textcolor{keywordtype}{int} r = \mbox{\hyperlink{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}{checkStoredIndex}}();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00416}00416   Serial.print( F( \textcolor{stringliteral}{"{}. 1wire index in eeprom: "{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00417}00417   Serial.println( r );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00418}00418   \textcolor{keywordflow}{if} ( r < 0 ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00419}00419     r = \mbox{\hyperlink{class_one_wire__mem_a08c1bb6f9c0756a5aa59f452d4956de1}{add1wireChip}}( addrs, owPinI );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00420}00420     Serial.print( F( \textcolor{stringliteral}{"{}storing in eeprom: "{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00421}00421     Serial.print( F( \textcolor{stringliteral}{"{}Setting EEPROM Address ("{}} ) ); Serial.print( \mbox{\hyperlink{1wire_8h_aadba483a3bd8dc77a950cf36cd204874}{no\_1wireChips\_EA}} ); Serial.print( F( \textcolor{stringliteral}{"{}) to = "{}} ) ); Serial.println( \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00422}00422     EEPROM.update( \mbox{\hyperlink{1wire_8h_aadba483a3bd8dc77a950cf36cd204874}{no\_1wireChips\_EA}}, \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}} ); \textcolor{comment}{// may be better to save from calling func instead of each time through likely loop}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00423}00423   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00424}00424   \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00425}00425 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00426}00426 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00427}\mbox{\hyperlink{class_one_wire__mem_ae174414a725b9d7db38d68f52c0e93ae}{00427}} int8\_t \mbox{\hyperlink{class_one_wire__mem_ae174414a725b9d7db38d68f52c0e93ae}{OneWire\_mem::makeSureInEeprom}}( \textcolor{keywordtype}{byte} owPinI ) \{ \textcolor{comment}{// for hardware pin number use lights\_1wire\_pins[owPinI];}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00428}00428   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_one_wire__mem_ae174414a725b9d7db38d68f52c0e93ae}{makeSureInEeprom}}( \&\mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}}, owPinI );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00429}00429 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00430}00430 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00431}\mbox{\hyperlink{1wire_8cpp_a387122cd32e13e3ab4868864bed08d3e}{00431}} \textcolor{keywordtype}{void} \mbox{\hyperlink{1wire_8cpp_a387122cd32e13e3ab4868864bed08d3e}{io\_print1wireAddr}}( \textcolor{keywordtype}{byte} addr[ ] ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00432}00432   \textcolor{keywordtype}{byte} i;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00433}00433   io\_print( \textcolor{stringliteral}{"{}Addr:"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00434}00434   \textcolor{comment}{// not needed now with union type. io\_print\_nh2( working1wire.chipType );}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00435}00435   \textcolor{comment}{//read each byte in the address array}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00436}00436   io\_print\_nh2( addr[ 0 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00437}00437   \textcolor{keywordflow}{for} ( i = 1; i < 7; i++ ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00438}00438     io\_print( \textcolor{stringliteral}{"{},"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00439}00439     \textcolor{comment}{// print each byte in the address array in hex format}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00440}00440     io\_print\_nh2( addr[ i ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00441}00441   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00442}00442   io\_print( \textcolor{stringliteral}{"{}."{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00443}00443 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00444}00444 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00445}\mbox{\hyperlink{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}{00445}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}{OneWire\_mem::io\_print1wireAddr}}() \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00446}00446   \mbox{\hyperlink{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}{::io\_print1wireAddr}}( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00447}00447 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00448}00448 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00457}00457 int8\_t OneWire\_mem::search1wireBus( \textcolor{keywordtype}{byte} addr[ ], \textcolor{keywordtype}{byte} owPinI, \textcolor{keywordtype}{bool} skipSaved ) \{\textcolor{comment}{//byte \&skiped}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00458}00458   int8\_t i;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00459}00459   \textcolor{comment}{//  byte c; if need skiped No. it needs to be a class var or add a out param}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00460}00460   \textcolor{keywordtype}{bool} r;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00461}00461   \textcolor{keywordflow}{do} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00462}00462     r = ow[ owPinI ].search( addr );\textcolor{comment}{// 1 if next chip found.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00463}00463     \textcolor{keywordflow}{if} ( r ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00464}00464       \textcolor{keywordflow}{if} ( OneWire::crc8( addr, 7 ) != addr[ 7 ] ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00465}00465         Serial.print( F( \textcolor{stringliteral}{"{}CRC failed!\(\backslash\)n"{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00466}00466         \textcolor{keywordflow}{return} -\/3;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00467}00467       \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00468}00468       \textcolor{keywordflow}{if} ( !skipSaved ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00469}00469         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00470}00470       \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00471}00471         \textcolor{comment}{//      skiped++;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00472}00472         i = \mbox{\hyperlink{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}{checkStoredIndex}}( addr ); \textcolor{comment}{// Any other logic branch returns before the while loop check.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00473}00473       \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00474}00474     \} \textcolor{keywordflow}{else} \{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00475}00475 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00476}00476   \} \textcolor{keywordflow}{while} ( skipSaved and ( i >= 0 ) );\textcolor{comment}{// if skipSaved is true keep searching if the chip found is already stored in eeprom.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00477}00477   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00478}00478 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00479}00479 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00496}\mbox{\hyperlink{class_one_wire__mem_ae5d9f16ae93c13a452a4fd33b5ead458}{00496}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_one_wire__mem_ae5d9f16ae93c13a452a4fd33b5ead458}{OneWire\_mem::set\_1wire\_state\_on\_bus}}( \textcolor{keywordtype}{byte} state, \textcolor{keywordtype}{byte} chip, \textcolor{keywordtype}{bool} skipSaved ) \{ \textcolor{comment}{//, boolean saveTemp) \{}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00497}00497   int8\_t i;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00498}00498   \textcolor{comment}{//byte deviceCountAll = 0;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00499}00499   \textcolor{keywordtype}{byte} deviceCount;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00500}00500   \textcolor{keywordtype}{byte} p, pi;\textcolor{comment}{// p = pin from array.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00501}00501   deviceCount = 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00502}00502   \textcolor{keywordflow}{for} ( pi = 0; pi < oneWireNumPins; pi++ ) \{ \textcolor{comment}{//loop for each pin a 1wire bus in on}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00503}00503     \textcolor{comment}{//    if(p>0) Serial.print(F("{}, "{}));}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00504}00504     p = \mbox{\hyperlink{class_one_wire__mem_a5b9e5adb64f5ca7823f65444494d8954}{pinsA}}[ pi ];}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00505}00505     Serial.print( F( \textcolor{stringliteral}{"{}\(\backslash\)nMCU pin: "{}} ) ); Serial.print( p ); Serial.print( F( \textcolor{stringliteral}{"{}, index: "{}} ) ); Serial.println( pi ); \textcolor{comment}{//Serial.print( F( "{}, "{} ) );}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00506}00506     \textcolor{comment}{/* initiate a search for the OneWire object we created and read its value into addr array we declared above*/}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00507}00507     ow[ pi ].reset\_search();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00508}00508     \textcolor{keywordflow}{do} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00509}00509       i = search1wireBus( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}, pi, skipSaved );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00510}00510       \textcolor{comment}{//deviceCountAll++;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00511}00511       \textcolor{comment}{//Serial.print( F( "{}chip: "{} ) );    Serial.print( chip );    Serial.print( F( "{}, deviceCount: "{} ) );    Serial.println( deviceCount );}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00512}00512       \textcolor{comment}{// a check to make sure that what we read is correct.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00513}00513       \textcolor{keywordflow}{if} ( ( i == 1 ) or ( i == -\/3 ) ) \{ Serial.print( F( \textcolor{stringliteral}{"{} CRC:"{}} ) );    Serial.print( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}[ 7 ], HEX ); \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00514}00514       \textcolor{keywordflow}{if} ( i == -\/3 ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00515}00515         Serial.print( F( \textcolor{stringliteral}{"{} failed!\(\backslash\)n"{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00516}00516         \textcolor{comment}{//return -\/3;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00517}00517         \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00518}00518       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( i == 1 ) \{ \textcolor{comment}{// crt check passed}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00519}00519         Serial.print( F( \textcolor{stringliteral}{"{} Passed, "{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00520}00520         \mbox{\hyperlink{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}{io\_print1wireAddr}}();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00521}00521         \textcolor{keywordflow}{if} ( i == 1 ) \{ deviceCount++; \} \textcolor{keywordflow}{else} \{ \textcolor{keywordflow}{continue}; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00522}00522         \textcolor{keywordflow}{if} ( chip == deviceCount ) \{\textcolor{comment}{//deviceCount will always be 1 or above at this point.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00523}00523           \textcolor{comment}{// if (saveTemp) \{}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00524}00524           \textcolor{comment}{//   for (x = 0; x < 8; x++) \{}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00525}00525           \textcolor{comment}{//     tempSaved1wireChip.addr[x] = addr[x];}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00526}00526           \textcolor{comment}{//   \}}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00527}00527           \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ac4cb745b0c5ceb9a3800a4b3bfed7b6a}{pinChan}} = pi << 5;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00528}00528           \textcolor{comment}{//   tempSaved1wireChip.state = state;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00529}00529           \textcolor{comment}{//   tempSaved1wireChip.ioBitmsk = 0;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00530}00530        \textcolor{comment}{// \}}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00531}00531 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00532}00532         \} \textcolor{comment}{// skipSaved == false, chip!=0 and chip == deviceCount}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00533}00533         \textcolor{keywordflow}{if} ( ( chip == deviceCount ) or ( chip == 0 ) ) \{ \textcolor{comment}{// Set the chip state.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00534}00534           Serial.print( F( \textcolor{stringliteral}{"{} Write "{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00535}00535           \textcolor{keywordflow}{if} ( ( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}[ 0 ] == \mbox{\hyperlink{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}{DS2413\_FAMILY\_ID}} ) or ( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}[ 0 ] == \mbox{\hyperlink{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}{DS2413clone\_FAMILY\_ID}} ) ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00536}00536             \textcolor{comment}{//Serial.print( F( "{}DS2413(type)"{} ) ); }}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00537}00537             Serial.print( F( \textcolor{stringliteral}{"{} chip: "{}} ) ); Serial.print( chip ); Serial.print( F( \textcolor{stringliteral}{"{}, count: "{}} ) ); Serial.print( deviceCount );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00538}00538             \mbox{\hyperlink{class_one_wire__mem_a2b1b128bc556e371bfcb7b079c323824}{write1wireIO}}( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}, pi, state );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00539}00539           \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00540}00540           \textcolor{keywordflow}{if} ( chip > 0 ) \{ \textcolor{keywordflow}{return} deviceCount; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00541}00541         \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00542}00542         Serial.println( \textcolor{stringliteral}{"{}."{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00543}00543       \} \textcolor{comment}{// End of 'crt check passed' block}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00544}00544     \} \textcolor{keywordflow}{while} ( i == 1 );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00545}00545   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00546}00546   \textcolor{keywordflow}{if} ( chip == 0 ) \{ \textcolor{keywordflow}{return} deviceCount; \} \textcolor{keywordflow}{else} \{ \textcolor{keywordflow}{return} -\/1; \}\textcolor{comment}{//chip not found}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00547}00547 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00548}00548 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00549}\mbox{\hyperlink{1wire_8cpp_a977007cf4daf77a6813d9bd5484e67e1}{00549}} \textcolor{keywordtype}{void} \mbox{\hyperlink{1wire_8cpp_a977007cf4daf77a6813d9bd5484e67e1}{printChipInfo}}( \textcolor{keywordtype}{byte} \textcolor{keywordtype}{id} ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00550}00550   Serial.print( \textcolor{stringliteral}{"{}\(\backslash\)e[0;94m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00551}00551   \textcolor{keywordflow}{switch} ( \textcolor{keywordtype}{id} ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00552}00552     \textcolor{keywordflow}{case} \mbox{\hyperlink{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}{DS2413\_FAMILY\_ID}}:      Serial.print( F( \textcolor{stringliteral}{"{}DS2413 IO/Open drain switch.\(\backslash\)t"{}} ) );     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00553}00553     \textcolor{keywordflow}{case} \mbox{\hyperlink{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}{DS2413clone\_FAMILY\_ID}}: Serial.print( F( \textcolor{stringliteral}{"{}3A 2100H (DS2413 clone).\(\backslash\)t"{}} ) );    \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00554}00554     \textcolor{keywordflow}{case} \mbox{\hyperlink{1wire_8cpp_a3e36d3f05676e13a5bc6fcfe0e7a54ee}{DS2408\_FAMILY\_ID}}:      Serial.print( F( \textcolor{stringliteral}{"{}DS2408 IO/Open drain switch.\(\backslash\)t"{}} ) );  \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00555}00555     \textcolor{keywordflow}{case} \mbox{\hyperlink{1wire_8cpp_ab20414815640ae9cd42c01c9d1a4c17a}{DS2406\_FAMILY\_ID}}:      Serial.print( F( \textcolor{stringliteral}{"{}DS2406/DS2407 IO+ 1kBit OTPROM\(\backslash\)t"{}} ) );  \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00556}00556     \textcolor{keywordflow}{case} \mbox{\hyperlink{1wire_8cpp_a98ea559b3f61a540608997b5ee55eb60}{DS2405\_FAMILY\_ID}}:      Serial.print( F( \textcolor{stringliteral}{"{}DS2405 Switch. DEPRECATED.\(\backslash\)t"{}} ) ); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00557}00557     \textcolor{keywordflow}{case} \mbox{\hyperlink{1wire_8cpp_a99ed45dde220f1f590bc945b4646bb0a}{DS18S20\_FAMILY\_ID}}:     Serial.print( F( \textcolor{stringliteral}{"{}DS18S20 temperature. Obsolete\(\backslash\)t"{}} ) );   \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00558}00558     \textcolor{keywordflow}{case} \mbox{\hyperlink{1wire_8cpp_aa888f4f026782b3d0919c5b6f42407c1}{DS18B20\_FAMILY\_ID}}:     Serial.print( F( \textcolor{stringliteral}{"{}DS18B20 temperature sensor.\(\backslash\)t"{}} ) );  \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00559}00559       \textcolor{comment}{// case :     break;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00560}00560 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00561}00561     \textcolor{keywordflow}{default}:io\_print( \textcolor{stringliteral}{"{}Unsupported chip type: "{}} ); io\_print\_nh( \textcolor{keywordtype}{id} ); io\_print( \textcolor{stringliteral}{"{}\(\backslash\)t"{}} ); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00562}00562   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00563}00563   io\_print\_n( \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wireChipTypeIOPins}}( \textcolor{keywordtype}{id} ) ); io\_print( \textcolor{stringliteral}{"{} IO pins. "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00564}00564 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00565}00565 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00566}\mbox{\hyperlink{1wire_8cpp_a2e8000096e9b85edb1ba3aab584b0a8a}{00566}} \textcolor{keywordtype}{void} \mbox{\hyperlink{1wire_8cpp_a2e8000096e9b85edb1ba3aab584b0a8a}{test\_printChipInfo}}() \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00567}00567   \textcolor{keywordtype}{byte} x, id;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00568}00568   io\_println( \textcolor{stringliteral}{"{}Testing printChipInfo()"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00569}00569   \textcolor{keywordflow}{for} ( x = 0; x <= \mbox{\hyperlink{1wire_8cpp_a47518a29c73d292a8e99cad8e5bc3d6a}{num1wireIDs}}; x++ ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00570}00570     \textcolor{keywordtype}{id} = \mbox{\hyperlink{1wire_8cpp_adc0e43b0bfe532c9150833a40d6ff2d7}{get1wireIdFIA}}( x );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00571}00571     \mbox{\hyperlink{1wire_8cpp_a977007cf4daf77a6813d9bd5484e67e1}{printChipInfo}}( \textcolor{keywordtype}{id} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00572}00572     io\_ln;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00573}00573   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00574}00574 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00575}00575 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00576}00576 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00582}\mbox{\hyperlink{class_one_wire__mem_a3bd5ba2d95c5873efc9b801a78b8ae6f}{00582}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_one_wire__mem_a3bd5ba2d95c5873efc9b801a78b8ae6f}{OneWire\_mem::get\_1wire\_devices}}() \{ \textcolor{comment}{// check for 1wire chips, do not store them in eeprom}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00583}00583   int8\_t i;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00584}00584   \textcolor{keywordtype}{byte} deviceCount = 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00585}00585   \textcolor{keywordtype}{byte} pi, p; \textcolor{comment}{//p = pin from array.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00586}00586   \textcolor{keywordflow}{for} ( i = 0; i < \mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{defMaxNo\_1wireChips}}; i++ ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00587}00587     bitClear( \mbox{\hyperlink{1wire_8cpp_a565a4ca1ef05911887e8e0e3c2b56291}{oneWireState}}[ i ], 0 );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00588}00588   \} \textcolor{comment}{// clears the bit for the 1wire chips stored in EEprom being found on the 1wire bus(s) pins}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00589}00589   \textcolor{keywordflow}{for} ( pi = 0; pi < oneWireNumPins; pi++ ) \{ \textcolor{comment}{//loop for each pin a 1wire bus in on}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00590}00590     \textcolor{comment}{//    if(p>0) Serial.print(F("{}, "{}));}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00591}00591     Serial.print( F( \textcolor{stringliteral}{"{}\(\backslash\)nStart search on 1-\/wire bus No. "{}} ) );  Serial.print( pi );  Serial.print( F( \textcolor{stringliteral}{"{} on hardware pin "{}} ) ); p = \mbox{\hyperlink{class_one_wire__mem_a5b9e5adb64f5ca7823f65444494d8954}{pinsA}}[ pi ]; Serial.println( p );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00592}00592     \textcolor{comment}{/* initiate a search for the OneWire object we created and read its value into}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00593}00593 \textcolor{comment}{    addr array we declared above*/}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00594}00594 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00595}00595     \textcolor{keywordflow}{while} ( ow[ pi ].search( \&\mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}} ) ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00596}00596       deviceCount++;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00597}00597       \textcolor{comment}{// a check to make sure that what we read is correct.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00598}00598       \textcolor{keywordflow}{if} ( OneWire::crc8( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}, 7 ) != \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}[ 7 ] ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00599}00599         Serial.print( F( \textcolor{stringliteral}{"{}CRC failed!\(\backslash\)n"{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00600}00600         \textcolor{comment}{//EEPROM.update( 4 , no\_storedChips ); // update any already added on previous loops}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00601}00601         \textcolor{keywordflow}{return} -\/3;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00602}00602       \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00603}00603         i = \mbox{\hyperlink{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}{checkStoredIndex}}();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00604}00604         \mbox{\hyperlink{1wire_8cpp_a977007cf4daf77a6813d9bd5484e67e1}{printChipInfo}}( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}[ 0 ] );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00605}00605         \mbox{\hyperlink{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}{io\_print1wireAddr}}();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00606}00606         Serial.print( F( \textcolor{stringliteral}{"{} CRC No = "{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00607}00607         Serial.print( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}[ 7 ], HEX );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00608}00608         Serial.print( F( \textcolor{stringliteral}{"{} Passed"{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00609}00609         \textcolor{keywordflow}{if} ( i < 0 ) \{ \textcolor{comment}{//not stored in EEprom}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00610}00610           oneWireChipsOnPin[ pi ]++;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00611}00611           oneWireChipsOnPinNotEE[ pi ]++;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00612}00612           Serial.print( F( \textcolor{stringliteral}{"{}, \(\backslash\)e[91mNot found in EEPROM\(\backslash\)e[37m"{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00613}00613           \textcolor{comment}{// 30-\/37: foreground colour, 40-\/47:background. 90-\/97: bright foreground, 100-\/107: bright background}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00614}00614           \textcolor{comment}{// 0:black, 1:red, 2:green, 3:yellow, 4:blue, 5:magenta, 6:cyan, 7:white}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00615}00615           \textcolor{comment}{// effects: 0=reset, 1=bold, 2=faint, 3=Italic, 4=underlined, 5=flash, 7=Reverse(swap foreground with background), 8=Hidden(passwords), 9=Strikethrough}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00616}00616         \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{// In eeprom}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00617}00617           oneWireChipsOnPin[ pi ]++;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00618}00618           \mbox{\hyperlink{1wire_8cpp_a565a4ca1ef05911887e8e0e3c2b56291}{oneWireState}}[ i ] \&= B11110000; \textcolor{comment}{//and out the 3 bits for 1-\/wire bus plus 1 bit for saved chip found}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00619}00619           \mbox{\hyperlink{1wire_8cpp_a565a4ca1ef05911887e8e0e3c2b56291}{oneWireState}}[ i ] |= ( pi << 1 ) bitor B00000001;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00620}00620           Serial.print( F( \textcolor{stringliteral}{"{}, \(\backslash\)e[92;1mFound in EEPROM at: \(\backslash\)e[92;3m"{}} ) ); Serial.print( i ); Serial.print( \textcolor{stringliteral}{"{}\(\backslash\)e[37;0m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00621}00621         \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00622}00622         \textcolor{comment}{//    if (addr[0] == DS2413\_FAMILY\_ID) \{ Serial.println(F("{} is DS2413 family chip. 2 Channel I/O Can use as switch or input\(\backslash\)n"{}) );    \}}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00623}00623 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00624}00624       \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00625}00625       Serial.println();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00626}00626     \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00627}00627     ow[ pi ].reset\_search();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00628}00628     Serial.print( F( \textcolor{stringliteral}{"{}Finished bus "{}} ) ); Serial.println( pi );\textcolor{comment}{//Serial.println();}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00629}00629   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00630}00630   \textcolor{comment}{//EEPROM.update( 4 , no\_storedChips );}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00631}00631   \textcolor{keywordflow}{return} deviceCount;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00632}00632 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00633}00633 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00638}\mbox{\hyperlink{class_one_wire__mem_af27c609b55b419df8178bb851a63c76f}{00638}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_one_wire__mem_af27c609b55b419df8178bb851a63c76f}{OneWire\_mem::printStorageUsage}}() \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00639}00639   \textcolor{keywordtype}{byte} i, line;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00640}00640   \textcolor{comment}{//switch1wire\_T wire\_1;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00641}00641   \textcolor{keywordflow}{for} ( i = 0; i < \mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{defMaxNo\_1wireChips}}; i++ ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00642}00642     io\_print( \textcolor{stringliteral}{"{}Slot:"{}} ); io\_printPrePad\_n( i ); io\_print( \textcolor{stringliteral}{"{} "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00643}00643     \textcolor{comment}{//io\_print( "{}, \&wire\_1:"{});io\_print\_n( (word)\&wire\_1 );}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00644}00644     blockObj.readSlot( i, \&\mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00645}00645     \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ac4cb745b0c5ceb9a3800a4b3bfed7b6a}{pinChan}} = \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ad4f020f5d04c7ec07fa4c940e57e2ad0}{crc}};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00646}00646     \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ad4f020f5d04c7ec07fa4c940e57e2ad0}{crc}} = OneWire::crc8( \&\mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}}, 7 );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00647}00647     \textcolor{keywordflow}{if} ( ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}} == 0xff )}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00648}00648       or ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}} == 0 ) ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00649}00649       \textcolor{comment}{//slot unused.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00650}00650       io\_println( \textcolor{stringliteral}{"{}\(\backslash\)e[91;73mSlot unused.\(\backslash\)e[37m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00651}00651     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00652}00652       \mbox{\hyperlink{1wire_8cpp_a977007cf4daf77a6813d9bd5484e67e1}{printChipInfo}}( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00653}00653       io\_print( \textcolor{stringliteral}{"{} \(\backslash\)e[33m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00654}00654       \mbox{\hyperlink{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}{io\_print1wireAddr}}();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00655}00655       line = \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ac4cb745b0c5ceb9a3800a4b3bfed7b6a}{pinChan}} >> 5;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00656}00656       io\_print( \textcolor{stringliteral}{"{} \(\backslash\)e[93mLine:"{}} ); io\_print\_n( line ); io\_print( \textcolor{stringliteral}{"{}\(\backslash\)e[37m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00657}00657       io\_print( \textcolor{stringliteral}{"{}, \(\backslash\)e[33mIO:"{}} ); io\_print\_n( ( ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ac4cb745b0c5ceb9a3800a4b3bfed7b6a}{pinChan}} >> 1 ) bitand 0b1111 ) ); io\_print( \textcolor{stringliteral}{"{}\(\backslash\)e[37m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00658}00658       io\_print( \textcolor{stringliteral}{"{}, \(\backslash\)e[93mRoom:"{}} ); io\_print\_n( ( ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a67cfeaa6e714cd6c282d4479d99d858c}{roomNum}} ) bitand 0b111111 ) ); io\_print( \textcolor{stringliteral}{"{}\(\backslash\)e[37m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00659}00659       io\_print( \textcolor{stringliteral}{"{}, \(\backslash\)e[33mChip found: "{}} ); io\_print\_n( ( ( ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a67cfeaa6e714cd6c282d4479d99d858c}{roomNum}} >> 6 ) xor 1 ) bitand 0b1 ) ); io\_print( \textcolor{stringliteral}{"{}\(\backslash\)e[37m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00660}00660       io\_print( \textcolor{stringliteral}{"{},  \(\backslash\)e[93mRam only: "{}} ); io\_print\_n( ( ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a67cfeaa6e714cd6c282d4479d99d858c}{roomNum}} >> 7 ) ) ); io\_print( \textcolor{stringliteral}{"{}\(\backslash\)e[37m."{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00661}00661       io\_print( \textcolor{stringliteral}{"{} \(\backslash\)e[95mLookup:\(\backslash\)e[37m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00662}00662       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{class_one_wire__mem_af56ea8aea5c4ef1c2c1463cf7f8a7d88}{::test1wireIO}}( ow[ line ], \&\mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}} ) ) \{ io\_println( \textcolor{stringliteral}{"{} \(\backslash\)e[92mFound\(\backslash\)e[37m"{}} ); \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00663}00663         io\_println( \textcolor{stringliteral}{"{} \(\backslash\)e[91mNot found\(\backslash\)e[37m"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00664}00664       \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00665}00665     \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00666}00666 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00667}00667   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00668}00668 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00669}00669 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00670}00670 \textcolor{comment}{//This should only be used for testing. Normally you would want to add the chips in light pos in the house order.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00671}\mbox{\hyperlink{class_one_wire__mem_afd6bd12f88bf7d323b3ea3ca69aaeb01}{00671}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_one_wire__mem_afd6bd12f88bf7d323b3ea3ca69aaeb01}{OneWire\_mem::get\_1wire\_devices\_ee}}() \{ \textcolor{comment}{// check for 1wire chips and store them in eeprom}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00672}00672   \textcolor{keywordflow}{return} 0; \textcolor{comment}{// to stop build warning with everything commented out.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00673}00673 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00674}00674 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00675}\mbox{\hyperlink{1wire_8cpp_ae06e28103688bff04370bd65ceb6ab5d}{00675}} \textcolor{keywordtype}{byte} \mbox{\hyperlink{1wire_8cpp_ae06e28103688bff04370bd65ceb6ab5d}{readDS2413}}( OneWire\& o, \textcolor{keywordtype}{byte} addr[ ] ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00676}00676   \textcolor{keywordtype}{byte} r;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00677}00677   o.reset();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00678}00678   delay( 10 );\textcolor{comment}{//todo remove delay;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00679}00679   o.select( addr );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00680}00680   o.write( \mbox{\hyperlink{1wire_8cpp_a7b66dbae451bc9c7a1b68897cc4836ac}{DS2413\_ACCESS\_READ}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00681}00681   r = o.read();\textcolor{comment}{// for fast poll of pins you could keep reading without reset, maybe if lib supports it. not needed here though.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00682}00682   o.reset();   \textcolor{comment}{// From data-\/sheet looks like 1-\/wire chip may send byte to bus forever after read without reset.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00683}00683   DigitalWrite(13)}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00684}00684   \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00685}00685 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00686}00686 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00687}\mbox{\hyperlink{1wire_8cpp_a6d64f194d5da81b7e217b7ea361efcc5}{00687}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{1wire_8cpp_a6d64f194d5da81b7e217b7ea361efcc5}{testDS2413}}( OneWire\& o, \textcolor{keywordtype}{byte} addr[ ] ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00688}00688   \textcolor{keywordtype}{bool} ok = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00689}00689   uint8\_t results;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00690}00690   results = \mbox{\hyperlink{1wire_8cpp_ae06e28103688bff04370bd65ceb6ab5d}{readDS2413}}( o, addr ); \textcolor{comment}{// Get the register results}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00691}00691   ok = ( ( !results ) \& 0x0F ) == ( results >> 4 ); \textcolor{comment}{// Compare nibbles}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00692}00692   \textcolor{comment}{//if(ok==0)\{io\_print( "{} ok = "{} );io\_print\_n(ok);io\_print( "{}results = "{} );io\_print\_n(results);\}}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00693}00693   \textcolor{keywordflow}{return} ok;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00694}00694 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00695}\mbox{\hyperlink{1wire_8cpp_a93a8808362069ecaef566c7fda84a1b3}{00695}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{1wire_8cpp_a93a8808362069ecaef566c7fda84a1b3}{test1wireIO}}( OneWire\& o, \textcolor{keywordtype}{byte} addr[ ] ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00696}00696   \textcolor{keywordflow}{if} ( ( addr[ 0 ] == \mbox{\hyperlink{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}{DS2413\_FAMILY\_ID}} ) or ( addr[ 0 ] == \mbox{\hyperlink{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}{DS2413clone\_FAMILY\_ID}} ) ) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{1wire_8cpp_a6d64f194d5da81b7e217b7ea361efcc5}{testDS2413}}( o, addr ); \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00697}00697   \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00698}00698 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00699}00699 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00700}00700 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00701}00701 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00702}\mbox{\hyperlink{1wire_8cpp_af90cd28b4d2a72569db9f6c06e651a5b}{00702}} \textcolor{keywordtype}{byte} \mbox{\hyperlink{1wire_8cpp_af90cd28b4d2a72569db9f6c06e651a5b}{read1wireIO}}( OneWire\& o, \textcolor{keywordtype}{byte} addr[ ] ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00703}00703   \textcolor{keywordtype}{bool} ok = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00704}00704   uint8\_t results = 0xff;\textcolor{comment}{// 1-\/wire uses ff for error so might as well keep the same.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00705}00705   \textcolor{keywordflow}{if} ( ( addr[ 0 ] == \mbox{\hyperlink{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}{DS2413\_FAMILY\_ID}} ) or ( addr[ 0 ] == \mbox{\hyperlink{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}{DS2413clone\_FAMILY\_ID}} ) ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00706}00706     results = \mbox{\hyperlink{1wire_8cpp_ae06e28103688bff04370bd65ceb6ab5d}{readDS2413}}( o, addr ); \textcolor{comment}{// Get the register results}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00707}00707     ok = ( ( !results ) \& 0x0F ) == ( results >> 4 ); \textcolor{comment}{// Compare nibbles}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00708}00708     results \&= 0x0F; \textcolor{comment}{/* Clear inverted values*/}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00709}00709   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00710}00710   \textcolor{comment}{// return ok ? results : -\/1;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00711}00711   \textcolor{keywordflow}{if} ( ok ) \{ \textcolor{keywordflow}{return} results; \} \textcolor{keywordflow}{else} \{ \textcolor{keywordflow}{return} 0xff; \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00712}00712 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00713}00713 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00714}\mbox{\hyperlink{class_one_wire__mem_a34f80402b4e705c8564e4f2b1cce9f48}{00714}} int8\_t \mbox{\hyperlink{class_one_wire__mem_a34f80402b4e705c8564e4f2b1cce9f48}{OneWire\_mem::read1wireIO}}() \{ \textcolor{comment}{//reads from the chip stored in the global owChipR}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00715}00715   \textcolor{comment}{//remember bits 0 and 2 show output(0 for connected to 0v) and 1 and 3 show input logic volt level.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00716}00716   \textcolor{keywordtype}{byte} line = \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ac4cb745b0c5ceb9a3800a4b3bfed7b6a}{pinChan}} >> 5;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00717}00717   \mbox{\hyperlink{1wire_8cpp_af90cd28b4d2a72569db9f6c06e651a5b}{return ::read1wireIO}}( ow[ line ], \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00718}00718 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00719}00719 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00733}\mbox{\hyperlink{1wire_8cpp_aa8820981770942c6f48687b950ab09c8}{00733}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{1wire_8cpp_aa8820981770942c6f48687b950ab09c8}{writeDS2413}}( OneWire\& o, \textcolor{keywordtype}{byte} addr[ ], \textcolor{keywordtype}{byte} state ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00734}00734   uint8\_t ack = 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00735}00735   \textcolor{comment}{/* Top six bits must '1' */}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00736}00736   state |= 0xFC;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00737}00737   \textcolor{comment}{//  state = state xor B11;// Invert IO bits as 0 = 0 voltage and as IO output is an n mosfet 0v is = on;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00738}00738   o.reset();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00739}00739   o.select( addr );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00740}00740   o.write( \mbox{\hyperlink{1wire_8cpp_a7f43ecbc0966fed19eaa57167f3fc748}{DS2413\_ACCESS\_WRITE}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00741}00741   o.write( state xor B11 );       \textcolor{comment}{// Invert IO bits as 0 = 0 voltage and as IO output is an n mosfet 0v is = on;}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00742}00742   o.write( state xor B11111100 ); \textcolor{comment}{/* Invert data and resend     */}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00743}00743   ack = o.read();                 \textcolor{comment}{/* 0xAA=success, 0xFF=failure */}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00744}00744   o.reset();                      \textcolor{comment}{// Stop chip sending. At least in some places the chip read continuously sends on the bus until reset.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00745}00745   Serial.print( F( \textcolor{stringliteral}{"{}ack:"{}} ) ); Serial.print( ack, HEX );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00746}00746   \textcolor{keywordflow}{if} ( ack == \mbox{\hyperlink{1wire_8cpp_ac0aa910faa0e7ff97464aed9869d38d6}{DS2413\_ACK\_SUCCESS}} ) \{\textcolor{comment}{//0xAA}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00747}00747     \textcolor{keywordflow}{if} ( !quiteMode ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00748}00748       Serial.print( F( \textcolor{stringliteral}{"{}Set success: B"{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00749}00749       Serial.print( state, BIN );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00750}00750     \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00751}00751   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00752}00752     Serial.print( F( \textcolor{stringliteral}{"{} Error writing to 1wire, 0xAA=success, 0xFF=failure: 0x"{}} ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00753}00753   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00754}00754   \textcolor{keywordflow}{return} ( ack == \mbox{\hyperlink{1wire_8cpp_ac0aa910faa0e7ff97464aed9869d38d6}{DS2413\_ACK\_SUCCESS}} ? \textcolor{keyword}{true} : \textcolor{keyword}{false} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00755}00755 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00756}00756 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00765}\mbox{\hyperlink{class_one_wire__mem_a2b1b128bc556e371bfcb7b079c323824}{00765}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_one_wire__mem_a2b1b128bc556e371bfcb7b079c323824}{OneWire\_mem::write1wireIO}}( \textcolor{keywordtype}{byte} a[ ], \textcolor{keywordtype}{byte} owIndex, \textcolor{keywordtype}{byte} state ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00766}00766   \mbox{\hyperlink{1wire_8cpp_a77ebc093a69243ec72e963d7c915fba0}{return ::write1wireIO}}( ow[ owIndex ], a, state );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00767}00767 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00768}00768 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00780}\mbox{\hyperlink{1wire_8cpp_a77ebc093a69243ec72e963d7c915fba0}{00780}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{1wire_8cpp_a77ebc093a69243ec72e963d7c915fba0}{write1wireIO}}( OneWire\& o, \textcolor{keywordtype}{byte} addr[ ], \textcolor{keywordtype}{byte} state ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00781}00781 \textcolor{preprocessor}{\#ifndef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00782}00782   \textcolor{comment}{//  io\_print("{}Setting 1-\/wire on pin: "{});}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00783}00783   \textcolor{comment}{//  io\_print\_n(lights\_1wire\_pins[owIndex]);}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00784}00784   \textcolor{keywordflow}{if} ( !quiteMode ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00785}00785     io\_print( \textcolor{stringliteral}{"{}ChipType: "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00786}00786     \mbox{\hyperlink{1wire_8cpp_a387122cd32e13e3ab4868864bed08d3e}{io\_print1wireAddr}}( addr );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00787}00787   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00788}00788 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00789}00789   \textcolor{keywordflow}{if} ( ( addr[ 0 ] == \mbox{\hyperlink{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}{DS2413\_FAMILY\_ID}} ) or ( addr[ 0 ] == \mbox{\hyperlink{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}{DS2413clone\_FAMILY\_ID}} ) ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00790}00790     \textcolor{comment}{//io\_println( "{}calling writeDS2413(addr,owIndex,state)"{} );}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00791}00791     \textcolor{keywordflow}{if} ( !quiteMode ) \{ io\_print( \textcolor{stringliteral}{"{}, "{}} ); \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00792}00792     \textcolor{keywordflow}{return} \mbox{\hyperlink{1wire_8cpp_aa8820981770942c6f48687b950ab09c8}{writeDS2413}}( o, addr, state );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00793}00793   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00794}00794     io\_println( \textcolor{stringliteral}{"{}write1wireIO() chip type not suported"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00795}00795   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00796}00796   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00797}00797 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00798}00798 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00808}\mbox{\hyperlink{class_one_wire__mem_abd64b471807251802d190f1c3d3d3034}{00808}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_one_wire__mem_abd64b471807251802d190f1c3d3d3034}{OneWire\_mem::writeChip\_E}}( uint8\_t state ) \{ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00809}00809   \textcolor{keywordtype}{bool} r;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00810}00810   io\_printTimeElapsed();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00811}00811 \textcolor{preprocessor}{\#ifdef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00812}00812   io\_printStartFunc( \textcolor{stringliteral}{"{}writeChip\_E"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00813}00813   io\_print( \textcolor{stringliteral}{"{}prams: state ="{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00814}00814   io\_print\_nb( state );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00815}00815 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00816}00816   \textcolor{keywordtype}{byte} line = \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_ac4cb745b0c5ceb9a3800a4b3bfed7b6a}{pinChan}} >> 5;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00817}00817   r = \mbox{\hyperlink{class_one_wire__mem_a2b1b128bc556e371bfcb7b079c323824}{write1wireIO}}( \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}}, line, state );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00818}00818   \textcolor{keywordflow}{if} ( r ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00819}00819     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a997ee99bbaf450bd0035cafec4a9803c}{slotI}} < \mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{defMaxNo\_1wireChips}} ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00820}00820       \mbox{\hyperlink{class_one_wire__mem_a41a2c9ef857340e9fee918455fbad54f}{ioSavedState}}[ \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a997ee99bbaf450bd0035cafec4a9803c}{slotI}} ] = state;\textcolor{comment}{// ( ioSavedState[ working1wire.slotI ] bitand B11111100 ) bitor ( state bitand B11 );}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00821}00821     \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00822}00822   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00823}00823   io\_printTimeElapsed();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00824}00824 \textcolor{preprocessor}{\#ifdef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00825}00825   io\_printEndFunc( \textcolor{stringliteral}{"{}writeChip\_E"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00826}00826 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00827}00827   \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00828}00828 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00829}00829 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00835}\mbox{\hyperlink{class_one_wire__mem_a2bc839954ab289d046fe725cc795ea77}{00835}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_one_wire__mem_a2bc839954ab289d046fe725cc795ea77}{OneWire\_mem::switch1wireAll\_E}}( \textcolor{keywordtype}{byte} action ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00836}00836   \textcolor{keywordtype}{byte} i;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00837}00837   \textcolor{keywordflow}{for} ( i = 0; i < \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\_storedChips}}; i++ ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00838}00838     \mbox{\hyperlink{class_one_wire__mem_a78917ec5043843e1db5bb3018320aab9}{write1wireIO\_E}}( i, 0xff \textcolor{comment}{/*=IO pin bitmsk*/}, action );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00839}00839 \textcolor{preprocessor}{  \#ifdef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00840}00840     \mbox{\hyperlink{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}{io\_print1wireAddr}}();}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00841}00841 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00842}00842   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00843}00843 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00844}00844 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00855}\mbox{\hyperlink{class_one_wire__mem_a78917ec5043843e1db5bb3018320aab9}{00855}} int8\_t \mbox{\hyperlink{class_one_wire__mem_a78917ec5043843e1db5bb3018320aab9}{OneWire\_mem::write1wireIO\_E}}( \textcolor{keywordtype}{byte} chip, \textcolor{keywordtype}{byte} channel, \textcolor{keywordtype}{byte} action ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00856}00856   \textcolor{keywordtype}{byte} x;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00857}00857 \textcolor{comment}{//\#define v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00858}00858 \textcolor{preprocessor}{\#ifdef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00859}00859   io\_ln;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00860}00860   io\_ln;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00861}00861   io\_printStartFunc( \textcolor{stringliteral}{"{}write1wireIO\_E"{}} )}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00862}00862     io\_print( \textcolor{stringliteral}{"{}Prams chip: "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00863}00863   io\_print\_n( chip );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00864}00864   io\_print( \textcolor{stringliteral}{"{}, channel: 0b"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00865}00865   io\_print\_nb( channel );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00866}00866   io\_print( \textcolor{stringliteral}{"{}, action: "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00867}00867   io\_println\_n( action );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00868}00868 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00869}00869   \mbox{\hyperlink{class_one_wire__mem_a825507ec70be0783b2c9b84a2ed86b39}{loadFromStorage}}( chip );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00870}00870   x = \mbox{\hyperlink{class_one_wire__mem_a41a2c9ef857340e9fee918455fbad54f}{ioSavedState}}[ chip ];}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00871}00871   \textcolor{keywordflow}{if} ( action == 0 ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00872}00872     x = x bitand ( !channel );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00873}00873   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( action == 1 ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00874}00874     x = x bitor channel;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00875}00875   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( action == 2 ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00876}00876 \textcolor{preprocessor}{  \#ifdef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00877}00877     io\_print( \textcolor{stringliteral}{"{}Saved IO state, ioSavedState[chip]= "{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00878}00878     io\_print\_nb( x );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00879}00879     io\_print( \textcolor{stringliteral}{"{} And after xor with channels:"{}} );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00880}00880     io\_println\_n( ( x xor channel ) );}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00881}00881 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00882}00882     x = x xor channel;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00883}00883   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00884}00884     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00885}00885   \} \textcolor{comment}{// error: invalid action.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00886}00886   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}} == \mbox{\hyperlink{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}{DS2413\_FAMILY\_ID}} || \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}.\mbox{\hyperlink{structswitch1wire___t_x_a5f309f46331e428e6c656027a23f825a}{chipType}} == \mbox{\hyperlink{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}{DS2413clone\_FAMILY\_ID}} ) \{}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00887}00887     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_one_wire__mem_abd64b471807251802d190f1c3d3d3034}{writeChip\_E}}( x ); \textcolor{comment}{// boolean, so 1 for success and 0 for fail.}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00888}00888   \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00889}00889 \textcolor{preprocessor}{\#ifdef v1wire}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00890}00890   io\_printEndFunc( \textcolor{stringliteral}{"{}write1wireIO\_E"{}} )}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00891}00891   \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00892}00892     \textcolor{keywordflow}{return} -\/2;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00893}00893 \}}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00894}00894 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00895}00895 ;}
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00896}00896 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00897}00897 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00898}00898 }
+\DoxyCodeLine{\Hypertarget{1wire_8cpp_source_l00899}00899 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,12 @@
+<map id="get1wireChipTypeIOPins" name="get1wireChipTypeIOPins">
+<area shape="rect" id="node1" title="Returns the number of IO pins the 1&#45;wire chip has." alt="" coords="636,213,815,239"/>
+<area shape="rect" id="node2" href="$1wire_8cpp.html#a977007cf4daf77a6813d9bd5484e67e1" title=" " alt="" coords="429,107,536,134"/>
+<area shape="rect" id="node7" href="$class_one_wire__mem.html#a1d9aed76616fc837319331ea69558234" title="Save the chip to nonvolatile storage overwriting any value already stored there." alt="" coords="382,213,583,239"/>
+<area shape="rect" id="node10" href="$test_2main_8cpp.html#ac13eac4135abb03c83315a4d5fa5ebd4" title=" " alt="" coords="377,263,588,290"/>
+<area shape="rect" id="node3" href="$class_one_wire__mem.html#a3bd5ba2d95c5873efc9b801a78b8ae6f" title="Find and print details of chips on the 1&#45;wire bus(s), including if it is saved and where." alt="" coords="125,5,316,47"/>
+<area shape="rect" id="node5" href="$class_one_wire__mem.html#af27c609b55b419df8178bb851a63c76f" title="Print 1&#45;wire eeprom(etc.) save slots." alt="" coords="117,71,324,112"/>
+<area shape="rect" id="node6" href="$1wire_8cpp.html#a2e8000096e9b85edb1ba3aab584b0a8a" title=" " alt="" coords="151,137,290,163"/>
+<area shape="rect" id="node4" href="$test_2main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="5,151,64,178"/>
+<area shape="rect" id="node8" href="$class_one_wire__mem.html#a5b48b1dbefc529284d2df8151e526d4c" title="Add 1wire chip in addr param to eeprom. Adds the details passed, no looking up on bus etc...." alt="" coords="113,187,329,214"/>
+<area shape="rect" id="node9" href="$class_one_wire__mem.html#a27f7ce3561aa62be2b5f2bb356c0e96f" title="Save all 1&#45;wire chips on a 1&#45;wire bus to storage e.g. EEPROM." alt="" coords="112,238,329,265"/>
+</map>

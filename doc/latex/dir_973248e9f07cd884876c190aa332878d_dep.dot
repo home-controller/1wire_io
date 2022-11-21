@@ -1,0 +1,18 @@
+digraph "examples/1-wire_chip_testing"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  compound=true
+  subgraph clusterdir_d28a4824dc47e487b107a5db32ef43c4 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,dashed,", label="examples", fontname="Helvetica", fontsize="10", URL="dir_d28a4824dc47e487b107a5db32ef43c4.html"]
+  subgraph clusterdir_973248e9f07cd884876c190aa332878d {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,bold,", label="", fontname="Helvetica", fontsize="10", URL="dir_973248e9f07cd884876c190aa332878d.html"]
+    dir_973248e9f07cd884876c190aa332878d [shape=plaintext, label="1-wire_chip_testing"];
+  dir_427d277d5a4ceb1791fc552ec6aa6803 [shape=box, label="src", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_427d277d5a4ceb1791fc552ec6aa6803.html"];
+  }
+  }
+  dir_68267d1309a1af8e8297ef4c3efbcdba [shape=box, label="src", style="", fillcolor="#edf0f7", color="grey25", URL="dir_68267d1309a1af8e8297ef4c3efbcdba.html"];
+  dir_427d277d5a4ceb1791fc552ec6aa6803->dir_68267d1309a1af8e8297ef4c3efbcdba [headlabel="1", labeldistance=1.5 headhref="dir_000002_000003.html"];
+}

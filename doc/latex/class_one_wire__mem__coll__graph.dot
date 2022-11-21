@@ -1,0 +1,10 @@
+digraph "OneWire_mem"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{OneWire_mem\n|+ workingAddr\l+ @1\l+ no_storedChips\l+ ioSavedState\l+ maxNo_1wireChips\l+ pinsA\l+ eepromStartIndex\l|+ initStuff()\l+ loadFromStorage()\l+ checkStoredIndex()\l+ checkStoredIndex()\l+ write1wireIO_E()\l+ writeChip_E()\l+ switch1wireAll_E()\l+ set_1wire_state_on\l_bus()\l+ get_1wire_devices()\l+ get_1wire_devices_ee()\land 14 more...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +working1wire" ,arrowhead="odiamond"];
+  Node2 [label="{switch1wire_TX\n|+ chipType\l+ addr\l+ crc\l+ roomNum\l+ pinChan\l+ slotI\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structswitch1wire___t_x.html",tooltip=" "];
+}

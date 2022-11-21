@@ -1,0 +1,4 @@
+<map id="test_get1wireIOno" name="test_get1wireIOno">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,147,32"/>
+<area shape="rect" id="node2" href="$1wire_8cpp.html#a0c2ff7ecc2f15b31cfe75c4598451678" title="Get the number of IO pins the chip has, i.e. 8 for the DS2408." alt="" coords="195,5,304,32"/>
+</map>

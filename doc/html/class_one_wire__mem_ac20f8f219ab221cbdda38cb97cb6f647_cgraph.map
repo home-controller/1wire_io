@@ -1,0 +1,5 @@
+<map id="OneWire_mem::makeSureInEeprom" name="OneWire_mem::makeSureInEeprom">
+<area shape="rect" id="node1" title=" " alt="" coords="5,71,260,97"/>
+<area shape="rect" id="node2" href="$class_one_wire__mem.html#a08c1bb6f9c0756a5aa59f452d4956de1" title="Add 1wire chip in working var to eeprom. addrs etc. are global vars. Make sure to save no_storedChips..." alt="" coords="308,29,524,56"/>
+<area shape="rect" id="node3" href="$class_one_wire__mem.html#aad6223f94fc828df2681212c6407c10e" title="Check if the 1wire chip in the global var: byte addr[8] is in eeprom." alt="" coords="313,105,519,146"/>
+</map>

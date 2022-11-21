@@ -1,0 +1,317 @@
+.TH "src/1wire.h" 3 "Sun Jun 19 2022" "Version 0.0.2" "1-wire" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/1wire.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <Arduino\&.h>\fP
+.br
+\fC#include <OneWire\&.h>\fP
+.br
+\fC#include <store\&.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBchip1wire_T\fP"
+.br
+.ti -1c
+.RI "struct \fBswitch1wire_T\fP"
+.br
+.RI "This is the EEPROM(or other storage) format\&. maybe leave room for up to 20 chips\&. 20 * 9 = 180 bytes\&. In EEPROM\&. "
+.ti -1c
+.RI "struct \fBswitch1wire_TX\fP"
+.br
+.ti -1c
+.RI "struct \fBswitch1wire_TE\fP"
+.br
+.ti -1c
+.RI "class \fBOneWire_mem\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBpinsA_\fP   {5, 6, 7}"
+.br
+.ti -1c
+.RI "#define \fBdefMaxNo_1wireChips\fP   20"
+.br
+.ti -1c
+.RI "#define \fBonewireEepromRecSize\fP   sizeof(\fBswitch1wire_T\fP)"
+.br
+.ti -1c
+.RI "#define \fBresFor_1wire_switch\fP   ( \fBdefMaxNo_1wireChips\fP * \fBonewireEepromRecSize\fP )"
+.br
+.ti -1c
+.RI "#define \fBno_1wireChips_EA\fP   4"
+.br
+.ti -1c
+.RI "#define \fBowPins\fP   3"
+.br
+.ti -1c
+.RI "#define \fBchipIO_DS2405\fP   1"
+.br
+.ti -1c
+.RI "#define \fBchipIO_DS2413\fP   2"
+.br
+.ti -1c
+.RI "#define \fBchipIO_DS2408\fP   8"
+.br
+.ti -1c
+.RI "#define \fBchipIOpins_1\fP   1"
+.br
+.ti -1c
+.RI "#define \fBchipIOpins_2\fP   2"
+.br
+.ti -1c
+.RI "#define \fBchipIOpins_8\fP   8"
+.br
+.ti -1c
+.RI "#define \fBswitchConRecSize\fP   4"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBwriteDS2413\fP (OneWire &o, byte addr[], byte state)"
+.br
+.RI "write output to a 1-wire DS2413 chip\&. "
+.ti -1c
+.RI "bool \fBwrite1wireIO\fP (OneWire &o, byte a[], byte state)"
+.br
+.RI "Writes bitmap to 1-wire pin IO Register(Sets all the IO pins on the 1-wire chip)\&. "
+.ti -1c
+.RI "int16_t \fBget1wireIDsIndex\fP (byte element)"
+.br
+.RI "set 1-wire chip output\&. Also updates arrays holding info on switched state etc\&. "
+.ti -1c
+.RI "byte \fBget1wireIOno\fP (byte i)"
+.br
+.RI "Get the number of IO pins the chip has, i\&.e\&. 8 for the DS2408\&. "
+.ti -1c
+.RI "byte \fBget1wireChipTypeIOPins\fP (byte chipType)"
+.br
+.RI "Returns the number of IO pins the 1-wire chip has\&. "
+.ti -1c
+.RI "bool \fBtest1wireIO\fP (OneWire &o, byte addr[])"
+.br
+.ti -1c
+.RI "void \fBtest_printChipInfo\fP ()"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const byte \fBowPins\fP = 3"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor\fP
+.RS 4
+Joseph (you@domain.com) 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+0\&.1 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2021-11-25
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2021 
+.RE
+.PP
+
+.PP
+Definition in file \fB1wire\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define chipIO_DS2405   1"
+
+.PP
+Definition at line \fB54\fP of file \fB1wire\&.h\fP\&.
+.SS "#define chipIO_DS2408   8"
+
+.PP
+Definition at line \fB56\fP of file \fB1wire\&.h\fP\&.
+.SS "#define chipIO_DS2413   2"
+
+.PP
+Definition at line \fB55\fP of file \fB1wire\&.h\fP\&.
+.SS "#define chipIOpins_1   1"
+
+.PP
+Definition at line \fB58\fP of file \fB1wire\&.h\fP\&.
+.SS "#define chipIOpins_2   2"
+
+.PP
+Definition at line \fB59\fP of file \fB1wire\&.h\fP\&.
+.SS "#define chipIOpins_8   8"
+
+.PP
+Definition at line \fB60\fP of file \fB1wire\&.h\fP\&.
+.SS "#define defMaxNo_1wireChips   20"
+
+.PP
+Definition at line \fB26\fP of file \fB1wire\&.h\fP\&.
+.SS "#define no_1wireChips_EA   4"
+
+.PP
+Definition at line \fB32\fP of file \fB1wire\&.h\fP\&.
+.SS "#define onewireEepromRecSize   sizeof(\fBswitch1wire_T\fP)"
+
+.PP
+Definition at line \fB27\fP of file \fB1wire\&.h\fP\&.
+.SS "#define owPins   3"
+
+.PP
+Definition at line \fB51\fP of file \fB1wire\&.h\fP\&.
+.SS "#define pinsA_   {5, 6, 7}"
+
+.PP
+Definition at line \fB21\fP of file \fB1wire\&.h\fP\&.
+.SS "#define resFor_1wire_switch   ( \fBdefMaxNo_1wireChips\fP * \fBonewireEepromRecSize\fP )"
+
+.PP
+Definition at line \fB30\fP of file \fB1wire\&.h\fP\&.
+.SS "#define switchConRecSize   4"
+
+.PP
+Definition at line \fB115\fP of file \fB1wire\&.h\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "byte get1wireChipTypeIOPins (byte chipType)"
+
+.PP
+Returns the number of IO pins the 1-wire chip has\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIchipType\fP the 1-wire chip type id e\&.g\&. 0x85(DS2413clone_FAMILY_ID)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+byte 
+.RE
+.PP
+
+.PP
+Definition at line \fB170\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int16_t get1wireIDsIndex (byte element)"
+
+.PP
+set 1-wire chip output\&. Also updates arrays holding info on switched state etc\&. This will return the index of the chip in the 2 arrays type1wireChip[x] & onewireSwitchIO[x] eg use get1wireIOno(get1wireIDsIndex( addr[0] ) ); to get the number of IO pins/channels for chip in the working vars etc\&.
+.PP
+Gets the array index index from the chip type id
+.PP
+\fBParameters\fP
+.RS 4
+\fIelement\fP chip type code referenced in fist byte of addrs from 1-wire chips 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int16_t return the index or -1 if chip type not found\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB102\fP of file \fB1wire\&.cpp\fP\&.
+.SS "byte get1wireIOno (byte i)"
+
+.PP
+Get the number of IO pins the chip has, i\&.e\&. 8 for the DS2408\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIi\fP the index into the array\&. use \fBget1wireChipTypeIOPins()\fP chip type id\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+byte number of IO pins\&.
+.RE
+.PP
+
+.PP
+Definition at line \fB154\fP of file \fB1wire\&.cpp\fP\&.
+.SS "bool test1wireIO (OneWire & o, byte addr[])"
+
+.PP
+Definition at line \fB695\fP of file \fB1wire\&.cpp\fP\&.
+.SS "void test_printChipInfo ()"
+
+.PP
+Definition at line \fB566\fP of file \fB1wire\&.cpp\fP\&.
+.SS "bool write1wireIO (OneWire & o, byte addr[], byte state)"
+
+.PP
+Writes bitmap to 1-wire pin IO Register(Sets all the IO pins on the 1-wire chip)\&. Takes a pointer to a 1-wire class objects from the standard Arduino OneWire libary initialized with the pin number etc\&. and a chip address on that pin/bus and the sets the IO Register on the 1-wire ship\&. Chip IO pins are a Mosfet so High impedance(off) and open drain(short to 0v)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIo\fP Pointer to a 1-wire bus/pin class object\&. 
+.br
+\fIaddr\fP 8 byte long array 1-wire chip address\&. [0] is the chip type and [7] the crc\&. 
+.br
+\fIstate\fP bitmask of IO output wanted\&. 0b11 should pull OIA and IOB low and 0 set them to off, high impedance? 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true for successes or false for fail\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB780\fP of file \fB1wire\&.cpp\fP\&.
+.SS "bool writeDS2413 (OneWire & o, byte addr[], byte state)"
+
+.PP
+write output to a 1-wire DS2413 chip\&. Each instance of the OneWire class stores it's pin as a reg + bitmap for direct access\&.
+.PP
+DS2413 can only pull the IO pins to ground\&. Open drain Mosfet keeps settings for quite awhile even with no power\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIo\fP OneWire object of class OneWire\&. From the standard lib, look at the Arduino website manual for more info\&. 
+.br
+\fIaddr\fP 8 byte array\&. Chip type code, 6 bytes of address and CRC 
+.br
+\fIstate\fP bitmap of IO pin state sent to the 1-wire chip IO register\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true for success\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB733\fP of file \fB1wire\&.cpp\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "const byte owPins = 3"
+
+.PP
+Definition at line \fB23\fP of file \fB1wire\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for 1-wire from the source code\&.

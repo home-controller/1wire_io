@@ -1,0 +1,3 @@
+<map id="OneWire_mem::add1wireChip" name="OneWire_mem::add1wireChip">
+<area shape="rect" id="node1" title="Add 1wire chip in working var to eeprom. addrs etc. are global vars. Make sure to save no_storedChips..." alt="" coords="5,29,221,56"/>
+</map>

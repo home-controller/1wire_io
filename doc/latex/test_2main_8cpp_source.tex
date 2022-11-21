@@ -1,0 +1,87 @@
+\hypertarget{test_2main_8cpp_source}{}\doxysection{main.\+cpp}
+\label{test_2main_8cpp_source}\index{test/main.cpp@{test/main.cpp}}
+\mbox{\hyperlink{test_2main_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00003}00003 \textcolor{preprocessor}{\#include <ui\_io.h>}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00004}00004 \textcolor{preprocessor}{\#include <defs.h>}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00005}00005 \textcolor{comment}{//\#include <EEPROM.h>}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00006}00006 \textcolor{comment}{//\#include <OneWire.h>}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00007}00007 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{1wire_8h}{1wire.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00009}00009 \textcolor{comment}{//const static byte maxNo\_1wireChips = 3;}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00010}00010 \textcolor{comment}{//int owp = owPins;}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00011}00011 \textcolor{comment}{//byte no\_1wireChips;}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00012}\mbox{\hyperlink{test_2main_8cpp_ad9de734c31fd1f856aaf978762ae2512}{00012}} \textcolor{preprocessor}{\#define termIO}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00014}\mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{00014}} \textcolor{preprocessor}{\#define testEqu( T, R, V) Serial.print( F("{} Test "{}} \# T "{}( "{} \# V "{} ) Expect: "{} \#R)  );   x = T(V);\(\backslash\)}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00015}00015    if(R==x)\{ Serial.println(F("{}\(\backslash\)t\(\backslash\)t\(\backslash\)e[32m Pas\(\backslash\)e[38;5;10msed \(\backslash\)e[37m "{}) ); \}else\{ Serial.print(F("{}\(\backslash\)t\(\backslash\)t\(\backslash\)e[91m Failed\(\backslash\)e[93m , returned: "{}) );  Serial.println(x);\}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00017}\mbox{\hyperlink{test_2main_8cpp_a80d91a868b2568b6c4c121a0c4f692e1}{00017}} \textcolor{keywordtype}{void} \mbox{\hyperlink{test_2main_8cpp_a80d91a868b2568b6c4c121a0c4f692e1}{test\_get1wireIDsIndex}}()\{ }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00018}00018   \textcolor{keywordtype}{int} x;}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00020}00020   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}, -\/1, 0004 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00021}00021   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}, -\/1, 0x86 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00022}00022   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}, -\/1, 0x15 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00024}00024   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}, 0, 0x05 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00025}00025   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}, 6, 0x85 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00026}00026   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}, 3, 0x28 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00027}00027   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}, 2, 0x12 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00028}00028   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wireIDsIndex}}, 5, 0x3A );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00029}00029 \}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00031}\mbox{\hyperlink{test_2main_8cpp_af0c21bce4598a6cd9bc60a4978bdcb47}{00031}} \textcolor{keywordtype}{void} \mbox{\hyperlink{test_2main_8cpp_af0c21bce4598a6cd9bc60a4978bdcb47}{test\_get1wireIOno}}()\{ }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00032}00032   \textcolor{keywordtype}{int} x;}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00034}00034   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}{get1wireIOno}}, 1, 0 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00035}00035   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}{get1wireIOno}}, 2, 6 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00036}00036   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}{get1wireIOno}}, 8, 4 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00038}00038   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}{get1wireIOno}}, 0, -\/1 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00039}00039   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}{get1wireIOno}}, 0, 7 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00040}00040 \}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00041}\mbox{\hyperlink{test_2main_8cpp_ac13eac4135abb03c83315a4d5fa5ebd4}{00041}} \textcolor{keywordtype}{void} \mbox{\hyperlink{test_2main_8cpp_ac13eac4135abb03c83315a4d5fa5ebd4}{test\_get1wireChipTypeIOPins}}()\{ }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00042}00042   \textcolor{keywordtype}{int} x;}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00044}00044   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wireChipTypeIOPins}}, 2, 0x85 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00045}00045   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wireChipTypeIOPins}}, 8, 0x29 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00046}00046   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wireChipTypeIOPins}}, 0, 0x28 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00048}00048   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wireChipTypeIOPins}}, 0, 0 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00049}00049   \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{testEqu}}( \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wireChipTypeIOPins}}, 0, 0x90 );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00050}00050 \}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00051}\mbox{\hyperlink{test_2main_8cpp_aa92568f814dfc0ba5409c8d044289f9c}{00051}} \mbox{\hyperlink{class_one_wire__mem}{OneWire\_mem}} \mbox{\hyperlink{test_2main_8cpp_aa92568f814dfc0ba5409c8d044289f9c}{v1wire}};}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00052}\mbox{\hyperlink{test_2main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{00052}} \textcolor{keywordtype}{void} \mbox{\hyperlink{examples_21-wire__chip__testing_2src_2main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}() \{}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00053}00053   \textcolor{keywordtype}{byte} count;}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00054}00054 \textcolor{preprocessor}{  \#ifdef termIO}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00055}00055     Serial.begin(9600);}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00056}00056     io\_println(\textcolor{stringliteral}{"{}Serial.begin(9600)"{}});}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00057}00057 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00058}00058   }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00059}00059   \textcolor{comment}{//io\_printHeading("{}Print 1-\/wire setup"{});}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00060}00060   \textcolor{comment}{//print1wireSetup();}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00061}00061 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00062}00062   \textcolor{comment}{//io\_printHeading("{}1-\/wire info from owp"{});}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00063}00063  }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00064}00064   Serial.print(F(\textcolor{stringliteral}{"{}No. 1 wire chips saved in EEPROM: "{}}) );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00065}00065   Serial.println(\mbox{\hyperlink{test_2main_8cpp_aa92568f814dfc0ba5409c8d044289f9c}{v1wire}}.no\_1wireChips);}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00067}00067   \mbox{\hyperlink{test_2main_8cpp_a80d91a868b2568b6c4c121a0c4f692e1}{test\_get1wireIDsIndex}}();}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00068}00068   \mbox{\hyperlink{test_2main_8cpp_af0c21bce4598a6cd9bc60a4978bdcb47}{test\_get1wireIOno}}();}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00069}00069   \mbox{\hyperlink{test_2main_8cpp_ac13eac4135abb03c83315a4d5fa5ebd4}{test\_get1wireChipTypeIOPins}}();}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00070}00070   io\_printHeading(\textcolor{stringliteral}{"{}1-\/wire testing init and using get\_1wire\_devices() to list chips on buses"{}});}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00071}00071   \mbox{\hyperlink{test_2main_8cpp_aa92568f814dfc0ba5409c8d044289f9c}{v1wire}}.initStuf(20);}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00072}00072   count = \mbox{\hyperlink{test_2main_8cpp_aa92568f814dfc0ba5409c8d044289f9c}{v1wire}}.\mbox{\hyperlink{class_one_wire__mem_a3bd5ba2d95c5873efc9b801a78b8ae6f}{get\_1wire\_devices}}();\textcolor{comment}{// search the 1-\/wire buses and print what is found.}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00073}00073   Serial.print(F(\textcolor{stringliteral}{"{}Onewire devices found on bus(s): "{}}) ); Serial.println(count );}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00074}00074   io\_printHeading(\textcolor{stringliteral}{"{}Print 1-\/wire setup"{}});}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00075}00075   \mbox{\hyperlink{test_2main_8cpp_aa92568f814dfc0ba5409c8d044289f9c}{v1wire}}.\mbox{\hyperlink{class_one_wire__mem_afbd641c23146fcafaaf12685d88b84ee}{print1wireSetup}}();}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00076}00076 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00077}00077 \}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00078}00078 }
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00079}\mbox{\hyperlink{test_2main_8cpp_afe461d27b9c48d5921c00d521181f12f}{00079}} \textcolor{keywordtype}{void} \mbox{\hyperlink{examples_21-wire__chip__testing_2src_2main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}() \{}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00080}00080   \textcolor{comment}{// put your main code here, to run repeatedly:}}
+\DoxyCodeLine{\Hypertarget{test_2main_8cpp_source_l00081}00081 \}}
+
+\end{DoxyCode}

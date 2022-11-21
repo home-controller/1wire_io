@@ -1,0 +1,21 @@
+digraph "readDS2413"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="readDS2413",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="read1wireIO",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$1wire_8cpp.html#af90cd28b4d2a72569db9f6c06e651a5b",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="OneWire_mem::read1wireIO",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_one_wire__mem.html#a34f80402b4e705c8564e4f2b1cce9f48",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="testDS2413",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$1wire_8cpp.html#a6d64f194d5da81b7e217b7ea361efcc5",tooltip=" "];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="test1wireIO",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$1wire_8cpp.html#a93a8808362069ecaef566c7fda84a1b3",tooltip=" "];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="OneWire_mem::test1wireIO",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_one_wire__mem.html#af56ea8aea5c4ef1c2c1463cf7f8a7d88",tooltip=" "];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="OneWire_mem::printStorage\lUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_one_wire__mem.html#af27c609b55b419df8178bb851a63c76f",tooltip="Print 1-wire eeprom(etc.) save slots."];
+}

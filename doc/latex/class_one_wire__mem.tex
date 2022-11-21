@@ -1,0 +1,670 @@
+\hypertarget{class_one_wire__mem}{}\doxysection{One\+Wire\+\_\+mem Class Reference}
+\label{class_one_wire__mem}\index{OneWire\_mem@{OneWire\_mem}}
+
+
+{\ttfamily \#include $<$1wire.\+h$>$}
+
+
+
+Collaboration diagram for One\+Wire\+\_\+mem\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_one_wire__mem_a5c7095bf9d144b6f93bbb718f53abe37}{init\+Stuff}} (storage\+Block\+\_\+C \&o, byte id)
+\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_a825507ec70be0783b2c9b84a2ed86b39}{load\+From\+Storage}} (byte index)
+\begin{DoxyCompactList}\small\item\em Load chip info saved in storage(e.\+g. eeprom) to the class working/temp var \char`\"{}working1wire\char`\"{}. \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}{check\+Stored\+Index}} ()
+\begin{DoxyCompactList}\small\item\em Check if the 1wire chip in the global var\+: byte addr\mbox{[}8\mbox{]} is in eeprom. \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_a2ef28102ddb6c05a30e870162f76fb5c}{check\+Stored\+Index}} (byte addr\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em return 1wire chip index in eeprom or -\/1 if not found. \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_a78917ec5043843e1db5bb3018320aab9}{write1wire\+IO\+\_\+E}} (byte chip, byte channel\+Msk, byte action)
+\begin{DoxyCompactList}\small\item\em Set 1-\/wire chip IO pin bitmask(register on chip) for chip stored in EEProm. todo only handles DS2413. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_one_wire__mem_abd64b471807251802d190f1c3d3d3034}{write\+Chip\+\_\+E}} (uint8\+\_\+t state)
+\begin{DoxyCompactList}\small\item\em Write IO to chip and save state. Works with last chip in working vars(working\+Addr). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_one_wire__mem_a2bc839954ab289d046fe725cc795ea77}{switch1wire\+All\+\_\+E}} (byte action)
+\begin{DoxyCompactList}\small\item\em Set IO pins on all saved 1-\/wire chips. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_one_wire__mem_ae5d9f16ae93c13a452a4fd33b5ead458}{set\+\_\+1wire\+\_\+state\+\_\+on\+\_\+bus}} (byte state, byte chip, bool skip\+Saved)
+\begin{DoxyCompactList}\small\item\em Set the 1wire chip IO pin state. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_one_wire__mem_a3bd5ba2d95c5873efc9b801a78b8ae6f}{get\+\_\+1wire\+\_\+devices}} ()
+\begin{DoxyCompactList}\small\item\em Find and print details of chips on the 1-\/wire bus(s), including if it is saved and where. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_one_wire__mem_afd6bd12f88bf7d323b3ea3ca69aaeb01}{get\+\_\+1wire\+\_\+devices\+\_\+ee}} ()
+\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_a1d9aed76616fc837319331ea69558234}{save\+Chip\+To}} (byte addr\mbox{[}$\,$\mbox{]}, byte ow\+PinI, byte slot)
+\begin{DoxyCompactList}\small\item\em Save the chip to nonvolatile storage overwriting any value already stored there. \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_a27f7ce3561aa62be2b5f2bb356c0e96f}{save\+All\+On\+Bus}} (byte ow\+PinI, byte slot)
+\begin{DoxyCompactList}\small\item\em Save all 1-\/wire chips on a 1-\/wire bus to storage e.\+g. EEPROM. \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_a08c1bb6f9c0756a5aa59f452d4956de1}{add1wire\+Chip}} (byte ow\+PinI)
+\begin{DoxyCompactList}\small\item\em Add 1wire chip in working var to eeprom. addrs etc. are global vars. Make sure to save no\+\_\+stored\+Chips after done adding chips. \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_a5b48b1dbefc529284d2df8151e526d4c}{add1wire\+Chip}} (byte addr\mbox{[}$\,$\mbox{]}, byte ow\+PinI)
+\begin{DoxyCompactList}\small\item\em Add 1wire chip in addr param to eeprom. Adds the details passed, no looking up on bus etc. There are no checks for if chips is already stored in eeprom. \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_ae174414a725b9d7db38d68f52c0e93ae}{make\+Sure\+In\+Eeprom}} (byte ow\+PinI)
+\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_ac20f8f219ab221cbdda38cb97cb6f647}{make\+Sure\+In\+Eeprom}} (byte addrs\mbox{[}$\,$\mbox{]}, byte ow\+PinI)
+\item 
+void \mbox{\hyperlink{class_one_wire__mem_a16981e2405fb8b76ba593d18dc0388d5}{print1wire\+Pins}} ()
+\item 
+void \mbox{\hyperlink{class_one_wire__mem_afbd641c23146fcafaaf12685d88b84ee}{print1wire\+Setup}} ()
+\item 
+void \mbox{\hyperlink{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}{io\+\_\+print1wire\+Addr}} ()
+\item 
+void \mbox{\hyperlink{class_one_wire__mem_af27c609b55b419df8178bb851a63c76f}{print\+Storage\+Usage}} ()
+\begin{DoxyCompactList}\small\item\em Print 1-\/wire eeprom(etc.) save slots. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_one_wire__mem_a2b1b128bc556e371bfcb7b079c323824}{write1wire\+IO}} (byte addr\mbox{[}$\,$\mbox{]}, byte ow\+Index, byte state)
+\begin{DoxyCompactList}\small\item\em Wrapper func to call global func with ( ow\mbox{[}ow\+Index\mbox{]} , addr , state ) \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{class_one_wire__mem_a34f80402b4e705c8564e4f2b1cce9f48}{read1wire\+IO}} ()
+\item 
+bool \mbox{\hyperlink{class_one_wire__mem_af56ea8aea5c4ef1c2c1463cf7f8a7d88}{test1wire\+IO}} (byte addr\mbox{[}$\,$\mbox{]}, byte bus)
+\item 
+\mbox{\hyperlink{class_one_wire__mem_ae8441694a10a04a607fa35eec3e113a5}{One\+Wire\+\_\+mem}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\mbox{\hyperlink{structswitch1wire___t_x}{switch1wire\_TX}} \mbox{\hyperlink{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}{working1wire}}\\
+\>byte \mbox{\hyperlink{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}{workingAddr}} \mbox{[}8\mbox{]}\\
+\}; \\
+
+\end{tabbing}\item 
+byte \mbox{\hyperlink{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}{no\+\_\+stored\+Chips}}
+\item 
+byte \mbox{\hyperlink{class_one_wire__mem_a41a2c9ef857340e9fee918455fbad54f}{io\+Saved\+State}} \mbox{[}\mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{def\+Max\+No\+\_\+1wire\+Chips}}+1\mbox{]}
+\item 
+const byte \mbox{\hyperlink{class_one_wire__mem_aade252862587d10878ae704957748225}{max\+No\+\_\+1wire\+Chips}} = \mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{def\+Max\+No\+\_\+1wire\+Chips}}
+\item 
+const byte \mbox{\hyperlink{class_one_wire__mem_a5b9e5adb64f5ca7823f65444494d8954}{pinsA}} \mbox{[}\mbox{\hyperlink{1wire_8h_ad98991aeddbf80974301458b78b55bc1}{ow\+Pins}}\mbox{]} = \mbox{\hyperlink{1wire_8h_a695fe13564bfe77c694e798695f03990}{pins\+A\+\_\+}}
+\item 
+byte \mbox{\hyperlink{class_one_wire__mem_a9b69e3e0959e689809be7a3e0ef9359a}{eeprom\+Start\+Index}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{1wire_8h_source_l00128}{128}} of file \mbox{\hyperlink{1wire_8h_source}{1wire.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_one_wire__mem_ae8441694a10a04a607fa35eec3e113a5}\label{class_one_wire__mem_ae8441694a10a04a607fa35eec3e113a5}} 
+\index{OneWire\_mem@{OneWire\_mem}!OneWire\_mem@{OneWire\_mem}}
+\index{OneWire\_mem@{OneWire\_mem}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{OneWire\_mem()}{OneWire\_mem()}}
+{\footnotesize\ttfamily One\+Wire\+\_\+mem\+::\+One\+Wire\+\_\+mem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8h_source_l00193}{193}} of file \mbox{\hyperlink{1wire_8h_source}{1wire.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_one_wire__mem_a5b48b1dbefc529284d2df8151e526d4c}\label{class_one_wire__mem_a5b48b1dbefc529284d2df8151e526d4c}} 
+\index{OneWire\_mem@{OneWire\_mem}!add1wireChip@{add1wireChip}}
+\index{add1wireChip@{add1wireChip}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{add1wireChip()}{add1wireChip()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::add1wire\+Chip (\begin{DoxyParamCaption}\item[{byte}]{addr\mbox{[}$\,$\mbox{]},  }\item[{byte}]{ow\+PinI }\end{DoxyParamCaption})}
+
+
+
+Add 1wire chip in addr param to eeprom. Adds the details passed, no looking up on bus etc. There are no checks for if chips is already stored in eeprom. 
+
+Make sure to save no\+\_\+stored\+Chips after done adding chips.
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & address of 1-\/wire chip to add. \\
+\hline
+{\em ow\+PinI} & The index of the array to look up the pin, Onewire object etc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int8\+\_\+t Returns -\/1 if already have max\+No\+\_\+1wire\+Chips stored. else return the number of chips now stored. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00389}{389}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{class_one_wire__mem_a08c1bb6f9c0756a5aa59f452d4956de1}\label{class_one_wire__mem_a08c1bb6f9c0756a5aa59f452d4956de1}} 
+\index{OneWire\_mem@{OneWire\_mem}!add1wireChip@{add1wireChip}}
+\index{add1wireChip@{add1wireChip}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{add1wireChip()}{add1wireChip()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::add1wire\+Chip (\begin{DoxyParamCaption}\item[{byte}]{ow\+PinI }\end{DoxyParamCaption})}
+
+
+
+Add 1wire chip in working var to eeprom. addrs etc. are global vars. Make sure to save no\+\_\+stored\+Chips after done adding chips. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ow\+PinI} & The index to the the hardware pin No. look it up in the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int8\+\_\+t 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00408}{408}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+Here is the caller graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}\label{class_one_wire__mem_aad6223f94fc828df2681212c6407c10e}} 
+\index{OneWire\_mem@{OneWire\_mem}!checkStoredIndex@{checkStoredIndex}}
+\index{checkStoredIndex@{checkStoredIndex}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{checkStoredIndex()}{checkStoredIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::check\+Stored\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Check if the 1wire chip in the global var\+: byte addr\mbox{[}8\mbox{]} is in eeprom. 
+
+\begin{DoxyReturn}{Returns}
+int8\+\_\+t -\/1 for not found or index in eeprom. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00258}{258}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+Here is the caller graph for this function\+:
+% FIG 5
+\mbox{\Hypertarget{class_one_wire__mem_a2ef28102ddb6c05a30e870162f76fb5c}\label{class_one_wire__mem_a2ef28102ddb6c05a30e870162f76fb5c}} 
+\index{OneWire\_mem@{OneWire\_mem}!checkStoredIndex@{checkStoredIndex}}
+\index{checkStoredIndex@{checkStoredIndex}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{checkStoredIndex()}{checkStoredIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::check\+Stored\+Index (\begin{DoxyParamCaption}\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+return 1wire chip index in eeprom or -\/1 if not found. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & 8 byte array 1-\/wire address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int8\+\_\+t if found returns index into 1-\/wire chip array in eeprom. First chip stored is index = 0 
+
+int8\+\_\+t Not found return -\/1. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00269}{269}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{class_one_wire__mem_a3bd5ba2d95c5873efc9b801a78b8ae6f}\label{class_one_wire__mem_a3bd5ba2d95c5873efc9b801a78b8ae6f}} 
+\index{OneWire\_mem@{OneWire\_mem}!get\_1wire\_devices@{get\_1wire\_devices}}
+\index{get\_1wire\_devices@{get\_1wire\_devices}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{get\_1wire\_devices()}{get\_1wire\_devices()}}
+{\footnotesize\ttfamily int One\+Wire\+\_\+mem\+::get\+\_\+1wire\+\_\+devices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Find and print details of chips on the 1-\/wire bus(s), including if it is saved and where. 
+
+\begin{DoxyReturn}{Returns}
+int No. chips found or -\/3 for CRC read fail. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00582}{582}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+Here is the caller graph for this function\+:
+% FIG 7
+\mbox{\Hypertarget{class_one_wire__mem_afd6bd12f88bf7d323b3ea3ca69aaeb01}\label{class_one_wire__mem_afd6bd12f88bf7d323b3ea3ca69aaeb01}} 
+\index{OneWire\_mem@{OneWire\_mem}!get\_1wire\_devices\_ee@{get\_1wire\_devices\_ee}}
+\index{get\_1wire\_devices\_ee@{get\_1wire\_devices\_ee}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{get\_1wire\_devices\_ee()}{get\_1wire\_devices\_ee()}}
+{\footnotesize\ttfamily int One\+Wire\+\_\+mem\+::get\+\_\+1wire\+\_\+devices\+\_\+ee (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00671}{671}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{class_one_wire__mem_a5c7095bf9d144b6f93bbb718f53abe37}\label{class_one_wire__mem_a5c7095bf9d144b6f93bbb718f53abe37}} 
+\index{OneWire\_mem@{OneWire\_mem}!initStuff@{initStuff}}
+\index{initStuff@{initStuff}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{initStuff()}{initStuff()}}
+{\footnotesize\ttfamily void One\+Wire\+\_\+mem\+::init\+Stuff (\begin{DoxyParamCaption}\item[{storage\+Block\+\_\+C \&}]{o,  }\item[{byte}]{id }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & storage object for storing stuff between MCU resets/power cuts etc. \\
+\hline
+{\em id} & storage id for use with store.\+h perm storage lib. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00198}{198}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}\label{class_one_wire__mem_aebbad3bbe0ce42d66daee7cb1d038162}} 
+\index{OneWire\_mem@{OneWire\_mem}!io\_print1wireAddr@{io\_print1wireAddr}}
+\index{io\_print1wireAddr@{io\_print1wireAddr}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{io\_print1wireAddr()}{io\_print1wireAddr()}}
+{\footnotesize\ttfamily void One\+Wire\+\_\+mem\+::io\+\_\+print1wire\+Addr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00445}{445}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+Here is the caller graph for this function\+:
+% FIG 9
+\mbox{\Hypertarget{class_one_wire__mem_a825507ec70be0783b2c9b84a2ed86b39}\label{class_one_wire__mem_a825507ec70be0783b2c9b84a2ed86b39}} 
+\index{OneWire\_mem@{OneWire\_mem}!loadFromStorage@{loadFromStorage}}
+\index{loadFromStorage@{loadFromStorage}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{loadFromStorage()}{loadFromStorage()}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::load\+From\+Storage (\begin{DoxyParamCaption}\item[{byte}]{index }\end{DoxyParamCaption})}
+
+
+
+Load chip info saved in storage(e.\+g. eeprom) to the class working/temp var \char`\"{}working1wire\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index the chip is saved at in storage. index = 0 for first chip. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int8\+\_\+t 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00289}{289}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the caller graph for this function\+:
+% FIG 10
+\mbox{\Hypertarget{class_one_wire__mem_ac20f8f219ab221cbdda38cb97cb6f647}\label{class_one_wire__mem_ac20f8f219ab221cbdda38cb97cb6f647}} 
+\index{OneWire\_mem@{OneWire\_mem}!makeSureInEeprom@{makeSureInEeprom}}
+\index{makeSureInEeprom@{makeSureInEeprom}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{makeSureInEeprom()}{makeSureInEeprom()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::make\+Sure\+In\+Eeprom (\begin{DoxyParamCaption}\item[{byte}]{addrs\mbox{[}$\,$\mbox{]},  }\item[{byte}]{ow\+PinI }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00412}{412}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 11
+\mbox{\Hypertarget{class_one_wire__mem_ae174414a725b9d7db38d68f52c0e93ae}\label{class_one_wire__mem_ae174414a725b9d7db38d68f52c0e93ae}} 
+\index{OneWire\_mem@{OneWire\_mem}!makeSureInEeprom@{makeSureInEeprom}}
+\index{makeSureInEeprom@{makeSureInEeprom}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{makeSureInEeprom()}{makeSureInEeprom()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::make\+Sure\+In\+Eeprom (\begin{DoxyParamCaption}\item[{byte}]{ow\+PinI }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00427}{427}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 12
+Here is the caller graph for this function\+:
+% FIG 13
+\mbox{\Hypertarget{class_one_wire__mem_a16981e2405fb8b76ba593d18dc0388d5}\label{class_one_wire__mem_a16981e2405fb8b76ba593d18dc0388d5}} 
+\index{OneWire\_mem@{OneWire\_mem}!print1wirePins@{print1wirePins}}
+\index{print1wirePins@{print1wirePins}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{print1wirePins()}{print1wirePins()}}
+{\footnotesize\ttfamily void One\+Wire\+\_\+mem\+::print1wire\+Pins (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00210}{210}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the caller graph for this function\+:
+% FIG 14
+\mbox{\Hypertarget{class_one_wire__mem_afbd641c23146fcafaaf12685d88b84ee}\label{class_one_wire__mem_afbd641c23146fcafaaf12685d88b84ee}} 
+\index{OneWire\_mem@{OneWire\_mem}!print1wireSetup@{print1wireSetup}}
+\index{print1wireSetup@{print1wireSetup}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{print1wireSetup()}{print1wireSetup()}}
+{\footnotesize\ttfamily void One\+Wire\+\_\+mem\+::print1wire\+Setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00231}{231}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 15
+Here is the caller graph for this function\+:
+% FIG 16
+\mbox{\Hypertarget{class_one_wire__mem_af27c609b55b419df8178bb851a63c76f}\label{class_one_wire__mem_af27c609b55b419df8178bb851a63c76f}} 
+\index{OneWire\_mem@{OneWire\_mem}!printStorageUsage@{printStorageUsage}}
+\index{printStorageUsage@{printStorageUsage}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{printStorageUsage()}{printStorageUsage()}}
+{\footnotesize\ttfamily void One\+Wire\+\_\+mem\+::print\+Storage\+Usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Print 1-\/wire eeprom(etc.) save slots. 
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00638}{638}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 17
+\mbox{\Hypertarget{class_one_wire__mem_a34f80402b4e705c8564e4f2b1cce9f48}\label{class_one_wire__mem_a34f80402b4e705c8564e4f2b1cce9f48}} 
+\index{OneWire\_mem@{OneWire\_mem}!read1wireIO@{read1wireIO}}
+\index{read1wireIO@{read1wireIO}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{read1wireIO()}{read1wireIO()}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::read1wire\+IO (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00714}{714}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 18
+\mbox{\Hypertarget{class_one_wire__mem_a27f7ce3561aa62be2b5f2bb356c0e96f}\label{class_one_wire__mem_a27f7ce3561aa62be2b5f2bb356c0e96f}} 
+\index{OneWire\_mem@{OneWire\_mem}!saveAllOnBus@{saveAllOnBus}}
+\index{saveAllOnBus@{saveAllOnBus}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{saveAllOnBus()}{saveAllOnBus()}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::save\+All\+On\+Bus (\begin{DoxyParamCaption}\item[{byte}]{ow\+PinI,  }\item[{byte}]{slot }\end{DoxyParamCaption})}
+
+
+
+Save all 1-\/wire chips on a 1-\/wire bus to storage e.\+g. EEPROM. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ow\+PinI} & index to the onewire object in the array of buses. eg. ow\mbox{[} ow\+PinI \mbox{]}. \\
+\hline
+{\em slot} & the record slot in the storage(eeprom etc.). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int8\+\_\+t Number save or \texorpdfstring{$>$}{>} 0 for error. e.\+g. -\/1 = out of storage space. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00365}{365}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 19
+\mbox{\Hypertarget{class_one_wire__mem_a1d9aed76616fc837319331ea69558234}\label{class_one_wire__mem_a1d9aed76616fc837319331ea69558234}} 
+\index{OneWire\_mem@{OneWire\_mem}!saveChipTo@{saveChipTo}}
+\index{saveChipTo@{saveChipTo}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{saveChipTo()}{saveChipTo()}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::save\+Chip\+To (\begin{DoxyParamCaption}\item[{byte}]{addr\mbox{[}$\,$\mbox{]},  }\item[{byte}]{ow\+PinI,  }\item[{byte}]{slot }\end{DoxyParamCaption})}
+
+
+
+Save the chip to nonvolatile storage overwriting any value already stored there. 
+
+Don\textquotesingle{}t care about updating how many chips are stored or if the slot is in the area of already used slots etc.
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & address of 1-\/wire chip to save. \\
+\hline
+{\em ow\+PinI} & The index of the array to look up the pin, Onewire object etc. \\
+\hline
+{\em slot} & the storage(e.\+g. EEPROM) slot to store the chip in. slot = 0 for first slot e.\+g. array\mbox{[}0\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int8\+\_\+t Returns -\/1 if already have max\+No\+\_\+1wire\+Chips stored. else return 0. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00333}{333}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 20
+Here is the caller graph for this function\+:
+% FIG 21
+\mbox{\Hypertarget{class_one_wire__mem_ae5d9f16ae93c13a452a4fd33b5ead458}\label{class_one_wire__mem_ae5d9f16ae93c13a452a4fd33b5ead458}} 
+\index{OneWire\_mem@{OneWire\_mem}!set\_1wire\_state\_on\_bus@{set\_1wire\_state\_on\_bus}}
+\index{set\_1wire\_state\_on\_bus@{set\_1wire\_state\_on\_bus}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{set\_1wire\_state\_on\_bus()}{set\_1wire\_state\_on\_bus()}}
+{\footnotesize\ttfamily int One\+Wire\+\_\+mem\+::set\+\_\+1wire\+\_\+state\+\_\+on\+\_\+bus (\begin{DoxyParamCaption}\item[{byte}]{state,  }\item[{byte}]{chip,  }\item[{bool}]{skip\+Saved }\end{DoxyParamCaption})}
+
+
+
+Set the 1wire chip IO pin state. 
+
+if chip = 0 set all found with One\+Wire.\+search(addr\+Array) else call this many times and set that one. chip No. is the order found when using One\+Wire.\+search(addr\+Array). well one bus at a time. For more info see \href{https://www.arduino.cc/reference/en/libraries/onewire/}{\texttt{ https\+://www.\+arduino.\+cc/reference/en/libraries/onewire/}} or data-\/sheet for the 1-\/wire devises.
+
+For return last chip found. If chip = 0 return total number of chips. else if chip \texorpdfstring{$>$}{>} 0 return chip(the param passed in value) if it was found.)
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & pin state bitmap \\
+\hline
+{\em chip} & 1-\/wire chip number to find on all pins/bus. \\
+\hline
+{\em skip\+Saved} & Skip chips saved to eeprom. //\\
+\hline
+{\em save\+Temp} & Save the chip found in the temp\+Saved1wire\+Chip var. Only 1 chip stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int return -\/1 if chip not found else Number of last chip found. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00496}{496}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 22
+\mbox{\Hypertarget{class_one_wire__mem_a2bc839954ab289d046fe725cc795ea77}\label{class_one_wire__mem_a2bc839954ab289d046fe725cc795ea77}} 
+\index{OneWire\_mem@{OneWire\_mem}!switch1wireAll\_E@{switch1wireAll\_E}}
+\index{switch1wireAll\_E@{switch1wireAll\_E}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{switch1wireAll\_E()}{switch1wireAll\_E()}}
+{\footnotesize\ttfamily void One\+Wire\+\_\+mem\+::switch1wire\+All\+\_\+E (\begin{DoxyParamCaption}\item[{byte}]{action }\end{DoxyParamCaption})}
+
+
+
+Set IO pins on all saved 1-\/wire chips. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em action} & action = 0\+: off, 1\+: on, 2\+: toggle. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00835}{835}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 23
+\mbox{\Hypertarget{class_one_wire__mem_af56ea8aea5c4ef1c2c1463cf7f8a7d88}\label{class_one_wire__mem_af56ea8aea5c4ef1c2c1463cf7f8a7d88}} 
+\index{OneWire\_mem@{OneWire\_mem}!test1wireIO@{test1wireIO}}
+\index{test1wireIO@{test1wireIO}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{test1wireIO()}{test1wireIO()}}
+{\footnotesize\ttfamily bool One\+Wire\+\_\+mem\+::test1wire\+IO (\begin{DoxyParamCaption}\item[{byte}]{addr\mbox{[}$\,$\mbox{]},  }\item[{byte}]{bus }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00321}{321}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 24
+Here is the caller graph for this function\+:
+% FIG 25
+\mbox{\Hypertarget{class_one_wire__mem_a2b1b128bc556e371bfcb7b079c323824}\label{class_one_wire__mem_a2b1b128bc556e371bfcb7b079c323824}} 
+\index{OneWire\_mem@{OneWire\_mem}!write1wireIO@{write1wireIO}}
+\index{write1wireIO@{write1wireIO}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{write1wireIO()}{write1wireIO()}}
+{\footnotesize\ttfamily bool One\+Wire\+\_\+mem\+::write1wire\+IO (\begin{DoxyParamCaption}\item[{byte}]{a\mbox{[}$\,$\mbox{]},  }\item[{byte}]{ow\+Index,  }\item[{byte}]{state }\end{DoxyParamCaption})}
+
+
+
+Wrapper func to call global func with ( ow\mbox{[}ow\+Index\mbox{]} , addr , state ) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & 1-\/wire 8 byte array \\
+\hline
+{\em ow\+Index} & index to 1-\/wire object in ow\mbox{[}ow\+Index\mbox{]} array. \\
+\hline
+{\em state} & bitmap of 1-\/wire chip IO pins state/ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true for success. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00765}{765}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 26
+Here is the caller graph for this function\+:
+% FIG 27
+\mbox{\Hypertarget{class_one_wire__mem_a78917ec5043843e1db5bb3018320aab9}\label{class_one_wire__mem_a78917ec5043843e1db5bb3018320aab9}} 
+\index{OneWire\_mem@{OneWire\_mem}!write1wireIO\_E@{write1wireIO\_E}}
+\index{write1wireIO\_E@{write1wireIO\_E}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{write1wireIO\_E()}{write1wireIO\_E()}}
+{\footnotesize\ttfamily int8\+\_\+t One\+Wire\+\_\+mem\+::write1wire\+IO\+\_\+E (\begin{DoxyParamCaption}\item[{byte}]{chip,  }\item[{byte}]{channel,  }\item[{byte}]{action }\end{DoxyParamCaption})}
+
+
+
+Set 1-\/wire chip IO pin bitmask(register on chip) for chip stored in EEProm. todo only handles DS2413. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chip} & chip is the index for the array in EEPROM \\
+\hline
+{\em channel} & channel is a bit mask of the IO pins on the 1-\/wire chip. Set bits to 1 for the IO pins effected by the action. \\
+\hline
+{\em action} & action = 0\+: off, 1\+: on, 2\+: toggle. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int8\+\_\+t return -\/1 for invalid \textquotesingle{}action\textquotesingle{} -\/2 for unhandled 1-\/wire chip type else return success of wiring to chip 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00855}{855}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 28
+Here is the caller graph for this function\+:
+% FIG 29
+\mbox{\Hypertarget{class_one_wire__mem_abd64b471807251802d190f1c3d3d3034}\label{class_one_wire__mem_abd64b471807251802d190f1c3d3d3034}} 
+\index{OneWire\_mem@{OneWire\_mem}!writeChip\_E@{writeChip\_E}}
+\index{writeChip\_E@{writeChip\_E}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{writeChip\_E()}{writeChip\_E()}}
+{\footnotesize\ttfamily bool One\+Wire\+\_\+mem\+::write\+Chip\+\_\+E (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{state }\end{DoxyParamCaption})}
+
+
+
+Write IO to chip and save state. Works with last chip in working vars(working\+Addr). 
+
+Only works with chips saved in eeprom as io\+Saved\+State\mbox{[}\mbox{]} array is 1 per eeprom save space.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & state is a bit map with 1 bit per channel i.\+e. B10 is IOA\+: off IOB\+: on. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00808}{808}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 30
+Here is the caller graph for this function\+:
+% FIG 31
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_one_wire__mem_a9fa76cefe0a5bd6761e90700f3946b50}\label{class_one_wire__mem_a9fa76cefe0a5bd6761e90700f3946b50}} 
+\doxysubsubsection{\texorpdfstring{}{}}
+{\footnotesize\ttfamily union  \{ ... \}  One\+Wire\+\_\+mem\+::@1}
+
+\mbox{\Hypertarget{class_one_wire__mem_a9b69e3e0959e689809be7a3e0ef9359a}\label{class_one_wire__mem_a9b69e3e0959e689809be7a3e0ef9359a}} 
+\index{OneWire\_mem@{OneWire\_mem}!eepromStartIndex@{eepromStartIndex}}
+\index{eepromStartIndex@{eepromStartIndex}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{eepromStartIndex}{eepromStartIndex}}
+{\footnotesize\ttfamily byte One\+Wire\+\_\+mem\+::eeprom\+Start\+Index}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8h_source_l00154}{154}} of file \mbox{\hyperlink{1wire_8h_source}{1wire.\+h}}.
+
+\mbox{\Hypertarget{class_one_wire__mem_a41a2c9ef857340e9fee918455fbad54f}\label{class_one_wire__mem_a41a2c9ef857340e9fee918455fbad54f}} 
+\index{OneWire\_mem@{OneWire\_mem}!ioSavedState@{ioSavedState}}
+\index{ioSavedState@{ioSavedState}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{ioSavedState}{ioSavedState}}
+{\footnotesize\ttfamily byte One\+Wire\+\_\+mem\+::io\+Saved\+State\mbox{[}\mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{def\+Max\+No\+\_\+1wire\+Chips}}+1\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8h_source_l00151}{151}} of file \mbox{\hyperlink{1wire_8h_source}{1wire.\+h}}.
+
+\mbox{\Hypertarget{class_one_wire__mem_aade252862587d10878ae704957748225}\label{class_one_wire__mem_aade252862587d10878ae704957748225}} 
+\index{OneWire\_mem@{OneWire\_mem}!maxNo\_1wireChips@{maxNo\_1wireChips}}
+\index{maxNo\_1wireChips@{maxNo\_1wireChips}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{maxNo\_1wireChips}{maxNo\_1wireChips}}
+{\footnotesize\ttfamily const byte One\+Wire\+\_\+mem\+::max\+No\+\_\+1wire\+Chips = \mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{def\+Max\+No\+\_\+1wire\+Chips}}}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8h_source_l00152}{152}} of file \mbox{\hyperlink{1wire_8h_source}{1wire.\+h}}.
+
+\mbox{\Hypertarget{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}\label{class_one_wire__mem_afa935889b4b91d45c596edfc8977a1b2}} 
+\index{OneWire\_mem@{OneWire\_mem}!no\_storedChips@{no\_storedChips}}
+\index{no\_storedChips@{no\_storedChips}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{no\_storedChips}{no\_storedChips}}
+{\footnotesize\ttfamily byte One\+Wire\+\_\+mem\+::no\+\_\+stored\+Chips}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8h_source_l00150}{150}} of file \mbox{\hyperlink{1wire_8h_source}{1wire.\+h}}.
+
+\mbox{\Hypertarget{class_one_wire__mem_a5b9e5adb64f5ca7823f65444494d8954}\label{class_one_wire__mem_a5b9e5adb64f5ca7823f65444494d8954}} 
+\index{OneWire\_mem@{OneWire\_mem}!pinsA@{pinsA}}
+\index{pinsA@{pinsA}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{pinsA}{pinsA}}
+{\footnotesize\ttfamily const byte One\+Wire\+\_\+mem\+::pinsA\mbox{[}\mbox{\hyperlink{1wire_8h_ad98991aeddbf80974301458b78b55bc1}{ow\+Pins}}\mbox{]} = \mbox{\hyperlink{1wire_8h_a695fe13564bfe77c694e798695f03990}{pins\+A\+\_\+}}}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8h_source_l00153}{153}} of file \mbox{\hyperlink{1wire_8h_source}{1wire.\+h}}.
+
+\mbox{\Hypertarget{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}\label{class_one_wire__mem_a92074fb3aa542a2bce3f2e9c4e2ce4ee}} 
+\index{OneWire\_mem@{OneWire\_mem}!working1wire@{working1wire}}
+\index{working1wire@{working1wire}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{working1wire}{working1wire}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structswitch1wire___t_x}{switch1wire\+\_\+\+TX}} One\+Wire\+\_\+mem\+::working1wire}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8h_source_l00146}{146}} of file \mbox{\hyperlink{1wire_8h_source}{1wire.\+h}}.
+
+\mbox{\Hypertarget{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}\label{class_one_wire__mem_a4e1099908829c4bd2e9c7e635e1a70f1}} 
+\index{OneWire\_mem@{OneWire\_mem}!workingAddr@{workingAddr}}
+\index{workingAddr@{workingAddr}!OneWire\_mem@{OneWire\_mem}}
+\doxysubsubsection{\texorpdfstring{workingAddr}{workingAddr}}
+{\footnotesize\ttfamily byte One\+Wire\+\_\+mem\+::working\+Addr\mbox{[}8\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8h_source_l00147}{147}} of file \mbox{\hyperlink{1wire_8h_source}{1wire.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{1wire_8h}{1wire.\+h}}\item 
+src/\mbox{\hyperlink{1wire_8cpp}{1wire.\+cpp}}\end{DoxyCompactItemize}

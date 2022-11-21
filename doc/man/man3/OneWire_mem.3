@@ -1,0 +1,476 @@
+.TH "OneWire_mem" 3 "Sun Jun 19 2022" "Version 0.0.2" "1-wire" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OneWire_mem
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <1wire\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinitStuff\fP (storageBlock_C &o, byte id)"
+.br
+.ti -1c
+.RI "int8_t \fBloadFromStorage\fP (byte index)"
+.br
+.RI "Load chip info saved in storage(e\&.g\&. eeprom) to the class working/temp var 'working1wire'\&. "
+.ti -1c
+.RI "int8_t \fBcheckStoredIndex\fP ()"
+.br
+.RI "Check if the 1wire chip in the global var: byte addr[8] is in eeprom\&. "
+.ti -1c
+.RI "int8_t \fBcheckStoredIndex\fP (byte addr[])"
+.br
+.RI "return 1wire chip index in eeprom or -1 if not found\&. "
+.ti -1c
+.RI "int8_t \fBwrite1wireIO_E\fP (byte chip, byte channelMsk, byte action)"
+.br
+.RI "Set 1-wire chip IO pin bitmask(register on chip) for chip stored in EEProm\&. todo only handles DS2413\&. "
+.ti -1c
+.RI "bool \fBwriteChip_E\fP (uint8_t state)"
+.br
+.RI "Write IO to chip and save state\&. Works with last chip in working vars(workingAddr)\&. "
+.ti -1c
+.RI "void \fBswitch1wireAll_E\fP (byte action)"
+.br
+.RI "Set IO pins on all saved 1-wire chips\&. "
+.ti -1c
+.RI "int \fBset_1wire_state_on_bus\fP (byte state, byte chip, bool skipSaved)"
+.br
+.RI "Set the 1wire chip IO pin state\&. "
+.ti -1c
+.RI "int \fBget_1wire_devices\fP ()"
+.br
+.RI "Find and print details of chips on the 1-wire bus(s), including if it is saved and where\&. "
+.ti -1c
+.RI "int \fBget_1wire_devices_ee\fP ()"
+.br
+.ti -1c
+.RI "int8_t \fBsaveChipTo\fP (byte addr[], byte owPinI, byte slot)"
+.br
+.RI "Save the chip to nonvolatile storage overwriting any value already stored there\&. "
+.ti -1c
+.RI "int8_t \fBsaveAllOnBus\fP (byte owPinI, byte slot)"
+.br
+.RI "Save all 1-wire chips on a 1-wire bus to storage e\&.g\&. EEPROM\&. "
+.ti -1c
+.RI "int8_t \fBadd1wireChip\fP (byte owPinI)"
+.br
+.RI "Add 1wire chip in working var to eeprom\&. addrs etc\&. are global vars\&. Make sure to save no_storedChips after done adding chips\&. "
+.ti -1c
+.RI "int8_t \fBadd1wireChip\fP (byte addr[], byte owPinI)"
+.br
+.RI "Add 1wire chip in addr param to eeprom\&. Adds the details passed, no looking up on bus etc\&. There are no checks for if chips is already stored in eeprom\&. "
+.ti -1c
+.RI "int8_t \fBmakeSureInEeprom\fP (byte owPinI)"
+.br
+.ti -1c
+.RI "int8_t \fBmakeSureInEeprom\fP (byte addrs[], byte owPinI)"
+.br
+.ti -1c
+.RI "void \fBprint1wirePins\fP ()"
+.br
+.ti -1c
+.RI "void \fBprint1wireSetup\fP ()"
+.br
+.ti -1c
+.RI "void \fBio_print1wireAddr\fP ()"
+.br
+.ti -1c
+.RI "void \fBprintStorageUsage\fP ()"
+.br
+.RI "Print 1-wire eeprom(etc\&.) save slots\&. "
+.ti -1c
+.RI "bool \fBwrite1wireIO\fP (byte addr[], byte owIndex, byte state)"
+.br
+.RI "Wrapper func to call global func with ( ow[owIndex] , addr , state ) "
+.ti -1c
+.RI "int8_t \fBread1wireIO\fP ()"
+.br
+.ti -1c
+.RI "bool \fBtest1wireIO\fP (byte addr[], byte bus)"
+.br
+.ti -1c
+.RI "\fBOneWire_mem\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "union {"
+.br
+.ti -1c
+.RI "   \fBswitch1wire_TX\fP \fBworking1wire\fP"
+.br
+.ti -1c
+.RI "   byte \fBworkingAddr\fP [8]"
+.br
+.ti -1c
+.RI "}; "
+.br
+.ti -1c
+.RI "byte \fBno_storedChips\fP"
+.br
+.ti -1c
+.RI "byte \fBioSavedState\fP [\fBdefMaxNo_1wireChips\fP+1]"
+.br
+.ti -1c
+.RI "const byte \fBmaxNo_1wireChips\fP = \fBdefMaxNo_1wireChips\fP"
+.br
+.ti -1c
+.RI "const byte \fBpinsA\fP [\fBowPins\fP] = \fBpinsA_\fP"
+.br
+.ti -1c
+.RI "byte \fBeepromStartIndex\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB128\fP of file \fB1wire\&.h\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "OneWire_mem::OneWire_mem ()\fC [inline]\fP"
+
+.PP
+Definition at line \fB193\fP of file \fB1wire\&.h\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "int8_t OneWire_mem::add1wireChip (byte addr[], byte owPinI)"
+
+.PP
+Add 1wire chip in addr param to eeprom\&. Adds the details passed, no looking up on bus etc\&. There are no checks for if chips is already stored in eeprom\&. Make sure to save no_storedChips after done adding chips\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddr\fP address of 1-wire chip to add\&. 
+.br
+\fIowPinI\fP The index of the array to look up the pin, Onewire object etc\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int8_t Returns -1 if already have maxNo_1wireChips stored\&. else return the number of chips now stored\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB389\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::add1wireChip (byte owPinI)"
+
+.PP
+Add 1wire chip in working var to eeprom\&. addrs etc\&. are global vars\&. Make sure to save no_storedChips after done adding chips\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIowPinI\fP The index to the the hardware pin No\&. look it up in the array\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int8_t 
+.RE
+.PP
+
+.PP
+Definition at line \fB408\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::checkStoredIndex ()"
+
+.PP
+Check if the 1wire chip in the global var: byte addr[8] is in eeprom\&. 
+.PP
+\fBReturns\fP
+.RS 4
+int8_t -1 for not found or index in eeprom\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB258\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::checkStoredIndex (byte addr[])"
+
+.PP
+return 1wire chip index in eeprom or -1 if not found\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddr\fP 8 byte array 1-wire address 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int8_t if found returns index into 1-wire chip array in eeprom\&. First chip stored is index = 0 
+.PP
+int8_t Not found return -1\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB269\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int OneWire_mem::get_1wire_devices ()"
+
+.PP
+Find and print details of chips on the 1-wire bus(s), including if it is saved and where\&. 
+.PP
+\fBReturns\fP
+.RS 4
+int No\&. chips found or -3 for CRC read fail\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB582\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int OneWire_mem::get_1wire_devices_ee ()"
+
+.PP
+Definition at line \fB671\fP of file \fB1wire\&.cpp\fP\&.
+.SS "void OneWire_mem::initStuff (storageBlock_C & o, byte id)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIo\fP storage object for storing stuff between MCU resets/power cuts etc\&. 
+.br
+\fIid\fP storage id for use with store\&.h perm storage lib\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB198\fP of file \fB1wire\&.cpp\fP\&.
+.SS "void OneWire_mem::io_print1wireAddr ()"
+
+.PP
+Definition at line \fB445\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::loadFromStorage (byte index)"
+
+.PP
+Load chip info saved in storage(e\&.g\&. eeprom) to the class working/temp var 'working1wire'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP The index the chip is saved at in storage\&. index = 0 for first chip\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int8_t 
+.RE
+.PP
+
+.PP
+Definition at line \fB289\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::makeSureInEeprom (byte addrs[], byte owPinI)"
+
+.PP
+Definition at line \fB412\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::makeSureInEeprom (byte owPinI)"
+
+.PP
+Definition at line \fB427\fP of file \fB1wire\&.cpp\fP\&.
+.SS "void OneWire_mem::print1wirePins ()"
+
+.PP
+Definition at line \fB210\fP of file \fB1wire\&.cpp\fP\&.
+.SS "void OneWire_mem::print1wireSetup ()"
+
+.PP
+Definition at line \fB231\fP of file \fB1wire\&.cpp\fP\&.
+.SS "void OneWire_mem::printStorageUsage ()"
+
+.PP
+Print 1-wire eeprom(etc\&.) save slots\&. 
+.PP
+Definition at line \fB638\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::read1wireIO ()"
+
+.PP
+Definition at line \fB714\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::saveAllOnBus (byte owPinI, byte slot)"
+
+.PP
+Save all 1-wire chips on a 1-wire bus to storage e\&.g\&. EEPROM\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIowPinI\fP index to the onewire object in the array of buses\&. eg\&. ow[ owPinI ]\&. 
+.br
+\fIslot\fP the record slot in the storage(eeprom etc\&.)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int8_t Number save or > 0 for error\&. e\&.g\&. -1 = out of storage space\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB365\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::saveChipTo (byte addr[], byte owPinI, byte slot)"
+
+.PP
+Save the chip to nonvolatile storage overwriting any value already stored there\&. Don't care about updating how many chips are stored or if the slot is in the area of already used slots etc\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddr\fP address of 1-wire chip to save\&. 
+.br
+\fIowPinI\fP The index of the array to look up the pin, Onewire object etc\&. 
+.br
+\fIslot\fP the storage(e\&.g\&. EEPROM) slot to store the chip in\&. slot = 0 for first slot e\&.g\&. array[0] 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int8_t Returns -1 if already have maxNo_1wireChips stored\&. else return 0\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB333\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int OneWire_mem::set_1wire_state_on_bus (byte state, byte chip, bool skipSaved)"
+
+.PP
+Set the 1wire chip IO pin state\&. if chip = 0 set all found with OneWire\&.search(addrArray) else call this many times and set that one\&. chip No\&. is the order found when using OneWire\&.search(addrArray)\&. well one bus at a time\&. For more info see https://www.arduino.cc/reference/en/libraries/onewire/ or data-sheet for the 1-wire devises\&.
+.PP
+For return last chip found\&. If chip = 0 return total number of chips\&. else if chip > 0 return chip(the param passed in value) if it was found\&.)
+.PP
+\fBParameters\fP
+.RS 4
+\fIstate\fP pin state bitmap 
+.br
+\fIchip\fP 1-wire chip number to find on all pins/bus\&. 
+.br
+\fIskipSaved\fP Skip chips saved to eeprom\&. //
+.br
+\fIsaveTemp\fP Save the chip found in the tempSaved1wireChip var\&. Only 1 chip stored\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int return -1 if chip not found else Number of last chip found\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB496\fP of file \fB1wire\&.cpp\fP\&.
+.SS "void OneWire_mem::switch1wireAll_E (byte action)"
+
+.PP
+Set IO pins on all saved 1-wire chips\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaction\fP action = 0: off, 1: on, 2: toggle\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB835\fP of file \fB1wire\&.cpp\fP\&.
+.SS "bool OneWire_mem::test1wireIO (byte addr[], byte bus)"
+
+.PP
+Definition at line \fB321\fP of file \fB1wire\&.cpp\fP\&.
+.SS "bool OneWire_mem::write1wireIO (byte a[], byte owIndex, byte state)"
+
+.PP
+Wrapper func to call global func with ( ow[owIndex] , addr , state ) 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddr\fP 1-wire 8 byte array 
+.br
+\fIowIndex\fP index to 1-wire object in ow[owIndex] array\&. 
+.br
+\fIstate\fP bitmap of 1-wire chip IO pins state/ 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true for success\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB765\fP of file \fB1wire\&.cpp\fP\&.
+.SS "int8_t OneWire_mem::write1wireIO_E (byte chip, byte channel, byte action)"
+
+.PP
+Set 1-wire chip IO pin bitmask(register on chip) for chip stored in EEProm\&. todo only handles DS2413\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIchip\fP chip is the index for the array in EEPROM 
+.br
+\fIchannel\fP channel is a bit mask of the IO pins on the 1-wire chip\&. Set bits to 1 for the IO pins effected by the action\&. 
+.br
+\fIaction\fP action = 0: off, 1: on, 2: toggle\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int8_t return -1 for invalid 'action' -2 for unhandled 1-wire chip type else return success of wiring to chip 
+.RE
+.PP
+
+.PP
+Definition at line \fB855\fP of file \fB1wire\&.cpp\fP\&.
+.SS "bool OneWire_mem::writeChip_E (uint8_t state)"
+
+.PP
+Write IO to chip and save state\&. Works with last chip in working vars(workingAddr)\&. Only works with chips saved in eeprom as ioSavedState[] array is 1 per eeprom save space\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIstate\fP state is a bit map with 1 bit per channel i\&.e\&. B10 is IOA: off IOB: on\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+
+.PP
+Definition at line \fB808\fP of file \fB1wire\&.cpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "union  { \&.\&.\&. }  OneWire_mem::@1"
+
+.SS "byte OneWire_mem::eepromStartIndex"
+
+.PP
+Definition at line \fB154\fP of file \fB1wire\&.h\fP\&.
+.SS "byte OneWire_mem::ioSavedState[\fBdefMaxNo_1wireChips\fP+1]"
+
+.PP
+Definition at line \fB151\fP of file \fB1wire\&.h\fP\&.
+.SS "const byte OneWire_mem::maxNo_1wireChips = \fBdefMaxNo_1wireChips\fP"
+
+.PP
+Definition at line \fB152\fP of file \fB1wire\&.h\fP\&.
+.SS "byte OneWire_mem::no_storedChips"
+
+.PP
+Definition at line \fB150\fP of file \fB1wire\&.h\fP\&.
+.SS "const byte OneWire_mem::pinsA[\fBowPins\fP] = \fBpinsA_\fP"
+
+.PP
+Definition at line \fB153\fP of file \fB1wire\&.h\fP\&.
+.SS "\fBswitch1wire_TX\fP OneWire_mem::working1wire"
+
+.PP
+Definition at line \fB146\fP of file \fB1wire\&.h\fP\&.
+.SS "byte OneWire_mem::workingAddr[8]"
+
+.PP
+Definition at line \fB147\fP of file \fB1wire\&.h\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for 1-wire from the source code\&.

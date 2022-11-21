@@ -1,0 +1,588 @@
+\hypertarget{1wire_8cpp}{}\doxysection{src/1wire.cpp File Reference}
+\label{1wire_8cpp}\index{src/1wire.cpp@{src/1wire.cpp}}
+
+
+works with 1-\/wire chip IO with the chips stored in eeprom and the state in ram.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$1wire.\+h$>$}\newline
+{\ttfamily \#include $<$ui\+\_\+io.\+h$>$}\newline
+{\ttfamily \#include $<$One\+Wire.\+h$>$}\newline
+{\ttfamily \#include $<$avr/pgmspace.\+h$>$}\newline
+{\ttfamily \#include $<$defs.\+h$>$}\newline
+{\ttfamily \#include $<$EEPROM.\+h$>$}\newline
+{\ttfamily \#include $<$store.\+h$>$}\newline
+Include dependency graph for 1wire.\+cpp\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_aa85c674d090bb0ef50f0a0e735edffba}{\+\_\+1wire\+\_\+cpp}}
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a5deccebbf24e21ddc073c8774179f1b3}{ARDUINO}}~10808
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a98ea559b3f61a540608997b5ee55eb60}{DS2405\+\_\+\+FAMILY\+\_\+\+ID}}~0x5
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a99ed45dde220f1f590bc945b4646bb0a}{DS18\+S20\+\_\+\+FAMILY\+\_\+\+ID}}~0x10
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_ab20414815640ae9cd42c01c9d1a4c17a}{DS2406\+\_\+\+FAMILY\+\_\+\+ID}}~0x12
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a39cd35a43de2fefdaed70c09898aaed3}{DS2407\+\_\+\+FAMILY\+\_\+\+ID}}~0x12
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_aa888f4f026782b3d0919c5b6f42407c1}{DS18\+B20\+\_\+\+FAMILY\+\_\+\+ID}}~0x28
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a3e36d3f05676e13a5bc6fcfe0e7a54ee}{DS2408\+\_\+\+FAMILY\+\_\+\+ID}}~0x29
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}{DS2413\+\_\+\+FAMILY\+\_\+\+ID}}~0x3A
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}{DS2413clone\+\_\+\+FAMILY\+\_\+\+ID}}~0x85
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a563b75793a1703adfba83ce275c4a2ee}{\+\_\+3\+A\+\_\+2100\+H\+\_\+\+FAMILY\+\_\+\+ID}}~0x85
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a47518a29c73d292a8e99cad8e5bc3d6a}{num1wire\+IDs}}~sizeof(type1wire\+Chip)
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a7b66dbae451bc9c7a1b68897cc4836ac}{DS2413\+\_\+\+ACCESS\+\_\+\+READ}}~0x\+F5
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a7f43ecbc0966fed19eaa57167f3fc748}{DS2413\+\_\+\+ACCESS\+\_\+\+WRITE}}~0x5A
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_ac0aa910faa0e7ff97464aed9869d38d6}{DS2413\+\_\+\+ACK\+\_\+\+SUCCESS}}~0x\+AA
+\item 
+\#define \mbox{\hyperlink{1wire_8cpp_a45b24525786ca075daff83e27ece1566}{DS2413\+\_\+\+ACK\+\_\+\+ERROR}}~0x\+FF
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int16\+\_\+t \mbox{\hyperlink{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wire\+IDs\+Index}} (byte element)
+\begin{DoxyCompactList}\small\item\em set 1-\/wire chip output. Also updates arrays holding info on switched state etc. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{1wire_8cpp_a9947dc757c59a6d2546157669ed3790a}{get1wire\+IDfrom\+Index}} (byte id)
+\begin{DoxyCompactList}\small\item\em Returns the index into the arrays type1wire\+Chip\mbox{[}i\mbox{]} and onewire\+Switch\+IO\mbox{[}x\mbox{]}. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}{get1wire\+IOno}} (byte i)
+\begin{DoxyCompactList}\small\item\em Get the number of IO pins the chip has, i.\+e. 8 for the DS2408. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{1wire_8cpp_adc0e43b0bfe532c9150833a40d6ff2d7}{get1wire\+Id\+FIA}} (byte i)
+\item 
+byte \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wire\+Chip\+Type\+IOPins}} (byte chip\+Type)
+\begin{DoxyCompactList}\small\item\em Returns the number of IO pins the 1-\/wire chip has. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{1wire_8cpp_a387122cd32e13e3ab4868864bed08d3e}{io\+\_\+print1wire\+Addr}} (byte addr\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{1wire_8cpp_a977007cf4daf77a6813d9bd5484e67e1}{print\+Chip\+Info}} (byte id)
+\item 
+void \mbox{\hyperlink{1wire_8cpp_a2e8000096e9b85edb1ba3aab584b0a8a}{test\+\_\+print\+Chip\+Info}} ()
+\item 
+byte \mbox{\hyperlink{1wire_8cpp_ae06e28103688bff04370bd65ceb6ab5d}{read\+DS2413}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]})
+\item 
+bool \mbox{\hyperlink{1wire_8cpp_a6d64f194d5da81b7e217b7ea361efcc5}{test\+DS2413}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]})
+\item 
+bool \mbox{\hyperlink{1wire_8cpp_a93a8808362069ecaef566c7fda84a1b3}{test1wire\+IO}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]})
+\item 
+byte \mbox{\hyperlink{1wire_8cpp_af90cd28b4d2a72569db9f6c06e651a5b}{read1wire\+IO}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]})
+\item 
+bool \mbox{\hyperlink{1wire_8cpp_aa8820981770942c6f48687b950ab09c8}{write\+DS2413}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]}, byte state)
+\begin{DoxyCompactList}\small\item\em write output to a 1-\/wire DS2413 chip. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{1wire_8cpp_a77ebc093a69243ec72e963d7c915fba0}{write1wire\+IO}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]}, byte state)
+\begin{DoxyCompactList}\small\item\em Writes bitmap to 1-\/wire pin IO Register(Sets all the IO pins on the 1-\/wire chip). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+byte \mbox{\hyperlink{1wire_8cpp_a565a4ca1ef05911887e8e0e3c2b56291}{one\+Wire\+State}} \mbox{[}\mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{def\+Max\+No\+\_\+1wire\+Chips}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em todo should probably get rid of global vars. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{1wire_8cpp_a857c0079efbda4141b54eb3ab2782618}{IOA}} = B00000001
+\item 
+const int \mbox{\hyperlink{1wire_8cpp_a1ba15df8bc259dcb4374803da9e30379}{IOB}} = 0x2
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+works with 1-\/wire chip IO with the chips stored in eeprom and the state in ram. 
+
+\begin{DoxyAuthor}{Author}
+Joseph (\href{mailto:you@domain.com}{\texttt{ you@domain.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+0.\+2 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2021-\/11-\/25
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2021
+\end{DoxyCopyright}
+Mostly to work with 1-\/wire chip IO with the chips stored in eeprom. handles 20 chips and 3 1-\/wire buses on there own 3 pins
+
+To change that you will need to edit the header. 
+
+Definition in file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{1wire_8cpp_aa85c674d090bb0ef50f0a0e735edffba}\label{1wire_8cpp_aa85c674d090bb0ef50f0a0e735edffba}} 
+\index{1wire.cpp@{1wire.cpp}!\_1wire\_cpp@{\_1wire\_cpp}}
+\index{\_1wire\_cpp@{\_1wire\_cpp}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{\_1wire\_cpp}{\_1wire\_cpp}}
+{\footnotesize\ttfamily \#define \+\_\+1wire\+\_\+cpp}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00017}{17}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a563b75793a1703adfba83ce275c4a2ee}\label{1wire_8cpp_a563b75793a1703adfba83ce275c4a2ee}} 
+\index{1wire.cpp@{1wire.cpp}!\_3A\_2100H\_FAMILY\_ID@{\_3A\_2100H\_FAMILY\_ID}}
+\index{\_3A\_2100H\_FAMILY\_ID@{\_3A\_2100H\_FAMILY\_ID}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{\_3A\_2100H\_FAMILY\_ID}{\_3A\_2100H\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define \+\_\+3\+A\+\_\+2100\+H\+\_\+\+FAMILY\+\_\+\+ID~0x85}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00050}{50}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a5deccebbf24e21ddc073c8774179f1b3}\label{1wire_8cpp_a5deccebbf24e21ddc073c8774179f1b3}} 
+\index{1wire.cpp@{1wire.cpp}!ARDUINO@{ARDUINO}}
+\index{ARDUINO@{ARDUINO}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{ARDUINO}{ARDUINO}}
+{\footnotesize\ttfamily \#define ARDUINO~10808}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00030}{30}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_aa888f4f026782b3d0919c5b6f42407c1}\label{1wire_8cpp_aa888f4f026782b3d0919c5b6f42407c1}} 
+\index{1wire.cpp@{1wire.cpp}!DS18B20\_FAMILY\_ID@{DS18B20\_FAMILY\_ID}}
+\index{DS18B20\_FAMILY\_ID@{DS18B20\_FAMILY\_ID}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS18B20\_FAMILY\_ID}{DS18B20\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS18\+B20\+\_\+\+FAMILY\+\_\+\+ID~0x28}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00046}{46}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a99ed45dde220f1f590bc945b4646bb0a}\label{1wire_8cpp_a99ed45dde220f1f590bc945b4646bb0a}} 
+\index{1wire.cpp@{1wire.cpp}!DS18S20\_FAMILY\_ID@{DS18S20\_FAMILY\_ID}}
+\index{DS18S20\_FAMILY\_ID@{DS18S20\_FAMILY\_ID}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS18S20\_FAMILY\_ID}{DS18S20\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS18\+S20\+\_\+\+FAMILY\+\_\+\+ID~0x10}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00043}{43}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a98ea559b3f61a540608997b5ee55eb60}\label{1wire_8cpp_a98ea559b3f61a540608997b5ee55eb60}} 
+\index{1wire.cpp@{1wire.cpp}!DS2405\_FAMILY\_ID@{DS2405\_FAMILY\_ID}}
+\index{DS2405\_FAMILY\_ID@{DS2405\_FAMILY\_ID}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2405\_FAMILY\_ID}{DS2405\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2405\+\_\+\+FAMILY\+\_\+\+ID~0x5}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00042}{42}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_ab20414815640ae9cd42c01c9d1a4c17a}\label{1wire_8cpp_ab20414815640ae9cd42c01c9d1a4c17a}} 
+\index{1wire.cpp@{1wire.cpp}!DS2406\_FAMILY\_ID@{DS2406\_FAMILY\_ID}}
+\index{DS2406\_FAMILY\_ID@{DS2406\_FAMILY\_ID}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2406\_FAMILY\_ID}{DS2406\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2406\+\_\+\+FAMILY\+\_\+\+ID~0x12}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00044}{44}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a39cd35a43de2fefdaed70c09898aaed3}\label{1wire_8cpp_a39cd35a43de2fefdaed70c09898aaed3}} 
+\index{1wire.cpp@{1wire.cpp}!DS2407\_FAMILY\_ID@{DS2407\_FAMILY\_ID}}
+\index{DS2407\_FAMILY\_ID@{DS2407\_FAMILY\_ID}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2407\_FAMILY\_ID}{DS2407\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2407\+\_\+\+FAMILY\+\_\+\+ID~0x12}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00045}{45}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a3e36d3f05676e13a5bc6fcfe0e7a54ee}\label{1wire_8cpp_a3e36d3f05676e13a5bc6fcfe0e7a54ee}} 
+\index{1wire.cpp@{1wire.cpp}!DS2408\_FAMILY\_ID@{DS2408\_FAMILY\_ID}}
+\index{DS2408\_FAMILY\_ID@{DS2408\_FAMILY\_ID}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2408\_FAMILY\_ID}{DS2408\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2408\+\_\+\+FAMILY\+\_\+\+ID~0x29}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00047}{47}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a7b66dbae451bc9c7a1b68897cc4836ac}\label{1wire_8cpp_a7b66dbae451bc9c7a1b68897cc4836ac}} 
+\index{1wire.cpp@{1wire.cpp}!DS2413\_ACCESS\_READ@{DS2413\_ACCESS\_READ}}
+\index{DS2413\_ACCESS\_READ@{DS2413\_ACCESS\_READ}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2413\_ACCESS\_READ}{DS2413\_ACCESS\_READ}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+ACCESS\+\_\+\+READ~0x\+F5}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00179}{179}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a7f43ecbc0966fed19eaa57167f3fc748}\label{1wire_8cpp_a7f43ecbc0966fed19eaa57167f3fc748}} 
+\index{1wire.cpp@{1wire.cpp}!DS2413\_ACCESS\_WRITE@{DS2413\_ACCESS\_WRITE}}
+\index{DS2413\_ACCESS\_WRITE@{DS2413\_ACCESS\_WRITE}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2413\_ACCESS\_WRITE}{DS2413\_ACCESS\_WRITE}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+ACCESS\+\_\+\+WRITE~0x5A}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00180}{180}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a45b24525786ca075daff83e27ece1566}\label{1wire_8cpp_a45b24525786ca075daff83e27ece1566}} 
+\index{1wire.cpp@{1wire.cpp}!DS2413\_ACK\_ERROR@{DS2413\_ACK\_ERROR}}
+\index{DS2413\_ACK\_ERROR@{DS2413\_ACK\_ERROR}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2413\_ACK\_ERROR}{DS2413\_ACK\_ERROR}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+ACK\+\_\+\+ERROR~0x\+FF}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00182}{182}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_ac0aa910faa0e7ff97464aed9869d38d6}\label{1wire_8cpp_ac0aa910faa0e7ff97464aed9869d38d6}} 
+\index{1wire.cpp@{1wire.cpp}!DS2413\_ACK\_SUCCESS@{DS2413\_ACK\_SUCCESS}}
+\index{DS2413\_ACK\_SUCCESS@{DS2413\_ACK\_SUCCESS}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2413\_ACK\_SUCCESS}{DS2413\_ACK\_SUCCESS}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+ACK\+\_\+\+SUCCESS~0x\+AA}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00181}{181}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}\label{1wire_8cpp_a8d5b8913d59e5b99859e36a0a772c4eb}} 
+\index{1wire.cpp@{1wire.cpp}!DS2413\_FAMILY\_ID@{DS2413\_FAMILY\_ID}}
+\index{DS2413\_FAMILY\_ID@{DS2413\_FAMILY\_ID}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2413\_FAMILY\_ID}{DS2413\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+FAMILY\+\_\+\+ID~0x3A}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00048}{48}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}\label{1wire_8cpp_a440b56d92fa798a2df986aadcc23a78d}} 
+\index{1wire.cpp@{1wire.cpp}!DS2413clone\_FAMILY\_ID@{DS2413clone\_FAMILY\_ID}}
+\index{DS2413clone\_FAMILY\_ID@{DS2413clone\_FAMILY\_ID}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{DS2413clone\_FAMILY\_ID}{DS2413clone\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2413clone\+\_\+\+FAMILY\+\_\+\+ID~0x85}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00049}{49}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a47518a29c73d292a8e99cad8e5bc3d6a}\label{1wire_8cpp_a47518a29c73d292a8e99cad8e5bc3d6a}} 
+\index{1wire.cpp@{1wire.cpp}!num1wireIDs@{num1wireIDs}}
+\index{num1wireIDs@{num1wireIDs}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{num1wireIDs}{num1wireIDs}}
+{\footnotesize\ttfamily \#define num1wire\+IDs~sizeof(type1wire\+Chip)}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00054}{54}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}\label{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}} 
+\index{1wire.cpp@{1wire.cpp}!get1wireChipTypeIOPins@{get1wireChipTypeIOPins}}
+\index{get1wireChipTypeIOPins@{get1wireChipTypeIOPins}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{get1wireChipTypeIOPins()}{get1wireChipTypeIOPins()}}
+{\footnotesize\ttfamily byte get1wire\+Chip\+Type\+IOPins (\begin{DoxyParamCaption}\item[{byte}]{chip\+Type }\end{DoxyParamCaption})}
+
+
+
+Returns the number of IO pins the 1-\/wire chip has. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chip\+Type} & the 1-\/wire chip type id e.\+g. 0x85(\+DS2413clone\+\_\+\+FAMILY\+\_\+\+ID). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+byte 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00170}{170}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+Here is the caller graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{1wire_8cpp_adc0e43b0bfe532c9150833a40d6ff2d7}\label{1wire_8cpp_adc0e43b0bfe532c9150833a40d6ff2d7}} 
+\index{1wire.cpp@{1wire.cpp}!get1wireIdFIA@{get1wireIdFIA}}
+\index{get1wireIdFIA@{get1wireIdFIA}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{get1wireIdFIA()}{get1wireIdFIA()}}
+{\footnotesize\ttfamily byte get1wire\+Id\+FIA (\begin{DoxyParamCaption}\item[{byte}]{i }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00159}{159}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the caller graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{1wire_8cpp_a9947dc757c59a6d2546157669ed3790a}\label{1wire_8cpp_a9947dc757c59a6d2546157669ed3790a}} 
+\index{1wire.cpp@{1wire.cpp}!get1wireIDfromIndex@{get1wireIDfromIndex}}
+\index{get1wireIDfromIndex@{get1wireIDfromIndex}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{get1wireIDfromIndex()}{get1wireIDfromIndex()}}
+{\footnotesize\ttfamily byte get1wire\+IDfrom\+Index (\begin{DoxyParamCaption}\item[{byte}]{id }\end{DoxyParamCaption})}
+
+
+
+Returns the index into the arrays type1wire\+Chip\mbox{[}i\mbox{]} and onewire\+Switch\+IO\mbox{[}x\mbox{]}. 
+
+more or less the same thing as get1wire\+IDs\+Index although you would think from the name it was the opposite.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the chip type id eg. 0x85 for DS2413clone\+\_\+\+FAMILY\+\_\+\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+byte 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00134}{134}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}\label{1wire_8cpp_aa10020cdfdad46fa553fc4a2ee31fd3b}} 
+\index{1wire.cpp@{1wire.cpp}!get1wireIDsIndex@{get1wireIDsIndex}}
+\index{get1wireIDsIndex@{get1wireIDsIndex}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{get1wireIDsIndex()}{get1wireIDsIndex()}}
+{\footnotesize\ttfamily int16\+\_\+t get1wire\+IDs\+Index (\begin{DoxyParamCaption}\item[{byte}]{element }\end{DoxyParamCaption})}
+
+
+
+set 1-\/wire chip output. Also updates arrays holding info on switched state etc. 
+
+This will return the index of the chip in the 2 arrays type1wire\+Chip\mbox{[}x\mbox{]} \& onewire\+Switch\+IO\mbox{[}x\mbox{]} eg use get1wire\+IOno(get1wire\+IDs\+Index( addr\mbox{[}0\mbox{]} ) ); to get the number of IO pins/channels for chip in the working vars etc.
+
+Gets the array index index from the chip type id
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em element} & chip type code referenced in fist byte of addrs from 1-\/wire chips \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int16\+\_\+t return the index or -\/1 if chip type not found. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00102}{102}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the caller graph for this function\+:
+% FIG 4
+\mbox{\Hypertarget{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}\label{1wire_8cpp_a0c2ff7ecc2f15b31cfe75c4598451678}} 
+\index{1wire.cpp@{1wire.cpp}!get1wireIOno@{get1wireIOno}}
+\index{get1wireIOno@{get1wireIOno}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{get1wireIOno()}{get1wireIOno()}}
+{\footnotesize\ttfamily byte get1wire\+IOno (\begin{DoxyParamCaption}\item[{byte}]{i }\end{DoxyParamCaption})}
+
+
+
+Get the number of IO pins the chip has, i.\+e. 8 for the DS2408. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i} & the index into the array. use \mbox{\hyperlink{1wire_8cpp_a26a5c521594f3f4380de4fe920f669fe}{get1wire\+Chip\+Type\+IOPins()}} chip type id. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+byte number of IO pins.
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00154}{154}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the caller graph for this function\+:
+% FIG 5
+\mbox{\Hypertarget{1wire_8cpp_a387122cd32e13e3ab4868864bed08d3e}\label{1wire_8cpp_a387122cd32e13e3ab4868864bed08d3e}} 
+\index{1wire.cpp@{1wire.cpp}!io\_print1wireAddr@{io\_print1wireAddr}}
+\index{io\_print1wireAddr@{io\_print1wireAddr}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{io\_print1wireAddr()}{io\_print1wireAddr()}}
+{\footnotesize\ttfamily void io\+\_\+print1wire\+Addr (\begin{DoxyParamCaption}\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00431}{431}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the caller graph for this function\+:
+% FIG 6
+\mbox{\Hypertarget{1wire_8cpp_a977007cf4daf77a6813d9bd5484e67e1}\label{1wire_8cpp_a977007cf4daf77a6813d9bd5484e67e1}} 
+\index{1wire.cpp@{1wire.cpp}!printChipInfo@{printChipInfo}}
+\index{printChipInfo@{printChipInfo}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{printChipInfo()}{printChipInfo()}}
+{\footnotesize\ttfamily void print\+Chip\+Info (\begin{DoxyParamCaption}\item[{byte}]{id }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00549}{549}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+Here is the caller graph for this function\+:
+% FIG 8
+\mbox{\Hypertarget{1wire_8cpp_af90cd28b4d2a72569db9f6c06e651a5b}\label{1wire_8cpp_af90cd28b4d2a72569db9f6c06e651a5b}} 
+\index{1wire.cpp@{1wire.cpp}!read1wireIO@{read1wireIO}}
+\index{read1wireIO@{read1wireIO}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{read1wireIO()}{read1wireIO()}}
+{\footnotesize\ttfamily byte read1wire\+IO (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00702}{702}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 9
+Here is the caller graph for this function\+:
+% FIG 10
+\mbox{\Hypertarget{1wire_8cpp_ae06e28103688bff04370bd65ceb6ab5d}\label{1wire_8cpp_ae06e28103688bff04370bd65ceb6ab5d}} 
+\index{1wire.cpp@{1wire.cpp}!readDS2413@{readDS2413}}
+\index{readDS2413@{readDS2413}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{readDS2413()}{readDS2413()}}
+{\footnotesize\ttfamily byte read\+DS2413 (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00675}{675}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the caller graph for this function\+:
+% FIG 11
+\mbox{\Hypertarget{1wire_8cpp_a93a8808362069ecaef566c7fda84a1b3}\label{1wire_8cpp_a93a8808362069ecaef566c7fda84a1b3}} 
+\index{1wire.cpp@{1wire.cpp}!test1wireIO@{test1wireIO}}
+\index{test1wireIO@{test1wireIO}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{test1wireIO()}{test1wireIO()}}
+{\footnotesize\ttfamily bool test1wire\+IO (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00695}{695}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 12
+Here is the caller graph for this function\+:
+% FIG 13
+\mbox{\Hypertarget{1wire_8cpp_a2e8000096e9b85edb1ba3aab584b0a8a}\label{1wire_8cpp_a2e8000096e9b85edb1ba3aab584b0a8a}} 
+\index{1wire.cpp@{1wire.cpp}!test\_printChipInfo@{test\_printChipInfo}}
+\index{test\_printChipInfo@{test\_printChipInfo}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_printChipInfo()}{test\_printChipInfo()}}
+{\footnotesize\ttfamily void test\+\_\+print\+Chip\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00566}{566}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 14
+\mbox{\Hypertarget{1wire_8cpp_a6d64f194d5da81b7e217b7ea361efcc5}\label{1wire_8cpp_a6d64f194d5da81b7e217b7ea361efcc5}} 
+\index{1wire.cpp@{1wire.cpp}!testDS2413@{testDS2413}}
+\index{testDS2413@{testDS2413}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{testDS2413()}{testDS2413()}}
+{\footnotesize\ttfamily bool test\+DS2413 (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00687}{687}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 15
+Here is the caller graph for this function\+:
+% FIG 16
+\mbox{\Hypertarget{1wire_8cpp_a77ebc093a69243ec72e963d7c915fba0}\label{1wire_8cpp_a77ebc093a69243ec72e963d7c915fba0}} 
+\index{1wire.cpp@{1wire.cpp}!write1wireIO@{write1wireIO}}
+\index{write1wireIO@{write1wireIO}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{write1wireIO()}{write1wireIO()}}
+{\footnotesize\ttfamily bool write1wire\+IO (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]},  }\item[{byte}]{state }\end{DoxyParamCaption})}
+
+
+
+Writes bitmap to 1-\/wire pin IO Register(Sets all the IO pins on the 1-\/wire chip). 
+
+Takes a pointer to a 1-\/wire class objects from the standard Arduino One\+Wire libary initialized with the pin number etc. and a chip address on that pin/bus and the sets the IO Register on the 1-\/wire ship. Chip IO pins are a Mosfet so High impedance(off) and open drain(short to 0v).
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & Pointer to a 1-\/wire bus/pin class object. \\
+\hline
+{\em addr} & 8 byte long array 1-\/wire chip address. \mbox{[}0\mbox{]} is the chip type and \mbox{[}7\mbox{]} the crc. \\
+\hline
+{\em state} & bitmask of IO output wanted. 0b11 should pull OIA and IOB low and 0 set them to off, high impedance? \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true for successes or false for fail. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00780}{780}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 17
+Here is the caller graph for this function\+:
+% FIG 18
+\mbox{\Hypertarget{1wire_8cpp_aa8820981770942c6f48687b950ab09c8}\label{1wire_8cpp_aa8820981770942c6f48687b950ab09c8}} 
+\index{1wire.cpp@{1wire.cpp}!writeDS2413@{writeDS2413}}
+\index{writeDS2413@{writeDS2413}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{writeDS2413()}{writeDS2413()}}
+{\footnotesize\ttfamily bool write\+DS2413 (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]},  }\item[{byte}]{state }\end{DoxyParamCaption})}
+
+
+
+write output to a 1-\/wire DS2413 chip. 
+
+Each instance of the One\+Wire class stores it\textquotesingle{}s pin as a reg + bitmap for direct access.
+
+DS2413 can only pull the IO pins to ground. Open drain Mosfet keeps settings for quite awhile even with no power.
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & One\+Wire object of class One\+Wire. From the standard lib, look at the Arduino website manual for more info. \\
+\hline
+{\em addr} & 8 byte array. Chip type code, 6 bytes of address and CRC \\
+\hline
+{\em state} & bitmap of IO pin state sent to the 1-\/wire chip IO register. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true for success. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00733}{733}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+Here is the caller graph for this function\+:
+% FIG 19
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{1wire_8cpp_a857c0079efbda4141b54eb3ab2782618}\label{1wire_8cpp_a857c0079efbda4141b54eb3ab2782618}} 
+\index{1wire.cpp@{1wire.cpp}!IOA@{IOA}}
+\index{IOA@{IOA}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{IOA}{IOA}}
+{\footnotesize\ttfamily const int IOA = B00000001}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00189}{189}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a1ba15df8bc259dcb4374803da9e30379}\label{1wire_8cpp_a1ba15df8bc259dcb4374803da9e30379}} 
+\index{1wire.cpp@{1wire.cpp}!IOB@{IOB}}
+\index{IOB@{IOB}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{IOB}{IOB}}
+{\footnotesize\ttfamily const int IOB = 0x2}
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00190}{190}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+
+\mbox{\Hypertarget{1wire_8cpp_a565a4ca1ef05911887e8e0e3c2b56291}\label{1wire_8cpp_a565a4ca1ef05911887e8e0e3c2b56291}} 
+\index{1wire.cpp@{1wire.cpp}!oneWireState@{oneWireState}}
+\index{oneWireState@{oneWireState}!1wire.cpp@{1wire.cpp}}
+\doxysubsubsection{\texorpdfstring{oneWireState}{oneWireState}}
+{\footnotesize\ttfamily byte one\+Wire\+State\mbox{[}\mbox{\hyperlink{1wire_8h_acc2bcc51bf648584775ffc5faf340096}{def\+Max\+No\+\_\+1wire\+Chips}}\mbox{]}}
+
+
+
+todo should probably get rid of global vars. 
+
+
+
+Definition at line \mbox{\hyperlink{1wire_8cpp_source_l00077}{77}} of file \mbox{\hyperlink{1wire_8cpp_source}{1wire.\+cpp}}.
+

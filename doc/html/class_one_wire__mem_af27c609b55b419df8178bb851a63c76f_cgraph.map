@@ -1,0 +1,12 @@
+<map id="OneWire_mem::printStorageUsage" name="OneWire_mem::printStorageUsage">
+<area shape="rect" id="node1" title="Print 1&#45;wire eeprom(etc.) save slots." alt="" coords="5,73,212,114"/>
+<area shape="rect" id="node2" href="$class_one_wire__mem.html#aebbad3bbe0ce42d66daee7cb1d038162" title=" " alt="" coords="260,29,503,56"/>
+<area shape="rect" id="node3" href="$1wire_8cpp.html#a977007cf4daf77a6813d9bd5484e67e1" title=" " alt="" coords="328,80,435,107"/>
+<area shape="rect" id="node7" href="$class_one_wire__mem.html#af56ea8aea5c4ef1c2c1463cf7f8a7d88" title=" " alt="" coords="280,131,483,157"/>
+<area shape="rect" id="node4" href="$1wire_8cpp.html#a26a5c521594f3f4380de4fe920f669fe" title="Returns the number of IO pins the 1&#45;wire chip has." alt="" coords="551,80,729,107"/>
+<area shape="rect" id="node5" href="$1wire_8cpp.html#aa10020cdfdad46fa553fc4a2ee31fd3b" title="set 1&#45;wire chip output. Also updates arrays holding info on switched state etc." alt="" coords="777,29,913,56"/>
+<area shape="rect" id="node6" href="$1wire_8cpp.html#a0c2ff7ecc2f15b31cfe75c4598451678" title="Get the number of IO pins the chip has, i.e. 8 for the DS2408." alt="" coords="791,80,900,107"/>
+<area shape="rect" id="node8" href="$1wire_8cpp.html#a93a8808362069ecaef566c7fda84a1b3" title=" " alt="" coords="591,131,689,157"/>
+<area shape="rect" id="node9" href="$1wire_8cpp.html#a6d64f194d5da81b7e217b7ea361efcc5" title=" " alt="" coords="797,131,894,157"/>
+<area shape="rect" id="node10" href="$1wire_8cpp.html#ae06e28103688bff04370bd65ceb6ab5d" title=" " alt="" coords="961,131,1063,157"/>
+</map>

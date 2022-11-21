@@ -1,0 +1,54 @@
+.TH "switch1wire_T" 3 "Sun Jun 19 2022" "Version 0.0.2" "1-wire" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+switch1wire_T \- This is the EEPROM(or other storage) format\&. maybe leave room for up to 20 chips\&. 20 * 9 = 180 bytes\&. In EEPROM\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <1wire\&.h>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "byte \fBchipType\fP"
+.br
+.ti -1c
+.RI "byte \fBaddr\fP [6]"
+.br
+.ti -1c
+.RI "byte \fBpinChan\fP"
+.br
+.ti -1c
+.RI "byte \fBroomNum\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This is the EEPROM(or other storage) format\&. maybe leave room for up to 20 chips\&. 20 * 9 = 180 bytes\&. In EEPROM\&. 
+.PP
+Definition at line \fB75\fP of file \fB1wire\&.h\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "byte switch1wire_T::addr[6]"
+
+.PP
+Definition at line \fB77\fP of file \fB1wire\&.h\fP\&.
+.SS "byte switch1wire_T::chipType"
+
+.PP
+Definition at line \fB76\fP of file \fB1wire\&.h\fP\&.
+.SS "byte switch1wire_T::pinChan"
+
+.PP
+Definition at line \fB79\fP of file \fB1wire\&.h\fP\&.
+.SS "byte switch1wire_T::roomNum"
+
+.PP
+Definition at line \fB81\fP of file \fB1wire\&.h\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for 1-wire from the source code\&.

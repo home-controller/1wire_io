@@ -1,0 +1,142 @@
+\hypertarget{test_2main_8cpp}{}\doxysection{test/main.cpp File Reference}
+\label{test_2main_8cpp}\index{test/main.cpp@{test/main.cpp}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$ui\+\_\+io.\+h$>$}\newline
+{\ttfamily \#include $<$defs.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}1wire.\+h\char`\"{}}\newline
+Include dependency graph for main.\+cpp\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{test_2main_8cpp_ad9de734c31fd1f856aaf978762ae2512}{term\+IO}}
+\item 
+\#define \mbox{\hyperlink{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}{test\+Equ}}(T,  R,  V)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test_2main_8cpp_a80d91a868b2568b6c4c121a0c4f692e1}{test\+\_\+get1wire\+IDs\+Index}} ()
+\item 
+void \mbox{\hyperlink{test_2main_8cpp_af0c21bce4598a6cd9bc60a4978bdcb47}{test\+\_\+get1wire\+IOno}} ()
+\item 
+void \mbox{\hyperlink{test_2main_8cpp_ac13eac4135abb03c83315a4d5fa5ebd4}{test\+\_\+get1wire\+Chip\+Type\+IOPins}} ()
+\item 
+void \mbox{\hyperlink{test_2main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{test_2main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_one_wire__mem}{One\+Wire\+\_\+mem}} \mbox{\hyperlink{test_2main_8cpp_aa92568f814dfc0ba5409c8d044289f9c}{v1wire}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{test_2main_8cpp_ad9de734c31fd1f856aaf978762ae2512}\label{test_2main_8cpp_ad9de734c31fd1f856aaf978762ae2512}} 
+\index{main.cpp@{main.cpp}!termIO@{termIO}}
+\index{termIO@{termIO}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{termIO}{termIO}}
+{\footnotesize\ttfamily \#define term\+IO}
+
+
+
+Definition at line \mbox{\hyperlink{test_2main_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{test_2main_8cpp_source}{main.\+cpp}}.
+
+\mbox{\Hypertarget{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}\label{test_2main_8cpp_a9a5a0289bb62e3cc1ddcde1c143a6a86}} 
+\index{main.cpp@{main.cpp}!testEqu@{testEqu}}
+\index{testEqu@{testEqu}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{testEqu}{testEqu}}
+{\footnotesize\ttfamily \#define test\+Equ(\begin{DoxyParamCaption}\item[{}]{T,  }\item[{}]{R,  }\item[{}]{V }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{   Serial.print( F(\textcolor{stringliteral}{"{} Test "{}} \# T \textcolor{stringliteral}{"{}( "{}} \# V \textcolor{stringliteral}{"{} ) Expect: "{}} \#R)  );   x = T(V);\(\backslash\)}
+\DoxyCodeLine{   if(R==x)\{ Serial.println(F(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)e[32m Pas\(\backslash\)e[38;5;10msed \(\backslash\)e[37m "{}}) ); \}\textcolor{keywordflow}{else}\{ Serial.print(F(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)e[91m Failed\(\backslash\)e[93m , returned: "{}}) );  Serial.println(x);\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{test_2main_8cpp_source_l00014}{14}} of file \mbox{\hyperlink{test_2main_8cpp_source}{main.\+cpp}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{test_2main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{test_2main_8cpp_afe461d27b9c48d5921c00d521181f12f}} 
+\index{main.cpp@{main.cpp}!loop@{loop}}
+\index{loop@{loop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test_2main_8cpp_source_l00079}{79}} of file \mbox{\hyperlink{test_2main_8cpp_source}{main.\+cpp}}.
+
+\mbox{\Hypertarget{test_2main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\label{test_2main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}} 
+\index{main.cpp@{main.cpp}!setup@{setup}}
+\index{setup@{setup}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test_2main_8cpp_source_l00052}{52}} of file \mbox{\hyperlink{test_2main_8cpp_source}{main.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{test_2main_8cpp_ac13eac4135abb03c83315a4d5fa5ebd4}\label{test_2main_8cpp_ac13eac4135abb03c83315a4d5fa5ebd4}} 
+\index{main.cpp@{main.cpp}!test\_get1wireChipTypeIOPins@{test\_get1wireChipTypeIOPins}}
+\index{test\_get1wireChipTypeIOPins@{test\_get1wireChipTypeIOPins}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_get1wireChipTypeIOPins()}{test\_get1wireChipTypeIOPins()}}
+{\footnotesize\ttfamily void test\+\_\+get1wire\+Chip\+Type\+IOPins (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test_2main_8cpp_source_l00041}{41}} of file \mbox{\hyperlink{test_2main_8cpp_source}{main.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+Here is the caller graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{test_2main_8cpp_a80d91a868b2568b6c4c121a0c4f692e1}\label{test_2main_8cpp_a80d91a868b2568b6c4c121a0c4f692e1}} 
+\index{main.cpp@{main.cpp}!test\_get1wireIDsIndex@{test\_get1wireIDsIndex}}
+\index{test\_get1wireIDsIndex@{test\_get1wireIDsIndex}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_get1wireIDsIndex()}{test\_get1wireIDsIndex()}}
+{\footnotesize\ttfamily void test\+\_\+get1wire\+IDs\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test_2main_8cpp_source_l00017}{17}} of file \mbox{\hyperlink{test_2main_8cpp_source}{main.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+Here is the caller graph for this function\+:
+% FIG 5
+\mbox{\Hypertarget{test_2main_8cpp_af0c21bce4598a6cd9bc60a4978bdcb47}\label{test_2main_8cpp_af0c21bce4598a6cd9bc60a4978bdcb47}} 
+\index{main.cpp@{main.cpp}!test\_get1wireIOno@{test\_get1wireIOno}}
+\index{test\_get1wireIOno@{test\_get1wireIOno}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_get1wireIOno()}{test\_get1wireIOno()}}
+{\footnotesize\ttfamily void test\+\_\+get1wire\+IOno (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test_2main_8cpp_source_l00031}{31}} of file \mbox{\hyperlink{test_2main_8cpp_source}{main.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{test_2main_8cpp_aa92568f814dfc0ba5409c8d044289f9c}\label{test_2main_8cpp_aa92568f814dfc0ba5409c8d044289f9c}} 
+\index{main.cpp@{main.cpp}!v1wire@{v1wire}}
+\index{v1wire@{v1wire}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{v1wire}{v1wire}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_one_wire__mem}{One\+Wire\+\_\+mem}} v1wire}
+
+
+
+Definition at line \mbox{\hyperlink{test_2main_8cpp_source_l00051}{51}} of file \mbox{\hyperlink{test_2main_8cpp_source}{main.\+cpp}}.
+

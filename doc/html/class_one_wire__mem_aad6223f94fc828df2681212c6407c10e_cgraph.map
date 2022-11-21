@@ -1,0 +1,3 @@
+<map id="OneWire_mem::checkStoredIndex" name="OneWire_mem::checkStoredIndex">
+<area shape="rect" id="node1" title="Check if the 1wire chip in the global var: byte addr[8] is in eeprom." alt="" coords="5,29,212,71"/>
+</map>
