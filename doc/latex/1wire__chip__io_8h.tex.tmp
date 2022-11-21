@@ -1,0 +1,727 @@
+\hypertarget{1wire__chip__io_8h}{}\doxysection{src/1wire\+\_\+chip\+\_\+io.h File Reference}
+\label{1wire__chip__io_8h}\index{src/1wire\_chip\_io.h@{src/1wire\_chip\_io.h}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$One\+Wire.\+h$>$}\newline
+Include dependency graph for 1wire\+\_\+chip\+\_\+io.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a1de6779b50465a5113adc1bcbea56f92}{io\+\_\+println}}(S)~Serial.\+println(F(S))
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a7a6749317c33ec646f1176d1f9425bff}{io\+\_\+ln}}~Serial.\+println()
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_ae055ad5c3315e449f490f0029391d6f7}{io\+\_\+print\+\_\+nh}}(N)
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a48d0cf25b5dd959234aa736c38b24fc0}{io\+\_\+print\+\_\+nh2}}(N)
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_abc8692d8a949c440988861f53d52bb4d}{io\+\_\+print}}(S)~Serial.\+print(F(S));
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a1dcfe4a2e6751f99fae71bbc48b3147d}{io\+\_\+println\+\_\+n}}(N)~Serial.\+println(N)
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a12e3e691273c105c95261e049b066bae}{io\+\_\+print\+\_\+n}}(N)~Serial.\+print(N)
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_ae497f1938d82bdc3875f0ce404adefef}{io\+\_\+print\+\_\+nb}}(N)~Serial.\+print(N, BIN)
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a4837db1902a1171a55c27b8b808ed9b9}{io\+\_\+println\+\_\+nb}}(N)~Serial.\+println(N, BIN)
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a927f37ecbf3118a5c45f82f212ba5ab5}{Quite\+Mode}}~0
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a98ea559b3f61a540608997b5ee55eb60}{DS2405\+\_\+\+FAMILY\+\_\+\+ID}}~0x5
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a99ed45dde220f1f590bc945b4646bb0a}{DS18\+S20\+\_\+\+FAMILY\+\_\+\+ID}}~0x10
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_ab20414815640ae9cd42c01c9d1a4c17a}{DS2406\+\_\+\+FAMILY\+\_\+\+ID}}~0x12
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a39cd35a43de2fefdaed70c09898aaed3}{DS2407\+\_\+\+FAMILY\+\_\+\+ID}}~0x12
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_aa888f4f026782b3d0919c5b6f42407c1}{DS18\+B20\+\_\+\+FAMILY\+\_\+\+ID}}~0x28
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a3e36d3f05676e13a5bc6fcfe0e7a54ee}{DS2408\+\_\+\+FAMILY\+\_\+\+ID}}~0x29
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a8d5b8913d59e5b99859e36a0a772c4eb}{DS2413\+\_\+\+FAMILY\+\_\+\+ID}}~0x3A
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a440b56d92fa798a2df986aadcc23a78d}{DS2413clone\+\_\+\+FAMILY\+\_\+\+ID}}~0x85
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a563b75793a1703adfba83ce275c4a2ee}{\+\_\+3\+A\+\_\+2100\+H\+\_\+\+FAMILY\+\_\+\+ID}}~0x85
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_acff509cefc710d6a08d1807e8584fcd6}{\+\_\+3\+A1100\+H\+\_\+\+FAMILY\+\_\+\+ID}}~0x\+BA
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a3673d211792c84b846ab08760609f3db}{DS2413clone2\+\_\+\+FAMILY\+\_\+\+ID}}~\mbox{\hyperlink{1wire__chip__io_8h_acff509cefc710d6a08d1807e8584fcd6}{\+\_\+3\+A1100\+H\+\_\+\+FAMILY\+\_\+\+ID}}
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a47518a29c73d292a8e99cad8e5bc3d6a}{num1wire\+IDs}}~sizeof(type1wire\+Chip)
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a7b66dbae451bc9c7a1b68897cc4836ac}{DS2413\+\_\+\+ACCESS\+\_\+\+READ}}~0x\+F5
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a7f43ecbc0966fed19eaa57167f3fc748}{DS2413\+\_\+\+ACCESS\+\_\+\+WRITE}}~0x5A
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_ac0aa910faa0e7ff97464aed9869d38d6}{DS2413\+\_\+\+ACK\+\_\+\+SUCCESS}}~0x\+AA
+\item 
+\#define \mbox{\hyperlink{1wire__chip__io_8h_a45b24525786ca075daff83e27ece1566}{DS2413\+\_\+\+ACK\+\_\+\+ERROR}}~0x\+FF
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{1wire__chip__io_8h_a387122cd32e13e3ab4868864bed08d3e}{io\+\_\+print1wire\+Addr}} (byte addr\mbox{[}$\,$\mbox{]})
+\item 
+byte \mbox{\hyperlink{1wire__chip__io_8h_a0c2ff7ecc2f15b31cfe75c4598451678}{get1wire\+IOno}} (byte i)
+\begin{DoxyCompactList}\small\item\em Get the number of IO pins the chip has, i.\+e. 8 for the DS2408. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{1wire__chip__io_8h_adc0e43b0bfe532c9150833a40d6ff2d7}{get1wire\+Id\+FIA}} (byte i)
+\begin{DoxyCompactList}\small\item\em Get the chip type id at type1wire\+Chip\mbox{[}i\mbox{]} in the array of 1wire chip type IDs. \end{DoxyCompactList}\item 
+int16\+\_\+t \mbox{\hyperlink{1wire__chip__io_8h_aa10020cdfdad46fa553fc4a2ee31fd3b}{get1wire\+IDs\+Index}} (byte element)
+\begin{DoxyCompactList}\small\item\em Gets the array index index from the chip type id. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{1wire__chip__io_8h_a26a5c521594f3f4380de4fe920f669fe}{get1wire\+Chip\+Type\+IOPins}} (byte chip\+Type)
+\begin{DoxyCompactList}\small\item\em Returns the number of IO pins the 1-\/wire chip has. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{1wire__chip__io_8h_a9947dc757c59a6d2546157669ed3790a}{get1wire\+IDfrom\+Index}} (byte id)
+\begin{DoxyCompactList}\small\item\em Returns the index into the arrays type1wire\+Chip\mbox{[}i\mbox{]} and onewire\+Switch\+IO\mbox{[}x\mbox{]}. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{1wire__chip__io_8h_a311f7b37ec0109f7273c2c2bc3757d9c}{get\+Chips\+No\+IO}} (byte id)
+\begin{DoxyCompactList}\small\item\em Get the Chips number of IO pins. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{1wire__chip__io_8h_ae06e28103688bff04370bd65ceb6ab5d}{read\+DS2413}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]})
+\item 
+bool \mbox{\hyperlink{1wire__chip__io_8h_a6d64f194d5da81b7e217b7ea361efcc5}{test\+DS2413}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]})
+\item 
+bool \mbox{\hyperlink{1wire__chip__io_8h_a93a8808362069ecaef566c7fda84a1b3}{test1wire\+IO}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]})
+\item 
+byte \mbox{\hyperlink{1wire__chip__io_8h_af90cd28b4d2a72569db9f6c06e651a5b}{read1wire\+IO}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]})
+\item 
+bool \mbox{\hyperlink{1wire__chip__io_8h_aa8820981770942c6f48687b950ab09c8}{write\+DS2413}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]}, byte state)
+\begin{DoxyCompactList}\small\item\em write output to a 1-\/wire DS2413 chip. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{1wire__chip__io_8h_a77ebc093a69243ec72e963d7c915fba0}{write1wire\+IO}} (One\+Wire \&o, byte addr\mbox{[}$\,$\mbox{]}, byte state)
+\begin{DoxyCompactList}\small\item\em Writes bitmap to 1-\/wire pin IO Register(Sets all the IO pins on the 1-\/wire chip). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{1wire__chip__io_8h_a977007cf4daf77a6813d9bd5484e67e1}{print\+Chip\+Info}} (byte id)
+\item 
+void \mbox{\hyperlink{1wire__chip__io_8h_a2e8000096e9b85edb1ba3aab584b0a8a}{test\+\_\+print\+Chip\+Info}} ()
+\item 
+int \mbox{\hyperlink{1wire__chip__io_8h_ac44d2f53065a0b411f5c6094dfcac6ff}{print1wire\+Devices\+On\+Pin}} (One\+Wire \&o)
+\begin{DoxyCompactList}\small\item\em Find and print details of chips on the 1-\/wire bus. One\+Wire class stores the pin, and by default the address of the last search. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{1wire__chip__io_8h_a1d6f9599dba99d3be6484b6dcb1ad2a7}{set\+All1wire\+Pin}} (One\+Wire \&o, byte state)
+\begin{DoxyCompactList}\small\item\em Find and print details of chips on the 1-\/wire bus. One\+Wire class stores the pin, and by default the address of the last search. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{1wire__chip__io_8h_acff509cefc710d6a08d1807e8584fcd6}\label{1wire__chip__io_8h_acff509cefc710d6a08d1807e8584fcd6}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!\_3A1100H\_FAMILY\_ID@{\_3A1100H\_FAMILY\_ID}}
+\index{\_3A1100H\_FAMILY\_ID@{\_3A1100H\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{\_3A1100H\_FAMILY\_ID}{\_3A1100H\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define \+\_\+3\+A1100\+H\+\_\+\+FAMILY\+\_\+\+ID~0x\+BA}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00041}{41}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a563b75793a1703adfba83ce275c4a2ee}\label{1wire__chip__io_8h_a563b75793a1703adfba83ce275c4a2ee}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!\_3A\_2100H\_FAMILY\_ID@{\_3A\_2100H\_FAMILY\_ID}}
+\index{\_3A\_2100H\_FAMILY\_ID@{\_3A\_2100H\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{\_3A\_2100H\_FAMILY\_ID}{\_3A\_2100H\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define \+\_\+3\+A\+\_\+2100\+H\+\_\+\+FAMILY\+\_\+\+ID~0x85}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00040}{40}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_aa888f4f026782b3d0919c5b6f42407c1}\label{1wire__chip__io_8h_aa888f4f026782b3d0919c5b6f42407c1}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS18B20\_FAMILY\_ID@{DS18B20\_FAMILY\_ID}}
+\index{DS18B20\_FAMILY\_ID@{DS18B20\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS18B20\_FAMILY\_ID}{DS18B20\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS18\+B20\+\_\+\+FAMILY\+\_\+\+ID~0x28}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00036}{36}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a99ed45dde220f1f590bc945b4646bb0a}\label{1wire__chip__io_8h_a99ed45dde220f1f590bc945b4646bb0a}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS18S20\_FAMILY\_ID@{DS18S20\_FAMILY\_ID}}
+\index{DS18S20\_FAMILY\_ID@{DS18S20\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS18S20\_FAMILY\_ID}{DS18S20\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS18\+S20\+\_\+\+FAMILY\+\_\+\+ID~0x10}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00033}{33}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a98ea559b3f61a540608997b5ee55eb60}\label{1wire__chip__io_8h_a98ea559b3f61a540608997b5ee55eb60}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2405\_FAMILY\_ID@{DS2405\_FAMILY\_ID}}
+\index{DS2405\_FAMILY\_ID@{DS2405\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2405\_FAMILY\_ID}{DS2405\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2405\+\_\+\+FAMILY\+\_\+\+ID~0x5}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00032}{32}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_ab20414815640ae9cd42c01c9d1a4c17a}\label{1wire__chip__io_8h_ab20414815640ae9cd42c01c9d1a4c17a}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2406\_FAMILY\_ID@{DS2406\_FAMILY\_ID}}
+\index{DS2406\_FAMILY\_ID@{DS2406\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2406\_FAMILY\_ID}{DS2406\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2406\+\_\+\+FAMILY\+\_\+\+ID~0x12}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00034}{34}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a39cd35a43de2fefdaed70c09898aaed3}\label{1wire__chip__io_8h_a39cd35a43de2fefdaed70c09898aaed3}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2407\_FAMILY\_ID@{DS2407\_FAMILY\_ID}}
+\index{DS2407\_FAMILY\_ID@{DS2407\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2407\_FAMILY\_ID}{DS2407\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2407\+\_\+\+FAMILY\+\_\+\+ID~0x12}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00035}{35}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a3e36d3f05676e13a5bc6fcfe0e7a54ee}\label{1wire__chip__io_8h_a3e36d3f05676e13a5bc6fcfe0e7a54ee}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2408\_FAMILY\_ID@{DS2408\_FAMILY\_ID}}
+\index{DS2408\_FAMILY\_ID@{DS2408\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2408\_FAMILY\_ID}{DS2408\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2408\+\_\+\+FAMILY\+\_\+\+ID~0x29}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00037}{37}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a7b66dbae451bc9c7a1b68897cc4836ac}\label{1wire__chip__io_8h_a7b66dbae451bc9c7a1b68897cc4836ac}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2413\_ACCESS\_READ@{DS2413\_ACCESS\_READ}}
+\index{DS2413\_ACCESS\_READ@{DS2413\_ACCESS\_READ}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2413\_ACCESS\_READ}{DS2413\_ACCESS\_READ}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+ACCESS\+\_\+\+READ~0x\+F5}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00204}{204}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a7f43ecbc0966fed19eaa57167f3fc748}\label{1wire__chip__io_8h_a7f43ecbc0966fed19eaa57167f3fc748}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2413\_ACCESS\_WRITE@{DS2413\_ACCESS\_WRITE}}
+\index{DS2413\_ACCESS\_WRITE@{DS2413\_ACCESS\_WRITE}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2413\_ACCESS\_WRITE}{DS2413\_ACCESS\_WRITE}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+ACCESS\+\_\+\+WRITE~0x5A}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00205}{205}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a45b24525786ca075daff83e27ece1566}\label{1wire__chip__io_8h_a45b24525786ca075daff83e27ece1566}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2413\_ACK\_ERROR@{DS2413\_ACK\_ERROR}}
+\index{DS2413\_ACK\_ERROR@{DS2413\_ACK\_ERROR}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2413\_ACK\_ERROR}{DS2413\_ACK\_ERROR}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+ACK\+\_\+\+ERROR~0x\+FF}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00207}{207}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_ac0aa910faa0e7ff97464aed9869d38d6}\label{1wire__chip__io_8h_ac0aa910faa0e7ff97464aed9869d38d6}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2413\_ACK\_SUCCESS@{DS2413\_ACK\_SUCCESS}}
+\index{DS2413\_ACK\_SUCCESS@{DS2413\_ACK\_SUCCESS}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2413\_ACK\_SUCCESS}{DS2413\_ACK\_SUCCESS}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+ACK\+\_\+\+SUCCESS~0x\+AA}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00206}{206}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a8d5b8913d59e5b99859e36a0a772c4eb}\label{1wire__chip__io_8h_a8d5b8913d59e5b99859e36a0a772c4eb}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2413\_FAMILY\_ID@{DS2413\_FAMILY\_ID}}
+\index{DS2413\_FAMILY\_ID@{DS2413\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2413\_FAMILY\_ID}{DS2413\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2413\+\_\+\+FAMILY\+\_\+\+ID~0x3A}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00038}{38}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a3673d211792c84b846ab08760609f3db}\label{1wire__chip__io_8h_a3673d211792c84b846ab08760609f3db}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2413clone2\_FAMILY\_ID@{DS2413clone2\_FAMILY\_ID}}
+\index{DS2413clone2\_FAMILY\_ID@{DS2413clone2\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2413clone2\_FAMILY\_ID}{DS2413clone2\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2413clone2\+\_\+\+FAMILY\+\_\+\+ID~\mbox{\hyperlink{1wire__chip__io_8h_acff509cefc710d6a08d1807e8584fcd6}{\+\_\+3\+A1100\+H\+\_\+\+FAMILY\+\_\+\+ID}}}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00042}{42}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a440b56d92fa798a2df986aadcc23a78d}\label{1wire__chip__io_8h_a440b56d92fa798a2df986aadcc23a78d}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!DS2413clone\_FAMILY\_ID@{DS2413clone\_FAMILY\_ID}}
+\index{DS2413clone\_FAMILY\_ID@{DS2413clone\_FAMILY\_ID}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{DS2413clone\_FAMILY\_ID}{DS2413clone\_FAMILY\_ID}}
+{\footnotesize\ttfamily \#define DS2413clone\+\_\+\+FAMILY\+\_\+\+ID~0x85}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00039}{39}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a7a6749317c33ec646f1176d1f9425bff}\label{1wire__chip__io_8h_a7a6749317c33ec646f1176d1f9425bff}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_ln@{io\_ln}}
+\index{io\_ln@{io\_ln}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_ln}{io\_ln}}
+{\footnotesize\ttfamily \#define io\+\_\+ln~Serial.\+println()}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00007}{7}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_abc8692d8a949c440988861f53d52bb4d}\label{1wire__chip__io_8h_abc8692d8a949c440988861f53d52bb4d}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_print@{io\_print}}
+\index{io\_print@{io\_print}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_print}{io\_print}}
+{\footnotesize\ttfamily \#define io\+\_\+print(\begin{DoxyParamCaption}\item[{}]{S }\end{DoxyParamCaption})~Serial.\+print(F(S));}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00021}{21}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a12e3e691273c105c95261e049b066bae}\label{1wire__chip__io_8h_a12e3e691273c105c95261e049b066bae}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_print\_n@{io\_print\_n}}
+\index{io\_print\_n@{io\_print\_n}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_print\_n}{io\_print\_n}}
+{\footnotesize\ttfamily \#define io\+\_\+print\+\_\+n(\begin{DoxyParamCaption}\item[{}]{N }\end{DoxyParamCaption})~Serial.\+print(N)}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00023}{23}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_ae497f1938d82bdc3875f0ce404adefef}\label{1wire__chip__io_8h_ae497f1938d82bdc3875f0ce404adefef}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_print\_nb@{io\_print\_nb}}
+\index{io\_print\_nb@{io\_print\_nb}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_print\_nb}{io\_print\_nb}}
+{\footnotesize\ttfamily \#define io\+\_\+print\+\_\+nb(\begin{DoxyParamCaption}\item[{}]{N }\end{DoxyParamCaption})~Serial.\+print(N, BIN)}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00024}{24}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_ae055ad5c3315e449f490f0029391d6f7}\label{1wire__chip__io_8h_ae055ad5c3315e449f490f0029391d6f7}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_print\_nh@{io\_print\_nh}}
+\index{io\_print\_nh@{io\_print\_nh}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_print\_nh}{io\_print\_nh}}
+{\footnotesize\ttfamily \#define io\+\_\+print\+\_\+nh(\begin{DoxyParamCaption}\item[{}]{N }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  Serial.print(\textcolor{stringliteral}{"{}0x"{}});  \(\backslash\)}
+\DoxyCodeLine{  if (N < 16)          \(\backslash\)}
+\DoxyCodeLine{  \{                    \(\backslash\)}
+\DoxyCodeLine{    Serial.print(\textcolor{stringliteral}{"{}0"{}}); \(\backslash\)}
+\DoxyCodeLine{  \}                    \(\backslash\)}
+\DoxyCodeLine{  Serial.print(N, HEX)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00008}{8}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a48d0cf25b5dd959234aa736c38b24fc0}\label{1wire__chip__io_8h_a48d0cf25b5dd959234aa736c38b24fc0}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_print\_nh2@{io\_print\_nh2}}
+\index{io\_print\_nh2@{io\_print\_nh2}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_print\_nh2}{io\_print\_nh2}}
+{\footnotesize\ttfamily \#define io\+\_\+print\+\_\+nh2(\begin{DoxyParamCaption}\item[{}]{N }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keywordflow}{if} (N < 16)           \(\backslash\)}
+\DoxyCodeLine{  \{                     \(\backslash\)}
+\DoxyCodeLine{    Serial.print(\textcolor{stringliteral}{"{}0"{}});  \(\backslash\)}
+\DoxyCodeLine{  \}                     \(\backslash\)}
+\DoxyCodeLine{  Serial.print(N, HEX)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00015}{15}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a1de6779b50465a5113adc1bcbea56f92}\label{1wire__chip__io_8h_a1de6779b50465a5113adc1bcbea56f92}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_println@{io\_println}}
+\index{io\_println@{io\_println}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_println}{io\_println}}
+{\footnotesize\ttfamily \#define io\+\_\+println(\begin{DoxyParamCaption}\item[{}]{S }\end{DoxyParamCaption})~Serial.\+println(F(S))}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00006}{6}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a1dcfe4a2e6751f99fae71bbc48b3147d}\label{1wire__chip__io_8h_a1dcfe4a2e6751f99fae71bbc48b3147d}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_println\_n@{io\_println\_n}}
+\index{io\_println\_n@{io\_println\_n}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_println\_n}{io\_println\_n}}
+{\footnotesize\ttfamily \#define io\+\_\+println\+\_\+n(\begin{DoxyParamCaption}\item[{}]{N }\end{DoxyParamCaption})~Serial.\+println(N)}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00022}{22}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a4837db1902a1171a55c27b8b808ed9b9}\label{1wire__chip__io_8h_a4837db1902a1171a55c27b8b808ed9b9}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_println\_nb@{io\_println\_nb}}
+\index{io\_println\_nb@{io\_println\_nb}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_println\_nb}{io\_println\_nb}}
+{\footnotesize\ttfamily \#define io\+\_\+println\+\_\+nb(\begin{DoxyParamCaption}\item[{}]{N }\end{DoxyParamCaption})~Serial.\+println(N, BIN)}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00025}{25}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a47518a29c73d292a8e99cad8e5bc3d6a}\label{1wire__chip__io_8h_a47518a29c73d292a8e99cad8e5bc3d6a}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!num1wireIDs@{num1wireIDs}}
+\index{num1wireIDs@{num1wireIDs}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{num1wireIDs}{num1wireIDs}}
+{\footnotesize\ttfamily \#define num1wire\+IDs~sizeof(type1wire\+Chip)}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00046}{46}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_a927f37ecbf3118a5c45f82f212ba5ab5}\label{1wire__chip__io_8h_a927f37ecbf3118a5c45f82f212ba5ab5}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!QuiteMode@{QuiteMode}}
+\index{QuiteMode@{QuiteMode}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{QuiteMode}{QuiteMode}}
+{\footnotesize\ttfamily \#define Quite\+Mode~0}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00029}{29}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{1wire__chip__io_8h_a26a5c521594f3f4380de4fe920f669fe}\label{1wire__chip__io_8h_a26a5c521594f3f4380de4fe920f669fe}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!get1wireChipTypeIOPins@{get1wireChipTypeIOPins}}
+\index{get1wireChipTypeIOPins@{get1wireChipTypeIOPins}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{get1wireChipTypeIOPins()}{get1wireChipTypeIOPins()}}
+{\footnotesize\ttfamily byte get1wire\+Chip\+Type\+IOPins (\begin{DoxyParamCaption}\item[{byte}]{chip\+Type }\end{DoxyParamCaption})}
+
+
+
+Returns the number of IO pins the 1-\/wire chip has. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chip\+Type} & the 1-\/wire chip type id e.\+g. 0x85(\+DS2413clone\+\_\+\+FAMILY\+\_\+\+ID). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+byte 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00128}{128}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+Here is the caller graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{1wire__chip__io_8h_adc0e43b0bfe532c9150833a40d6ff2d7}\label{1wire__chip__io_8h_adc0e43b0bfe532c9150833a40d6ff2d7}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!get1wireIdFIA@{get1wireIdFIA}}
+\index{get1wireIdFIA@{get1wireIdFIA}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{get1wireIdFIA()}{get1wireIdFIA()}}
+{\footnotesize\ttfamily byte get1wire\+Id\+FIA (\begin{DoxyParamCaption}\item[{byte}]{i }\end{DoxyParamCaption})}
+
+
+
+Get the chip type id at type1wire\+Chip\mbox{[}i\mbox{]} in the array of 1wire chip type IDs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index into the program memory array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+byte The chip id at i. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00072}{72}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the caller graph for this function\+:
+% FIG 4
+\mbox{\Hypertarget{1wire__chip__io_8h_a9947dc757c59a6d2546157669ed3790a}\label{1wire__chip__io_8h_a9947dc757c59a6d2546157669ed3790a}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!get1wireIDfromIndex@{get1wireIDfromIndex}}
+\index{get1wireIDfromIndex@{get1wireIDfromIndex}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{get1wireIDfromIndex()}{get1wireIDfromIndex()}}
+{\footnotesize\ttfamily byte get1wire\+IDfrom\+Index (\begin{DoxyParamCaption}\item[{byte}]{id }\end{DoxyParamCaption})}
+
+
+
+Returns the index into the arrays type1wire\+Chip\mbox{[}i\mbox{]} and onewire\+Switch\+IO\mbox{[}x\mbox{]}. 
+
+more or less the same thing as get1wire\+IDs\+Index although you would think from the name it was the opposite.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the chip type id eg. 0x85 for DS2413clone\+\_\+\+FAMILY\+\_\+\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+byte 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00148}{148}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{1wire__chip__io_8h_aa10020cdfdad46fa553fc4a2ee31fd3b}\label{1wire__chip__io_8h_aa10020cdfdad46fa553fc4a2ee31fd3b}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!get1wireIDsIndex@{get1wireIDsIndex}}
+\index{get1wireIDsIndex@{get1wireIDsIndex}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{get1wireIDsIndex()}{get1wireIDsIndex()}}
+{\footnotesize\ttfamily int16\+\_\+t get1wire\+IDs\+Index (\begin{DoxyParamCaption}\item[{byte}]{element }\end{DoxyParamCaption})}
+
+
+
+Gets the array index index from the chip type id. 
+
+This will return the index of the chip in the 2 arrays type1wire\+Chip\mbox{[}x\mbox{]} \& onewire\+Switch\+IO\mbox{[}x\mbox{]} eg use get1wire\+IOno(get1wire\+IDs\+Index( addr\mbox{[}0\mbox{]} ) ); to get the number of IO pins/channels for chip in the working vars etc.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em element} & chip type code referenced in fist byte of addrs from 1-\/wire chips \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int16\+\_\+t return the index or -\/1 if chip type not found. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00090}{90}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the caller graph for this function\+:
+% FIG 5
+\mbox{\Hypertarget{1wire__chip__io_8h_a0c2ff7ecc2f15b31cfe75c4598451678}\label{1wire__chip__io_8h_a0c2ff7ecc2f15b31cfe75c4598451678}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!get1wireIOno@{get1wireIOno}}
+\index{get1wireIOno@{get1wireIOno}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{get1wireIOno()}{get1wireIOno()}}
+{\footnotesize\ttfamily byte get1wire\+IOno (\begin{DoxyParamCaption}\item[{byte}]{i }\end{DoxyParamCaption})}
+
+
+
+Get the number of IO pins the chip has, i.\+e. 8 for the DS2408. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i} & the index into the array. use \mbox{\hyperlink{1wire__chip__io_8h_a26a5c521594f3f4380de4fe920f669fe}{get1wire\+Chip\+Type\+IOPins()}} chip type id. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+byte number of IO pins.
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00057}{57}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the caller graph for this function\+:
+% FIG 6
+\mbox{\Hypertarget{1wire__chip__io_8h_a311f7b37ec0109f7273c2c2bc3757d9c}\label{1wire__chip__io_8h_a311f7b37ec0109f7273c2c2bc3757d9c}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!getChipsNoIO@{getChipsNoIO}}
+\index{getChipsNoIO@{getChipsNoIO}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{getChipsNoIO()}{getChipsNoIO()}}
+{\footnotesize\ttfamily byte get\+Chips\+No\+IO (\begin{DoxyParamCaption}\item[{byte}]{id }\end{DoxyParamCaption})}
+
+
+
+Get the Chips number of IO pins. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The one\+Wire chips type Id number. ie\+: 0x3A = DS2413\+\_\+\+FAMILY\+\_\+\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+byte The number of IO pins the chip has. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00199}{199}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\mbox{\Hypertarget{1wire__chip__io_8h_a387122cd32e13e3ab4868864bed08d3e}\label{1wire__chip__io_8h_a387122cd32e13e3ab4868864bed08d3e}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!io\_print1wireAddr@{io\_print1wireAddr}}
+\index{io\_print1wireAddr@{io\_print1wireAddr}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{io\_print1wireAddr()}{io\_print1wireAddr()}}
+{\footnotesize\ttfamily void io\+\_\+print1wire\+Addr (\begin{DoxyParamCaption}\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00403}{403}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the caller graph for this function\+:
+% FIG 8
+\mbox{\Hypertarget{1wire__chip__io_8h_ac44d2f53065a0b411f5c6094dfcac6ff}\label{1wire__chip__io_8h_ac44d2f53065a0b411f5c6094dfcac6ff}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!print1wireDevicesOnPin@{print1wireDevicesOnPin}}
+\index{print1wireDevicesOnPin@{print1wireDevicesOnPin}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{print1wireDevicesOnPin()}{print1wireDevicesOnPin()}}
+{\footnotesize\ttfamily int print1wire\+Devices\+On\+Pin (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o }\end{DoxyParamCaption})}
+
+
+
+Find and print details of chips on the 1-\/wire bus. One\+Wire class stores the pin, and by default the address of the last search. 
+
+\begin{DoxyReturn}{Returns}
+int No. chips found or -\/3 for CRC read fail. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00424}{424}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 9
+Here is the caller graph for this function\+:
+% FIG 10
+\mbox{\Hypertarget{1wire__chip__io_8h_a977007cf4daf77a6813d9bd5484e67e1}\label{1wire__chip__io_8h_a977007cf4daf77a6813d9bd5484e67e1}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!printChipInfo@{printChipInfo}}
+\index{printChipInfo@{printChipInfo}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{printChipInfo()}{printChipInfo()}}
+{\footnotesize\ttfamily void print\+Chip\+Info (\begin{DoxyParamCaption}\item[{byte}]{id }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00350}{350}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 11
+Here is the caller graph for this function\+:
+% FIG 12
+\mbox{\Hypertarget{1wire__chip__io_8h_af90cd28b4d2a72569db9f6c06e651a5b}\label{1wire__chip__io_8h_af90cd28b4d2a72569db9f6c06e651a5b}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!read1wireIO@{read1wireIO}}
+\index{read1wireIO@{read1wireIO}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{read1wireIO()}{read1wireIO()}}
+{\footnotesize\ttfamily byte read1wire\+IO (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00246}{246}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 13
+\mbox{\Hypertarget{1wire__chip__io_8h_ae06e28103688bff04370bd65ceb6ab5d}\label{1wire__chip__io_8h_ae06e28103688bff04370bd65ceb6ab5d}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!readDS2413@{readDS2413}}
+\index{readDS2413@{readDS2413}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{readDS2413()}{readDS2413()}}
+{\footnotesize\ttfamily byte read\+DS2413 (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00215}{215}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the caller graph for this function\+:
+% FIG 14
+\mbox{\Hypertarget{1wire__chip__io_8h_a1d6f9599dba99d3be6484b6dcb1ad2a7}\label{1wire__chip__io_8h_a1d6f9599dba99d3be6484b6dcb1ad2a7}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!setAll1wirePin@{setAll1wirePin}}
+\index{setAll1wirePin@{setAll1wirePin}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{setAll1wirePin()}{setAll1wirePin()}}
+{\footnotesize\ttfamily int set\+All1wire\+Pin (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{state }\end{DoxyParamCaption})}
+
+
+
+Find and print details of chips on the 1-\/wire bus. One\+Wire class stores the pin, and by default the address of the last search. 
+
+\begin{DoxyReturn}{Returns}
+int No. chips found or -\/3 for CRC read fail. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00482}{482}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 15
+Here is the caller graph for this function\+:
+% FIG 16
+\mbox{\Hypertarget{1wire__chip__io_8h_a93a8808362069ecaef566c7fda84a1b3}\label{1wire__chip__io_8h_a93a8808362069ecaef566c7fda84a1b3}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!test1wireIO@{test1wireIO}}
+\index{test1wireIO@{test1wireIO}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{test1wireIO()}{test1wireIO()}}
+{\footnotesize\ttfamily bool test1wire\+IO (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00237}{237}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 17
+\mbox{\Hypertarget{1wire__chip__io_8h_a2e8000096e9b85edb1ba3aab584b0a8a}\label{1wire__chip__io_8h_a2e8000096e9b85edb1ba3aab584b0a8a}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!test\_printChipInfo@{test\_printChipInfo}}
+\index{test\_printChipInfo@{test\_printChipInfo}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{test\_printChipInfo()}{test\_printChipInfo()}}
+{\footnotesize\ttfamily void test\+\_\+print\+Chip\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00391}{391}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 18
+\mbox{\Hypertarget{1wire__chip__io_8h_a6d64f194d5da81b7e217b7ea361efcc5}\label{1wire__chip__io_8h_a6d64f194d5da81b7e217b7ea361efcc5}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!testDS2413@{testDS2413}}
+\index{testDS2413@{testDS2413}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{testDS2413()}{testDS2413()}}
+{\footnotesize\ttfamily bool test\+DS2413 (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00228}{228}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 19
+Here is the caller graph for this function\+:
+% FIG 20
+\mbox{\Hypertarget{1wire__chip__io_8h_a77ebc093a69243ec72e963d7c915fba0}\label{1wire__chip__io_8h_a77ebc093a69243ec72e963d7c915fba0}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!write1wireIO@{write1wireIO}}
+\index{write1wireIO@{write1wireIO}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{write1wireIO()}{write1wireIO()}}
+{\footnotesize\ttfamily bool write1wire\+IO (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]},  }\item[{byte}]{state }\end{DoxyParamCaption})}
+
+
+
+Writes bitmap to 1-\/wire pin IO Register(Sets all the IO pins on the 1-\/wire chip). 
+
+Takes a pointer to a 1-\/wire class objects from the standard Arduino One\+Wire libary initialized with the pin number etc. and a chip address on that pin/bus and the sets the IO Register on the 1-\/wire ship. Chip IO pins are a Mosfet so High impedance(off) and open drain(short to 0v). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & Pointer to a 1-\/wire bus/pin class object. \\
+\hline
+{\em addr} & 8 byte long array 1-\/wire chip address. \mbox{[}0\mbox{]} is the chip type and \mbox{[}7\mbox{]} the crc. \\
+\hline
+{\em state} & bitmask of IO output wanted. 0b11 should pull OIA and IOB low and 0 set them to off, high impedance? \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true for successes or false for fail. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00321}{321}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 21
+Here is the caller graph for this function\+:
+% FIG 22
+\mbox{\Hypertarget{1wire__chip__io_8h_aa8820981770942c6f48687b950ab09c8}\label{1wire__chip__io_8h_aa8820981770942c6f48687b950ab09c8}} 
+\index{1wire\_chip\_io.h@{1wire\_chip\_io.h}!writeDS2413@{writeDS2413}}
+\index{writeDS2413@{writeDS2413}!1wire\_chip\_io.h@{1wire\_chip\_io.h}}
+\doxysubsubsection{\texorpdfstring{writeDS2413()}{writeDS2413()}}
+{\footnotesize\ttfamily bool write\+DS2413 (\begin{DoxyParamCaption}\item[{One\+Wire \&}]{o,  }\item[{byte}]{addr\mbox{[}$\,$\mbox{]},  }\item[{byte}]{state }\end{DoxyParamCaption})}
+
+
+
+write output to a 1-\/wire DS2413 chip. 
+
+Each instance of the One\+Wire class stores it\textquotesingle{}s pin as a reg + bitmap for direct access.
+
+DS2413 can only pull the IO pins to ground. Open drain Mosfet keeps settings for quite awhile even with no power.
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & One\+Wire object of class One\+Wire. From the standard lib, look at the Arduino website manual for more info. \\
+\hline
+{\em addr} & 8 byte array. Chip type code, 6 bytes of address and CRC \\
+\hline
+{\em state} & bitmap of IO pin state sent to the 1-\/wire chip IO register. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true for success. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{1wire__chip__io_8h_source_l00280}{280}} of file \mbox{\hyperlink{1wire__chip__io_8h_source}{1wire\+\_\+chip\+\_\+io.\+h}}.
+
+Here is the caller graph for this function\+:
+% FIG 23

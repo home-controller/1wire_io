@@ -1,0 +1,4 @@
+<map id="get1wireIdFIA" name="get1wireIdFIA">
+<area shape="rect" id="node1" title="Get the chip type id at type1wireChip[i] in the array of 1wire chip type IDs." alt="" coords="192,5,304,31"/>
+<area shape="rect" id="node2" href="$1wire__chip__io_8h.html#a2e8000096e9b85edb1ba3aab584b0a8a" title=" " alt="" coords="5,5,144,31"/>
+</map>

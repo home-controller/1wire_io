@@ -1,0 +1,123 @@
+\hypertarget{main_8cpp}{}\doxysection{examples/test\+\_\+chips/src/main.cpp File Reference}
+\label{main_8cpp}\index{examples/test\_chips/src/main.cpp@{examples/test\_chips/src/main.cpp}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$One\+Wire.\+h$>$}\newline
+{\ttfamily \#include $<$1wire\+\_\+chip\+\_\+io.\+h$>$}\newline
+Include dependency graph for main.\+cpp\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8cpp_a27db014ffb92c1abaa286f3519fcc8af}{one\+\_\+wire\+\_\+pin}}~5
+\begin{DoxyCompactList}\small\item\em Storage blocks leave 15 bytes for misc vars. EEPROM\mbox{[}0\mbox{]} should be id/ip address. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8cpp_a5c3b9907c5968ff920d1f0b33cca1de1}{serial\+\_\+speed}}~38400
+\item 
+\#define \mbox{\hyperlink{main_8cpp_ad9de734c31fd1f856aaf978762ae2512}{term\+IO}}
+\item 
+\#define \mbox{\hyperlink{main_8cpp_aac0a59b96c21bbb853b4cf3b52607393}{storage\+Blocks\+Max}}~5
+\item 
+\#define \mbox{\hyperlink{main_8cpp_ae77c8f06333e10674132a0ac1357eb9e}{eeprom\+Block\+Start}}~15
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+One\+Wire \mbox{\hyperlink{main_8cpp_a55c6ca9356ed81c03398c15e3c318b30}{ow}} (\mbox{\hyperlink{main_8cpp_a27db014ffb92c1abaa286f3519fcc8af}{one\+\_\+wire\+\_\+pin}})
+\item 
+void \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{main_8cpp_ae77c8f06333e10674132a0ac1357eb9e}\label{main_8cpp_ae77c8f06333e10674132a0ac1357eb9e}} 
+\index{main.cpp@{main.cpp}!eepromBlockStart@{eepromBlockStart}}
+\index{eepromBlockStart@{eepromBlockStart}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{eepromBlockStart}{eepromBlockStart}}
+{\footnotesize\ttfamily \#define eeprom\+Block\+Start~15}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00027}{27}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\mbox{\Hypertarget{main_8cpp_a27db014ffb92c1abaa286f3519fcc8af}\label{main_8cpp_a27db014ffb92c1abaa286f3519fcc8af}} 
+\index{main.cpp@{main.cpp}!one\_wire\_pin@{one\_wire\_pin}}
+\index{one\_wire\_pin@{one\_wire\_pin}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{one\_wire\_pin}{one\_wire\_pin}}
+{\footnotesize\ttfamily \#define one\+\_\+wire\+\_\+pin~5}
+
+
+
+Storage blocks leave 15 bytes for misc vars. EEPROM\mbox{[}0\mbox{]} should be id/ip address. 
+
+BLOCKS 0\+: Rooms 1\+: 1-\/wire 2\+: Switch units 3\+: groups
+
+global vars are here, blocks are setup in \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup()}} 
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00022}{22}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\mbox{\Hypertarget{main_8cpp_a5c3b9907c5968ff920d1f0b33cca1de1}\label{main_8cpp_a5c3b9907c5968ff920d1f0b33cca1de1}} 
+\index{main.cpp@{main.cpp}!serial\_speed@{serial\_speed}}
+\index{serial\_speed@{serial\_speed}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{serial\_speed}{serial\_speed}}
+{\footnotesize\ttfamily \#define serial\+\_\+speed~38400}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\mbox{\Hypertarget{main_8cpp_aac0a59b96c21bbb853b4cf3b52607393}\label{main_8cpp_aac0a59b96c21bbb853b4cf3b52607393}} 
+\index{main.cpp@{main.cpp}!storageBlocksMax@{storageBlocksMax}}
+\index{storageBlocksMax@{storageBlocksMax}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{storageBlocksMax}{storageBlocksMax}}
+{\footnotesize\ttfamily \#define storage\+Blocks\+Max~5}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+\mbox{\Hypertarget{main_8cpp_ad9de734c31fd1f856aaf978762ae2512}\label{main_8cpp_ad9de734c31fd1f856aaf978762ae2512}} 
+\index{main.cpp@{main.cpp}!termIO@{termIO}}
+\index{termIO@{termIO}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{termIO}{termIO}}
+{\footnotesize\ttfamily \#define term\+IO}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00024}{24}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f}} 
+\index{main.cpp@{main.cpp}!loop@{loop}}
+\index{loop@{loop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00057}{57}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{main_8cpp_a55c6ca9356ed81c03398c15e3c318b30}\label{main_8cpp_a55c6ca9356ed81c03398c15e3c318b30}} 
+\index{main.cpp@{main.cpp}!ow@{ow}}
+\index{ow@{ow}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{ow()}{ow()}}
+{\footnotesize\ttfamily One\+Wire ow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8cpp_a27db014ffb92c1abaa286f3519fcc8af}{one\+\_\+wire\+\_\+pin}}}]{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\label{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}} 
+\index{main.cpp@{main.cpp}!setup@{setup}}
+\index{setup@{setup}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+Here is the call graph for this function\+:
+% FIG 3

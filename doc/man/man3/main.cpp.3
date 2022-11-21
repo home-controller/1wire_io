@@ -1,41 +1,43 @@
-.TH "test/main.cpp" 3 "Sun Jun 19 2022" "Version 0.0.2" "1-wire" \" -*- nroff -*-
+.TH "examples/test_chips/src/main.cpp" 3 "Mon Nov 21 2022" "Version 0.0.1" "1-wire_io" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-test/main.cpp
+examples/test_chips/src/main.cpp
 .SH SYNOPSIS
 .br
 .PP
 \fC#include <Arduino\&.h>\fP
 .br
-\fC#include <ui_io\&.h>\fP
+\fC#include <OneWire\&.h>\fP
 .br
-\fC#include <defs\&.h>\fP
-.br
-\fC#include '1wire\&.h'\fP
+\fC#include <1wire_chip_io\&.h>\fP
 .br
 
 .SS "Macros"
 
 .in +1c
 .ti -1c
+.RI "#define \fBone_wire_pin\fP   5"
+.br
+.RI "Storage blocks leave 15 bytes for misc vars\&. EEPROM[0] should be id/ip address\&. "
+.ti -1c
+.RI "#define \fBserial_speed\fP   38400"
+.br
+.ti -1c
 .RI "#define \fBtermIO\fP"
 .br
 .ti -1c
-.RI "#define \fBtestEqu\fP(T,  R,  V)"
+.RI "#define \fBstorageBlocksMax\fP   5"
+.br
+.ti -1c
+.RI "#define \fBeepromBlockStart\fP   15"
 .br
 .in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "void \fBtest_get1wireIDsIndex\fP ()"
-.br
-.ti -1c
-.RI "void \fBtest_get1wireIOno\fP ()"
-.br
-.ti -1c
-.RI "void \fBtest_get1wireChipTypeIOPins\fP ()"
+.RI "OneWire \fBow\fP (\fBone_wire_pin\fP)"
 .br
 .ti -1c
 .RI "void \fBsetup\fP ()"
@@ -44,56 +46,44 @@ test/main.cpp
 .RI "void \fBloop\fP ()"
 .br
 .in -1c
-.SS "Variables"
-
-.in +1c
-.ti -1c
-.RI "\fBOneWire_mem\fP \fBv1wire\fP"
-.br
-.in -1c
 .SH "Macro Definition Documentation"
 .PP 
+.SS "#define eepromBlockStart   15"
+
+.PP
+Definition at line \fB27\fP of file \fBmain\&.cpp\fP\&.
+.SS "#define one_wire_pin   5"
+
+.PP
+Storage blocks leave 15 bytes for misc vars\&. EEPROM[0] should be id/ip address\&. BLOCKS 0: Rooms 1: 1-wire 2: Switch units 3: groups
+.PP
+global vars are here, blocks are setup in \fBsetup()\fP 
+.PP
+Definition at line \fB22\fP of file \fBmain\&.cpp\fP\&.
+.SS "#define serial_speed   38400"
+
+.PP
+Definition at line \fB23\fP of file \fBmain\&.cpp\fP\&.
+.SS "#define storageBlocksMax   5"
+
+.PP
+Definition at line \fB26\fP of file \fBmain\&.cpp\fP\&.
 .SS "#define termIO"
 
 .PP
-Definition at line \fB12\fP of file \fBmain\&.cpp\fP\&.
-.SS "#define testEqu(T, R, V)"
-\fBValue:\fP
-.PP
-.nf
-   Serial\&.print( F(" Test " # T "( " # V " ) Expect: " #R)  );   x = T(V);\
-   if(R==x){ Serial\&.println(F("\t\t\e[32m Pas\e[38;5;10msed \e[37m ") ); }else{ Serial\&.print(F("\t\t\e[91m Failed\e[93m , returned: ") );  Serial\&.println(x);}
-.fi
-.PP
-Definition at line \fB14\fP of file \fBmain\&.cpp\fP\&.
+Definition at line \fB24\fP of file \fBmain\&.cpp\fP\&.
 .SH "Function Documentation"
 .PP 
 .SS "void loop ()"
 
 .PP
-Definition at line \fB79\fP of file \fBmain\&.cpp\fP\&.
+Definition at line \fB57\fP of file \fBmain\&.cpp\fP\&.
+.SS "OneWire ow (\fBone_wire_pin\fP)"
+
 .SS "void setup ()"
 
 .PP
-Definition at line \fB52\fP of file \fBmain\&.cpp\fP\&.
-.SS "void test_get1wireChipTypeIOPins ()"
-
-.PP
-Definition at line \fB41\fP of file \fBmain\&.cpp\fP\&.
-.SS "void test_get1wireIDsIndex ()"
-
-.PP
-Definition at line \fB17\fP of file \fBmain\&.cpp\fP\&.
-.SS "void test_get1wireIOno ()"
-
-.PP
-Definition at line \fB31\fP of file \fBmain\&.cpp\fP\&.
-.SH "Variable Documentation"
-.PP 
-.SS "\fBOneWire_mem\fP v1wire"
-
-.PP
-Definition at line \fB51\fP of file \fBmain\&.cpp\fP\&.
+Definition at line \fB37\fP of file \fBmain\&.cpp\fP\&.
 .SH "Author"
 .PP 
-Generated automatically by Doxygen for 1-wire from the source code\&.
+Generated automatically by Doxygen for 1-wire_io from the source code\&.

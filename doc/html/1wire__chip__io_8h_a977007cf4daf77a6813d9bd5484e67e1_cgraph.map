@@ -1,0 +1,6 @@
+<map id="printChipInfo" name="printChipInfo">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,112,56"/>
+<area shape="rect" id="node2" href="$1wire__chip__io_8h.html#a26a5c521594f3f4380de4fe920f669fe" title="Returns the number of IO pins the 1&#45;wire chip has." alt="" coords="160,31,339,56"/>
+<area shape="rect" id="node3" href="$1wire__chip__io_8h.html#aa10020cdfdad46fa553fc4a2ee31fd3b" title="Gets the array index index from the chip type id." alt="" coords="387,5,523,31"/>
+<area shape="rect" id="node4" href="$1wire__chip__io_8h.html#a0c2ff7ecc2f15b31cfe75c4598451678" title="Get the number of IO pins the chip has, i.e. 8 for the DS2408." alt="" coords="400,55,509,80"/>
+</map>

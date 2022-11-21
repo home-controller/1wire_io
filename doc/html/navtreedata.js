@@ -24,24 +24,16 @@
 */
 var NAVTREE =
 [
-  [ "1-wire", "index.html", [
+  [ "1-wire_io", "index.html", [
     [ "changelog", "md_changelog.html", null ],
-    [ "1-wire home_auto lib", "md__r_e_a_d_m_e.html", null ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
-      ] ]
+    [ "1-wire IO", "md__r_e_a_d_m_e.html", [
+      [ "1wire_io", "md__r_e_a_d_m_e.html#autotoc_md1", null ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
-        [ "Variables", "globals_vars.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -50,7 +42,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"1wire_8cpp.html"
+"1wire__chip__io_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

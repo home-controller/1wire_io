@@ -1,0 +1,60 @@
+\hypertarget{main_8cpp_source}{}\doxysection{main.\+cpp}
+\label{main_8cpp_source}\index{examples/test\_chips/src/main.cpp@{examples/test\_chips/src/main.cpp}}
+\mbox{\hyperlink{main_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00003}00003 \textcolor{preprocessor}{\#include <OneWire.h>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00004}00004 \textcolor{comment}{//\#include <1wire.h>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00005}00005 \textcolor{comment}{//\#include <../../../src/1wire\_chip\_io.h>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00006}00006 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{1wire__chip__io_8h}{1wire\_chip\_io.h}}>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00008}00008 \textcolor{comment}{//++++++++++++++++++++++ Storage blocks class setup start++++++++++++++++}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00022}\mbox{\hyperlink{main_8cpp_a27db014ffb92c1abaa286f3519fcc8af}{00022}} \textcolor{comment}{}\textcolor{preprocessor}{\#define one\_wire\_pin 5}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00023}\mbox{\hyperlink{main_8cpp_a5c3b9907c5968ff920d1f0b33cca1de1}{00023}} \textcolor{preprocessor}{\#define serial\_speed 38400}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00024}\mbox{\hyperlink{main_8cpp_ad9de734c31fd1f856aaf978762ae2512}{00024}} \textcolor{preprocessor}{\#define termIO}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00026}\mbox{\hyperlink{main_8cpp_aac0a59b96c21bbb853b4cf3b52607393}{00026}} \textcolor{preprocessor}{\#define storageBlocksMax 5}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00027}\mbox{\hyperlink{main_8cpp_ae77c8f06333e10674132a0ac1357eb9e}{00027}} \textcolor{preprocessor}{\#define eepromBlockStart 15}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00028}00028 \textcolor{comment}{// storageBlock\_T storageBlocksA[storageBlocksMax];  //Mem for sState. Do this here to save the need for acquiring memory in the class at run time.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00029}00029 \textcolor{comment}{// storageBlock\_C sState(storageBlocksMax, storageBlocksA, eepromBlockStart);}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00030}00030 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Storage blocks declarations end.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00032}00032 \textcolor{comment}{// lights\_C lights;// lights class.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00034}00034 \textcolor{comment}{// OneWire\_mem v1wire;}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00035}\mbox{\hyperlink{main_8cpp_a55c6ca9356ed81c03398c15e3c318b30}{00035}} OneWire \mbox{\hyperlink{main_8cpp_a55c6ca9356ed81c03398c15e3c318b30}{ow}}(\mbox{\hyperlink{main_8cpp_a27db014ffb92c1abaa286f3519fcc8af}{one\_wire\_pin}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00037}\mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{00037}} \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00038}00038 \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00039}00039   \textcolor{comment}{// byte id1wire;}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00040}00040 \textcolor{preprocessor}{\#ifdef termIO}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00041}00041   \textcolor{comment}{// Serial.begin( 9600 );}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00042}00042   Serial.begin(\mbox{\hyperlink{main_8cpp_a5c3b9907c5968ff920d1f0b33cca1de1}{serial\_speed}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00043}00043   delay(250);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00044}00044   \textcolor{comment}{// io\_print( "{}Serial.begin("{} );  io\_print\_n( serial\_speed );  io\_println( "{})"{} );}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00045}00045   Serial.print(F(\textcolor{stringliteral}{"{}Serial.begin("{}}));}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00046}00046   Serial.print(\mbox{\hyperlink{main_8cpp_a5c3b9907c5968ff920d1f0b33cca1de1}{serial\_speed}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00047}00047   Serial.print(F(\textcolor{stringliteral}{"{})"{}}));}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00048}00048 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00049}00049   Serial.print(F(\textcolor{stringliteral}{"{}\(\backslash\)nStart search on 1-\/wire bus. "{}}));}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00050}00050   Serial.print(F(\textcolor{stringliteral}{"{}On hardware pin "{}}));}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00051}00051   Serial.println(\mbox{\hyperlink{main_8cpp_a27db014ffb92c1abaa286f3519fcc8af}{one\_wire\_pin}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00052}00052   \mbox{\hyperlink{1wire__chip__io_8h_ac44d2f53065a0b411f5c6094dfcac6ff}{print1wireDevicesOnPin}}(\mbox{\hyperlink{main_8cpp_a55c6ca9356ed81c03398c15e3c318b30}{ow}});}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00054}00054   \textcolor{comment}{// put your setup code here, to run once:}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00055}00055 \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00057}\mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{00057}} \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00058}00058 \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00059}00059   \textcolor{keyword}{static} \textcolor{keywordtype}{byte} ioState;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00060}00060   \textcolor{keywordtype}{byte} addr[8];}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00061}00061   ioState = ioState bitand 0b11;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00062}00062   \textcolor{comment}{// put your main code here, to run repeatedly:}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00063}00063   Serial.print(F(\textcolor{stringliteral}{"{}\(\backslash\)nSetting state to: "{}}));Serial.print(ioState,BIN);Serial.println();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00064}00064   \mbox{\hyperlink{1wire__chip__io_8h_a1d6f9599dba99d3be6484b6dcb1ad2a7}{setAll1wirePin}}(\mbox{\hyperlink{main_8cpp_a55c6ca9356ed81c03398c15e3c318b30}{ow}}, ioState);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00065}00065   delay(5000);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00066}00066   ioState++;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00067}00067 \}}
+
+\end{DoxyCode}

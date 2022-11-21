@@ -1,0 +1,5 @@
+<map id="get1wireChipTypeIOPins" name="get1wireChipTypeIOPins">
+<area shape="rect" id="node1" title="Returns the number of IO pins the 1&#45;wire chip has." alt="" coords="5,31,184,56"/>
+<area shape="rect" id="node2" href="$1wire__chip__io_8h.html#aa10020cdfdad46fa553fc4a2ee31fd3b" title="Gets the array index index from the chip type id." alt="" coords="232,5,368,31"/>
+<area shape="rect" id="node3" href="$1wire__chip__io_8h.html#a0c2ff7ecc2f15b31cfe75c4598451678" title="Get the number of IO pins the chip has, i.e. 8 for the DS2408." alt="" coords="245,55,355,80"/>
+</map>

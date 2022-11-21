@@ -1,0 +1,13 @@
+digraph "getChipsNoIO"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="getChipsNoIO",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Get the Chips number of IO pins."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="get1wireIDsIndex",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$1wire__chip__io_8h.html#aa10020cdfdad46fa553fc4a2ee31fd3b",tooltip="Gets the array index index from the chip type id."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="get1wireIOno",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$1wire__chip__io_8h.html#a0c2ff7ecc2f15b31cfe75c4598451678",tooltip="Get the number of IO pins the chip has, i.e. 8 for the DS2408."];
+}
