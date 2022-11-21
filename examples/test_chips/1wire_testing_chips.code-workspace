@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"name": "1wire_io",
+			"path": ".",
+		},
+		{
+			"name": "lib path",
+			"path": "../../.."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.tcc": "cpp"
+		},
+		"cSpell.words": [
+			"ARDUINO"
+		]
+	}
+}
